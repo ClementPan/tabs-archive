@@ -1,0 +1,68 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@500&family=Roboto+Condensed:wght@300&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@500&display=swap");
+@font-face {
+  font-family: 'Taipei Sans TC';
+  src: url("../fonts/TaipeiSansTCBeta-Regular.ttf") format("truetype"); }
+
+html {
+  height: 100vh;
+  font-size: 16px;
+  font-weight: normal;
+  font-family: 'Taipei Sans TC','Montserrat', 'Noto Serif TC', sans-serif;
+  line-height: 1.5;
+  color: #222;
+  outline: none;
+  box-sizing: border-box; }
+
+.navbar {
+  background-color: #1d3557;
+  height: 100px;
+  display: flex;
+  flex-direction: row;
+  align-items: center; }
+  .navbar h1 {
+    height: 40px;
+    width: 240px;
+    font-size: 32px;
+    font-weight: 700;
+    color: #fff;
+    line-height: 100%;
+    text-align: center; }
+  .navbar .search-bar {
+    margin-left: 40px;
+    height: 40px;
+    width: 400px;
+    background-color: #fff;
+    padding-left: 24px;
+    display: flex;
+    align-items: center;
+    border-radius: 8px; }
+    .navbar .search-bar input {
+      height: 100%;
+      width: 100%;
+      font-size: 24px;
+      margin-left: 12px;
+      background-color: transparent;
+      border: none; }
+      .navbar .search-bar input:focus {
+        outline: none; }
+    .navbar .search-bar i,
+    .navbar .search-bar input::placeholder {
+      color: #aaa; }
+
+main {
+  width: 100%;
+  height: calc(100vh - 100px);
+  display: flex;
+  background-color: #fff; }
+  main .sidebar {
+    width: 240px;
+    min-width: 240px;
+    background-color: #457b9d;
+    height: 100%; }
+    main .sidebar .archive-style {
+      width: 200px;
+      height: 50px;
+      border: 1px solid #000; }
+  main .content {
+    height: 100%; }

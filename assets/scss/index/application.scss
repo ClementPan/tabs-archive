@@ -7,22 +7,21 @@
   src: url('../fonts/TaipeiSansTCBeta-Regular.ttf')  format('truetype');
 }
 
-:root {
-  --dark-grey: #666;
-  --light-grey: #aaa;
-  --dark-background: #444;
-  --font-white: #ddd;
-  --pure-white: #fff;
-  --footer-background: #20201a;
-  --font-dark: #222;
-  --title-weight: 700;
-  --body-background: #ccc;
-  --blue: #1d3557;
-}
+
+$dark-grey: #666;
+$light-grey: #aaa;
+$dark-background: #444;
+$font-white: #ddd;
+$pure-white: #fff;
+$footer-background: #20201a;
+$font-dark: #222;
+$title-weight: 700;
+$body-background: #ccc;
+$blue: #1d3557;
 
 html {
   height: 100vh;
-    font-size: 16px;
+  font-size: 16px;
   font-weight: normal;
   font-family: 'Taipei Sans TC','Montserrat', 'Noto Serif TC', sans-serif;
   line-height: 1.5;
