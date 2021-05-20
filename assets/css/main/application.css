@@ -1,0 +1,32 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@500&family=Roboto+Condensed:wght@300&display=swap');
+
+@import url('https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@500&display=swap');
+
+@font-face {
+  font-family: 'Taipei Sans TC';
+  src: url('../fonts/TaipeiSansTCBeta-Regular.ttf')  format('truetype');
+}
+
+:root {
+  --dark-grey: #666;
+  --light-grey: #aaa;
+  --dark-background: #444;
+  --font-white: #ddd;
+  --pure-white: #fff;
+  --footer-background: #20201a;
+  --font-dark: #222;
+  --title-weight: 700;
+  --body-background: #ccc;
+  --blue: #1d3557;
+}
+
+html {
+  height: 100vh;
+    font-size: 16px;
+  font-weight: normal;
+  font-family: 'Taipei Sans TC','Montserrat', 'Noto Serif TC', sans-serif;
+  line-height: 1.5;
+  color: #222;
+  outline: none;
+  box-sizing: border-box;
+}
