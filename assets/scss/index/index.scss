@@ -2,32 +2,31 @@
 
 .navbar {
   background-color: $blue;
-  height: 100px;
-  display: flex;
+  height: $navbar-height;
+  @extend %flex-vertical-center;
   flex-direction: row;
-  align-items: center;
+
   h1 {
     height: 40px;
     width: 240px;
-    font-size: 32px;
-    font-weight: 700;
-    color:  $pure-white;
+    font-size: $brand-size;
+    font-weight: $title-weight;
+    color: $pure-white;
     line-height: 100%;
     text-align: center;
   }
+
   .search-bar {
     margin-left: 40px;
     height: 40px;
     width: 400px;
     background-color: $pure-white;
     padding-left: 24px;
-    display: flex;
-    align-items: center;
-    border-radius: 8px;
+    @extend %flex-vertical-center;
+    border-radius: $border-radius-normal;
 
     input {
-      height: 100%;
-      width: 100%;
+      @extend %child-full-size;
       font-size: 24px;
       margin-left: 12px;
       background-color: transparent;

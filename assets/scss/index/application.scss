@@ -7,7 +7,7 @@
   src: url('../fonts/TaipeiSansTCBeta-Regular.ttf')  format('truetype');
 }
 
-
+// color
 $dark-grey: #666;
 $light-grey: #aaa;
 $dark-background: #444;
@@ -15,10 +15,32 @@ $font-white: #ddd;
 $pure-white: #fff;
 $footer-background: #20201a;
 $font-dark: #222;
-$title-weight: 700;
 $body-background: #ccc;
 $blue: #1d3557;
 
+// font-weight
+$title-weight: 700;
+$content-eight: 500;
+
+// layout
+$navbar-height: 100px;
+$brand-size: 32px;
+
+// box model
+$border-radius-normal: 8px;
+
+// extends
+%flex-vertical-center {
+  display: flex;
+  align-items: center;
+}
+
+%child-full-size {
+  height: 100%;
+  width: 100%;
+}
+
+// html
 html {
   height: 100vh;
   font-size: 16px;

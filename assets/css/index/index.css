@@ -4,6 +4,14 @@
   font-family: 'Taipei Sans TC';
   src: url("../fonts/TaipeiSansTCBeta-Regular.ttf") format("truetype"); }
 
+.navbar, .navbar .search-bar {
+  display: flex;
+  align-items: center; }
+
+.navbar .search-bar input {
+  height: 100%;
+  width: 100%; }
+
 html {
   height: 100vh;
   font-size: 16px;
@@ -17,9 +25,7 @@ html {
 .navbar {
   background-color: #1d3557;
   height: 100px;
-  display: flex;
-  flex-direction: row;
-  align-items: center; }
+  flex-direction: row; }
   .navbar h1 {
     height: 40px;
     width: 240px;
@@ -34,12 +40,8 @@ html {
     width: 400px;
     background-color: #fff;
     padding-left: 24px;
-    display: flex;
-    align-items: center;
     border-radius: 8px; }
     .navbar .search-bar input {
-      height: 100%;
-      width: 100%;
       font-size: 24px;
       margin-left: 12px;
       background-color: transparent;
