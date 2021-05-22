@@ -4,14 +4,6 @@
   font-family: 'Taipei Sans TC';
   src: url("../fonts/TaipeiSansTCBeta-Regular.ttf") format("truetype"); }
 
-.navbar, .navbar .search-bar {
-  display: flex;
-  align-items: center; }
-
-.navbar .search-bar input {
-  height: 100%;
-  width: 100%; }
-
 html {
   height: 100vh;
   font-size: 16px;
@@ -21,6 +13,39 @@ html {
   color: #222;
   outline: none;
   box-sizing: border-box; }
+
+main .sidebar .root-archive .archive-style, .navbar, .navbar .search-bar {
+  display: flex;
+  flex-direction: row;
+  align-items: center; }
+
+.navbar .search-bar input {
+  height: 100%;
+  width: 100%; }
+
+main .sidebar .root-archive .archive-style {
+  width: 200px;
+  height: 40px;
+  background-color: #fff;
+  margin-bottom: 6px;
+  position: relative; }
+  main .sidebar .root-archive .archive-style p {
+    flex: 1;
+    height: 100%;
+    font-size: 24px;
+    line-height: 40px;
+    overflow-x: hidden;
+    margin-right: 24px;
+    vertical-align: middle; }
+  main .sidebar .root-archive .archive-style i {
+    font-size: 24px;
+    width: 24px;
+    text-align: center; }
+  main .sidebar .root-archive .archive-style i:hover {
+    cursor: pointer; }
+  main .sidebar .root-archive .archive-style i.new {
+    position: absolute;
+    right: 6px; }
 
 .navbar {
   background-color: #1d3557;
@@ -62,9 +87,12 @@ main {
     min-width: 240px;
     background-color: #457b9d;
     height: 100%; }
-    main .sidebar .archive-style {
-      width: 200px;
-      height: 50px;
-      border: 1px solid #000; }
+    main .sidebar .root-archive {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding-top: 24px; }
+      main .sidebar .root-archive .create-new i:first-child {
+        font-size: 16px; }
   main .content {
     height: 100%; }

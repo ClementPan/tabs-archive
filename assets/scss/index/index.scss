@@ -17,18 +17,18 @@
   }
 
   .search-bar {
-    margin-left: 40px;
-    height: 40px;
-    width: 400px;
+    margin-left: $search-bar-height;
+    height: $search-bar-height;
+    width: $search-bar-width;
     background-color: $pure-white;
-    padding-left: 24px;
+    padding-left: 2 * $oneUnit;
     @extend %flex-vertical-center;
     border-radius: $border-radius-normal;
 
     input {
       @extend %child-full-size;
-      font-size: 24px;
-      margin-left: 12px;
+      font-size: 2 * $oneUnit;
+      margin-left: $oneUnit;
       background-color: transparent;
       border: none;
       &:focus {
@@ -50,18 +50,30 @@ main {
   background-color: #fff;
 
   .sidebar {
-    width: 240px;
-    min-width: 240px;
+    width: $sidebar-width;
+    min-width: $sidebar-width;
     background-color: #457b9d;
     height: 100%;
-    .archive-style {
-      width: 200px;
-      height: 50px;
-      border: 1px solid #000;
+
+    .root-archive {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding-top: 2 * $oneUnit;
+      
+      .archive-style {
+        @extend %archive-style;
+      }
+      .create-new {
+        i:first-child {
+          font-size: 16px;
+        }
+      }
     }
   }
 
   .content {
     height: 100%;
+    
   }
 }

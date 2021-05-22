@@ -7,6 +7,19 @@
   src: url('../fonts/TaipeiSansTCBeta-Regular.ttf')  format('truetype');
 }
 
+// html
+html {
+  height: 100vh;
+  font-size: 16px;
+  font-weight: normal;
+  font-family: 'Taipei Sans TC','Montserrat', 'Noto Serif TC', sans-serif;
+  line-height: 1.5;
+  color: #222;
+  outline: none;
+  box-sizing: border-box;
+}
+
+
 // color
 $dark-grey: #666;
 $light-grey: #aaa;
@@ -23,8 +36,14 @@ $title-weight: 700;
 $content-eight: 500;
 
 // layout
+$oneUnit: 12px;
 $navbar-height: 100px;
 $brand-size: 32px;
+$search-bar-height: 40px;
+$search-bar-width: 400px;
+$sidebar-width: 240px;
+$archive-width: 200px;
+$archive-height: 40px;
 
 // box model
 $border-radius-normal: 8px;
@@ -32,6 +51,7 @@ $border-radius-normal: 8px;
 // extends
 %flex-vertical-center {
   display: flex;
+  flex-direction: row;
   align-items: center;
 }
 
@@ -40,14 +60,32 @@ $border-radius-normal: 8px;
   width: 100%;
 }
 
-// html
-html {
-  height: 100vh;
-  font-size: 16px;
-  font-weight: normal;
-  font-family: 'Taipei Sans TC','Montserrat', 'Noto Serif TC', sans-serif;
-  line-height: 1.5;
-  color: #222;
-  outline: none;
-  box-sizing: border-box;
+%archive-style {
+  width: $archive-width;
+  height: $archive-height;
+  background-color: $pure-white;
+  margin-bottom: 0.5 * $oneUnit;
+  @extend %flex-vertical-center;
+  position: relative;
+  p {
+    flex: 1;
+    height: 100%;
+    font-size: 24px;
+    line-height: $archive-height;
+    overflow-x: hidden;
+    margin-right: 24px;
+    vertical-align: middle;
+  }
+  i {
+    font-size: 24px;
+    width: 24px;
+    text-align: center;
+  }
+  i:hover {
+    cursor: pointer;
+  }
+  i.new {
+    position: absolute;
+    right: 6px;
+  }
 }

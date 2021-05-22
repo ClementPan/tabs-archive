@@ -24,7 +24,7 @@ const defaultArchive = {
       ]
     },
     {
-      archiveName: 'backend',
+      archiveName: 'back-end',
       archivesList: [],
       unclassified: []
     }
@@ -68,6 +68,6 @@ chrome.runtime.onInstalled.addListener(() => {
   console.log('Service worker working...')
   chrome.storage.sync.set({ defaultArchive }, () => {
     console.log('defaultArchive set!')
-    console.log(defaultArchive)
   });
+  chrome.tabs.create({ url: "index.html" })
 });
