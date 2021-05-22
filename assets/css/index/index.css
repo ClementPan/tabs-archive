@@ -6,6 +6,7 @@
 
 html {
   height: 100vh;
+  min-width: 960px;
   font-size: 16px;
   font-weight: normal;
   font-family: 'Taipei Sans TC','Montserrat', 'Noto Serif TC', sans-serif;
@@ -13,6 +14,11 @@ html {
   color: #222;
   outline: none;
   box-sizing: border-box; }
+
+* {
+  box-sizing: border-box;
+  list-style: none;
+  text-decoration: none; }
 
 main .sidebar .root-archive .archive-style, .navbar, .navbar .search-bar {
   display: flex;
@@ -46,6 +52,28 @@ main .sidebar .root-archive .archive-style {
   main .sidebar .root-archive .archive-style i.new {
     position: absolute;
     right: 6px; }
+
+main .content .tab-style, main .content .data-bar {
+  background-color: #CAF0F8;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  padding: 0 24px; }
+  main .content .tab-style div, main .content .data-bar div {
+    flex: 1;
+    min-height: 20px;
+    min-width: 90px;
+    font-size: 18px;
+    font-weight: 500;
+    text-align: center; }
+  main .content .tab-style .title, main .content .data-bar .title {
+    flex: 3; }
+  main .content .tab-style .tags, main .content .data-bar .tags {
+    flex: 2; }
+
+main .content .tab-style {
+  background-color: #fff; }
 
 .navbar {
   background-color: #1d3557;
@@ -81,6 +109,7 @@ main {
   width: 100%;
   height: calc(100vh - 100px);
   display: flex;
+  flex-direction: row;
   background-color: #fff; }
   main .sidebar {
     width: 240px;
@@ -95,4 +124,10 @@ main {
       main .sidebar .root-archive .create-new i:first-child {
         font-size: 16px; }
   main .content {
-    height: 100%; }
+    height: calc(100vh - 100px);
+    flex: 1;
+    background-color: #fff;
+    padding: 24px;
+    overflow-y: scroll; }
+    main .content::-webkit-scrollbar {
+      display: none; }

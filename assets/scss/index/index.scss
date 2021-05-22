@@ -17,8 +17,8 @@
   }
 
   .search-bar {
-    margin-left: $search-bar-height;
-    height: $search-bar-height;
+    margin-left: 40px;
+    height: $bar-height;
     width: $search-bar-width;
     background-color: $pure-white;
     padding-left: 2 * $oneUnit;
@@ -47,6 +47,7 @@ main {
   width: 100%;
   height: calc(100vh - 100px);
   display: flex;
+  flex-direction: row;
   background-color: #fff;
 
   .sidebar {
@@ -72,8 +73,22 @@ main {
     }
   }
 
+
   .content {
-    height: 100%;
-    
+    height: calc(100vh - 100px);
+    flex: 1;
+    // max-width: 1440px;
+    background-color: $pure-white;
+    padding: 2 * $oneUnit;
+    overflow-y: scroll;
+    &::-webkit-scrollbar {
+      display: none;
+    }
+    .data-bar {
+      @extend %data-bar
+    }
+    .tab-style {
+      @extend %tab-style
+    }
   }
 }

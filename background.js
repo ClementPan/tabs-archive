@@ -5,9 +5,11 @@ const Archive = function (archiveName) {
 }
 
 const defaultArchive = {
+  id: 1,
   archiveName: 'root',
   archivesList: [
     {
+      id: 2,
       archiveName: 'frontend',
       archivesList: ['scss'],
       unclassified: [
@@ -16,14 +18,15 @@ const defaultArchive = {
           title: 'Vue.js doc',
           url: 'https://vuejs.org/v2/api/',
           icon: '',
-          createdAt: 'time',
-          updatedAt: 'time',
+          createdAt: '2021/03/03',
+          updatedAt: '2021/03/03',
           finishReading: false,
           tags: []
         }
       ]
     },
     {
+      id: 3,
       archiveName: 'back-end',
       archivesList: [],
       unclassified: []
@@ -35,8 +38,8 @@ const defaultArchive = {
       title: 'Google',
       url: 'https://www.google.com',
       icon: '',
-      createdAt: 'time',
-      updatedAt: 'time',
+      createdAt: '2021/03/03',
+      updatedAt: '2021/03/03',
       finishReading: false,
       tags: []
     },
@@ -45,8 +48,8 @@ const defaultArchive = {
       title: 'Youtube',
       url: 'https://www.youtube.com/',
       icon: '',
-      createdAt: 'time',
-      updatedAt: 'time',
+      createdAt: '2021/03/03',
+      updatedAt: '2021/03/03',
       finishReading: false,
       tags: []
     },
@@ -55,8 +58,8 @@ const defaultArchive = {
       title: 'DeepL',
       url: 'https://www.deepl.com/translator',
       icon: '',
-      createdAt: 'time',
-      updatedAt: 'time',
+      createdAt: '2021/03/03',
+      updatedAt: '2021/03/03',
       finishReading: false,
       tags: []
     }

@@ -12,5 +12,8 @@
     "node-sass": "^6.0.0",
     "sass-loader": "^11.1.1",
     "webpack": "^5.37.1"
+  },
+  "dependencies": {
+    "uuidv4": "^6.2.8"
   }
 }
