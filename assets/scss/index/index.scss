@@ -5,6 +5,7 @@
   height: $navbar-height;
   @extend %flex-vertical-center;
   flex-direction: row;
+  position: relative;
 
   h1 {
     height: 40px;
@@ -41,6 +42,21 @@
       color: $light-grey
     }
   }
+
+  .get-all-btn {
+    position: absolute;
+    top: 50%;
+    right: 2rem;
+    transform: translateY(-50%);
+    height: 36px;
+    border: none;
+    background-color: $pure-white;
+    border-radius: 8px;
+
+    &:hover {
+      cursor: pointer;
+    }
+  }
 }
 
 main {
@@ -72,7 +88,6 @@ main {
       }
     }
   }
-
 
   .content {
     height: calc(100vh - 100px);

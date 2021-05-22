@@ -1,4 +1,4 @@
-// const { uuid } = '../../../package-lock.json/';
+const { uuid } = '../../../node_modules/uuidv4' //to be fixed
 
 // Archive proto
 const ArchiveData = function (archiveName) {
@@ -8,7 +8,7 @@ const ArchiveData = function (archiveName) {
 }
 
 const TabData = function (title, url, icon, createdAt, updatedAt, tags) {
-  this.id = uuid()
+  this.id = NaN
   this.title = title
   this.url = url
   this.icon = icon
@@ -16,6 +16,10 @@ const TabData = function (title, url, icon, createdAt, updatedAt, tags) {
   this.updatedAt = updatedAt
   this.finishReading = false
   this.tags = tags
+}
+
+const data = {
+  archive: {}
 }
 
 const model = {
@@ -38,7 +42,7 @@ const model = {
           <p>${id}</p>
         </div>
         <div class='icon'>
-          <p>${icon}</p>
+          <img src="${icon}" alt="">
         </div>
         <div class='title'>
           <p>${title}</p>
@@ -76,11 +80,14 @@ const model = {
   async getAllTabs() {
     return new Promise((resolve, reject) => {
       try {
-        chrome.tabs.query({}, (data) => {
+        chrome.tabs.query({ active: false }, (data) => {
           const tabs = []
           for (let tab of data) {
             const { favIconUrl: icon, title, url } = tab
-            tabs.push({ icon, title, url })
+            const createdAt = new Date().toLocaleDateString('zh-tw')
+            const updatedAt = new Date().toLocaleDateString('zh-tw')
+            const tags = []
+            tabs.push(new TabData(title, url, icon, createdAt, updatedAt, tags))
           }
           return resolve(tabs)
         })
@@ -89,19 +96,24 @@ const model = {
       }
     })
   },
+  storeArchiveToStorage(archive) {
+    chrome.storage.sync.set({ archive }, () => {
+      console.log('Archive stored!')
+    });
+  }
 }
 
 const view = {
   showTabsInContent(data) {
+    // data: root.unclassified
     const tabsList = document.querySelector('.tabs-list')
-    const { unclassified } = data.defaultArchive
-    for (let tab of unclassified) {
-      console.log(tab)
+    for (let tab of data) {
       const newTab = model.createTabDOMInContent(tab)
       tabsList.appendChild(newTab)
     }
   },
   showRootArchiveList(list) {
+    // list: root.archivesList
     const archivesList = document.querySelector('.archivesList')
     for (let item of list) {
       const newArchive = model.createArhiveDOMInSidebar(item.archiveName)
@@ -116,44 +128,61 @@ const controller = {
       // get all active tabs
       const activeTabs = await model.getAllTabs()
       console.log(activeTabs)
-      // get storage defaultArchive
-      const archive = await model.getDefaultArchive()
-      console.log(archive)
+      // return
 
       // add new tabs to root.unclassified
+      for (let tab of activeTabs) {
+        data.archive.unclassified.push(tab)
+      }
+
+      // change view
+      const { unclassified } = data.archive
+      view.showTabsInContent(unclassified)
 
       // store defaultArchive to storage
-      // chrome.storage.sync.set({ defaultArchive }, () => {
-      //   console.log('Archive stored!')
-      // });
-      // open index.html
-      // chrome.tabs.create({ url: "index.html" });
-
-
+      const { archive } = data
+      model.storeArchiveToStorage(archive)
     } catch (error) {
       console.log(error)
     }
   },
-  async initArchiveData() {
+  async initLocalArchiveData() {
     try {
-      const data = await model.getDefaultArchive()
-      view.showTabsInContent(data)
-    } catch (error) {
-      console.log(error)
-    }
-  },
-  async setRootArchiveList() {
-    try {
+      // get chrome storage data
       const { defaultArchive } = await model.getDefaultArchive()
-      const { archivesList } = defaultArchive
+
+      // store it to local data
+      data.archive = defaultArchive
+      // console.log(data)
+
+      const { unclassified } = data.archive
+      view.showTabsInContent(unclassified)
+
+      const { archivesList } = data.archive
       view.showRootArchiveList(archivesList)
+
+      // console.log(data)
     } catch (error) {
       console.log(error)
-
     }
+  },
+  clearStorage() {
+    chrome.storage.sync.clear(() => {
+      console.log('Storage cleared!')
+    })
+
   }
 }
 
-controller.getAllTabs()
-controller.initArchiveData()
-controller.setRootArchiveList()
+controller.initLocalArchiveData()
+// controller.setRootArchiveList()
+
+// controller.clearStorage()
+
+// eventListener
+window.addEventListener('click', (e) => {
+  const target = e.target
+  if (target.className === 'get-all-btn') {
+    controller.getAllTabs()
+  }
+})

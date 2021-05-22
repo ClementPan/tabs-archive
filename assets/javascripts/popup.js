@@ -2,9 +2,12 @@ const openBtn = document.getElementById('open')
 const getAll = document.getElementById('getAll')
 
 const openTabsArchive = () => {
-  chrome.tabs.create({ url: "index.html" });
+  chrome.runtime.openOptionsPage()
 }
+
 const getAllTabs = () => {
+  return
+  // to be fixed
   chrome.tabs.query({}, (data) => {
     const tabs = []
     for (let tab of data) {
@@ -12,16 +15,7 @@ const getAllTabs = () => {
       tabs.push({ icon, title, url })
     }
   })
-  // get storage defaultArchive
 
-  // add new tabs to root.unclassified
-
-  // store defaultArchive to storage
-  // chrome.storage.sync.set({ defaultArchive }, () => {
-  //   console.log('defaultArchive set!')
-  // });
-  // open index.html
-  // chrome.tabs.create({ url: "index.html" });
 }
 
 openBtn.addEventListener('click', openTabsArchive)

@@ -37,7 +37,7 @@ const defaultArchive = {
       id: 1,
       title: 'Google',
       url: 'https://www.google.com',
-      icon: '',
+      icon: 'https://www.google.com/favicon.ico',
       createdAt: '2021/03/03',
       updatedAt: '2021/03/03',
       finishReading: false,
@@ -47,7 +47,7 @@ const defaultArchive = {
       id: 2,
       title: 'Youtube',
       url: 'https://www.youtube.com/',
-      icon: '',
+      icon: 'https://www.youtube.com/s/desktop/df22805b/img/favicon_32.png',
       createdAt: '2021/03/03',
       updatedAt: '2021/03/03',
       finishReading: false,
@@ -57,7 +57,7 @@ const defaultArchive = {
       id: 3,
       title: 'DeepL',
       url: 'https://www.deepl.com/translator',
-      icon: '',
+      icon: 'https://www.deepl.com/img/favicon/favicon_32.png',
       createdAt: '2021/03/03',
       updatedAt: '2021/03/03',
       finishReading: false,
@@ -68,9 +68,14 @@ const defaultArchive = {
 
 /////////////// 
 chrome.runtime.onInstalled.addListener(() => {
-  console.log('Service worker working...')
+  console.log('onInstalled: Service worker working...')
+
   chrome.storage.sync.set({ defaultArchive }, () => {
     console.log('defaultArchive set!')
   });
   chrome.tabs.create({ url: "index.html" })
 });
+
+chrome.runtime.onStartup.addListener(() => {
+  console.log('on Startup!')
+})

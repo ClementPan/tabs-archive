@@ -20,6 +20,11 @@ html {
   list-style: none;
   text-decoration: none; }
 
+main .content .tab-style div, main .content .data-bar div {
+  display: flex;
+  justify-content: center;
+  align-items: center; }
+
 main .sidebar .root-archive .archive-style, .navbar, .navbar .search-bar {
   display: flex;
   flex-direction: row;
@@ -34,17 +39,18 @@ main .sidebar .root-archive .archive-style {
   height: 40px;
   background-color: #fff;
   margin-bottom: 6px;
-  position: relative; }
+  position: relative;
+  border-radius: 8px; }
   main .sidebar .root-archive .archive-style p {
     flex: 1;
     height: 100%;
-    font-size: 24px;
+    font-size: 20px;
     line-height: 40px;
     overflow-x: hidden;
     margin-right: 24px;
     vertical-align: middle; }
   main .sidebar .root-archive .archive-style i {
-    font-size: 24px;
+    font-size: 20px;
     width: 24px;
     text-align: center; }
   main .sidebar .root-archive .archive-style i:hover {
@@ -59,26 +65,31 @@ main .content .tab-style, main .content .data-bar {
   display: flex;
   align-items: center;
   justify-content: space-around;
-  padding: 0 24px; }
+  padding: 0 24px;
+  border-radius: 8px; }
   main .content .tab-style div, main .content .data-bar div {
     flex: 1;
-    min-height: 20px;
+    height: 100%;
     min-width: 90px;
-    font-size: 18px;
+    font-size: 16px;
     font-weight: 500;
-    text-align: center; }
+    overflow: hidden; }
   main .content .tab-style .title, main .content .data-bar .title {
-    flex: 3; }
+    flex: 3;
+    border: 1px solid #000; }
   main .content .tab-style .tags, main .content .data-bar .tags {
     flex: 2; }
 
 main .content .tab-style {
-  background-color: #fff; }
+  background-color: #fff;
+  border: 1px solid #CAF0F8;
+  margin: 12px 0; }
 
 .navbar {
   background-color: #1d3557;
   height: 100px;
-  flex-direction: row; }
+  flex-direction: row;
+  position: relative; }
   .navbar h1 {
     height: 40px;
     width: 240px;
@@ -104,6 +115,17 @@ main .content .tab-style {
     .navbar .search-bar i,
     .navbar .search-bar input::placeholder {
       color: #aaa; }
+  .navbar .get-all-btn {
+    position: absolute;
+    top: 50%;
+    right: 2rem;
+    transform: translateY(-50%);
+    height: 36px;
+    border: none;
+    background-color: #fff;
+    border-radius: 8px; }
+    .navbar .get-all-btn:hover {
+      cursor: pointer; }
 
 main {
   width: 100%;
