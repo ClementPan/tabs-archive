@@ -39,19 +39,23 @@
 
     i,
     input::placeholder {
-      color: $light-grey
+      color: $light-grey;
+      background-color: $pure-white;
     }
   }
 
   .get-all-btn {
     position: absolute;
     top: 50%;
-    right: 2rem;
+    right: 2 * $oneUnit;
     transform: translateY(-50%);
-    height: 36px;
+    height: $bar-height;
     border: none;
     background-color: $pure-white;
     border-radius: 8px;
+    padding: 0 8px;
+    font-size: $text-size;
+    font-weight: $content-weight;
 
     &:hover {
       cursor: pointer;

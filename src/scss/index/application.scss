@@ -46,7 +46,7 @@ $text-size: 16px;
 
 // font-weight
 $title-weight: 700;
-$content-eight: 500;
+$content-weight: 500;
 
 // layout
 $oneUnit: 12px;
@@ -126,14 +126,43 @@ $border-radius-normal: 8px;
     font-size: $text-size;
     font-weight: 500;
     overflow: hidden;
+    // border: 1px solid #000;
+    p {
+      // border: 1px solid #000;
+    }
   }
   .title {
     flex: 3;
-    border: 1px solid #000;
+    // border: 1px solid #000;
+    p {
+      // border: 1px solid #000;
+      max-width: 80%;
+      height:  $text-size;
+      overflow:hidden;
+    }
+  }
+  .icon {
+    img {
+      height: 80%;
+      object-fit: cover;
+    }
   }
   .tags {
     flex: 2;
   }
+  .btn {
+    button {
+      border: none;
+      background-color: transparent;
+      font-size: $text-size;
+      font-weight: 500;
+      &:hover {
+        cursor: pointer;
+      }
+    }
+  }
+  // .open-tab {
+  // }
 }
 
 %tab-style {
