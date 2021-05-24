@@ -101,6 +101,36 @@ const methods = {
     findLastTabId(archive)
     return tabId
   },
+  getLastArchiveId(data) {
+    let archiveId = 0
+    const archive = data
+
+    const findLastArchiveId = (archive) => {
+      if (archiveId < + archive.id) {
+        archiveId = + archive.id
+      }
+
+      if (!archive.archivesList.length) {
+        return
+      } else {
+        for (let subArchive of archive.archivesList) {
+          if (archiveId < + subArchive.id) {
+            archiveId = + subArchive.id
+          }
+          if (!subArchive.archivesList.length) {
+            continue
+          } else {
+            for (let innerArchive of subArchive.archivesList) {
+              findLastArchiveId(innerArchive)
+            }
+          }
+        }
+      }
+    }
+
+    findLastArchiveId(archive)
+    return archiveId
+  },
   getStorageData: async function (archive) {
     return new Promise((resolve, reject) => {
       try {
@@ -140,8 +170,9 @@ const methods = {
 
       // get tabs count
       const lastTabId = methods.getLastTabId(archive)
+      const lastArchiveId = methods.getLastArchiveId(archive)
       const response = {
-        archive, lastTabId
+        archive, lastTabId, lastArchiveId
       }
 
       sendResponse(response)

@@ -20,15 +20,17 @@ const TabData = function (id, icon, title, tags, createdAt, url, updatedAt) {
 
 const data = {
   archive: {},
-  lastTabId: ''
+  lastTabId: '',
+  lastArchiveId: ''
 }
 
 const utils = {
-  idFormatter: function (num) {
+  idFormatter: function (type, num) {
+    let mode = type === 'tab' ? 5 : 3
     num = num + ''
     let output = num.split('')
-    if (num.length < 5) {
-      for (let i = 0; i < 5 - num.length; i++) {
+    if (num.length < mode) {
+      for (let i = 0; i < mode - num.length; i++) {
         output.unshift('0')
       }
     }
@@ -47,7 +49,17 @@ const model = {
     archive.classList = 'archive-style'
     return archive
   },
-  createArchiveDOMInContent() { },
+  // 5/25 start here  <------
+  createArchiveDOMInContent(archiveData) {
+    const archive = document.createElement('div')
+    archive.innerHTML = `
+      <i class="fas fa-caret-right closed"></i>
+      <p>${archiveName}</p>
+      <i class="fas fa-plus new"></i>
+    `
+    archive.classList = 'archive-style'
+    return archive
+  },
   createTabDOMInContent(tabData) {
     const { createdAt, finishReading, icon, id, tags, title, updatedAt, url } = tabData
     const tab = document.createElement('div')
@@ -119,7 +131,7 @@ const model = {
 
             // set id
             data.lastTabId++
-            const id = utils.idFormatter(data.lastTabId)
+            const id = utils.idFormatter('tab', data.lastTabId)
 
             tabs.push(new TabData(id, icon, title, tags, createdAt, url, updatedAt))
           }
@@ -188,10 +200,14 @@ const view = {
   },
   showRootArchiveList(list) {
     // list: root.archivesList
-    const archivesList = document.querySelector('.archivesList')
+    const sidebarArchivesList = document.querySelector('.sidebar .archivesList')
+    const contentArchivesList = document.querySelector('.content .archivesList')
     for (let item of list) {
-      const newArchive = model.createArhiveDOMInSidebar(item.archiveName)
-      archivesList.appendChild(newArchive)
+      const newSidebarArchive = model.createArhiveDOMInSidebar(item.archiveName)
+      sidebarArchivesList.appendChild(newSidebarArchive)
+
+      // const newContentArchive = model.createArhiveDOMInContent(item.archiveName)
+      // contentArchivesList.appendChild(newnewContentArchiveArchive)
     }
   },
   removeTab(tabBar) {
@@ -264,9 +280,9 @@ window.onload = function () {
   }
   chrome.runtime.sendMessage(request, (response) => {
     console.log('[Index] received archive data', response)
-    const { archive, lastTabId } = response
+    const { archive, lastTabId, lastArchiveId } = response
     data.lastTabId = lastTabId
-    // console.log('data.lastTabId: ' + data.lastTabId)
+    data.lastArchiveId = lastArchiveId
     controller.initLocalArchiveData(archive)
   });
 }
@@ -281,7 +297,7 @@ window.addEventListener('click', (e) => {
   }
 
   if (target.className === 'open-all') {
-    console.log(target.parentElement)
+    console.log(target.parentElement.parentElement)
   }
 
   if (target.className === 'open-tab') {
