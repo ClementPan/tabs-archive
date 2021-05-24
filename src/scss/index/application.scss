@@ -170,4 +170,7 @@ $border-radius-normal: 8px;
   background-color: $pure-white;
   border: 1px solid $light-blue;
   margin: 12px 0;
+  &.none {
+    display: none;
+  }
 }

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <link rel="stylesheet" href="./css/index/normalize.css">
+  <link rel="stylesheet" href="./css/index/application.css">
+  <link rel="stylesheet" href="./css/index/index.css">
+  <!-- font awesome -->
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css"
+    integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+  <title>Tabs Archive</title>
+</head>
+
+<body>
+  <div class="navbar">
+    <h1>Tabs Archive</h1>
+    <div class="search-bar">
+      <i class="fas fa-search"></i>
+      <input type="text" placeholder="search for tab">
+    </div>
+    <button class='get-all-btn'>Get all tabs</button>
+    <button class='get-data'>Get data</button>
+    <button class='clear-data'>Clear data</button>
+  </div>
+
+  <main>
+    <div class="sidebar">
+      <div class="root-archive">
+        <div class="archivesList">
+          <div class="archive-style create-new">
+            <i class="fas fa-star-of-life"></i>
+            <p>New Folder</p>
+            <i class="fas fa-plus new"></i>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="content">
+      <div class="archivesList"></div>
+      <div class="data-bar">
+        <div class='number'>
+          <p>Tabs No.</p>
+        </div>
+        <div class='icon'>
+          <p>Icon</p>
+        </div>
+        <div class='title'>
+          <p>Title</p>
+        </div>
+        <div class='tags'>
+          <p>Tags</p>
+        </div>
+        <div class='createdAt'>
+          <p>CreatedAt</p>
+        </div>
+        <div class='btn'>
+          <button class='open-all'>Open All</button>
+        </div>
+        <div class='delete-btn'>
+          <p>Delete All</p>
+        </div>
+      </div>
+      <div class="tabs-list">
+      </div>
+
+    </div>
+  </main>
+
+  <script src="./js/main/index.js"></script>
+
+</body>
+
+</html>
