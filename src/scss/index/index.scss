@@ -61,6 +61,16 @@
       cursor: pointer;
     }
   }
+
+  .get-data {
+    @extend .get-all-btn;
+    right: 12 * $oneUnit;
+  }
+
+  .clear-data {
+    @extend .get-all-btn;
+    right: 20 * $oneUnit;
+  }
 }
 
 main {
