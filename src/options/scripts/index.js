@@ -1,4 +1,11 @@
-// const { uuid } = '../../../node_modules/uuidv4' //to be fixed
+// css bundle
+import '../styles/application.scss'
+import '../styles/index.scss'
+import '../styles/normalize.scss'
+
+
+//to be fixed
+// const { uuid } = '../../../node_modules/uuidv4' 
 
 // Archive proto
 const ArchiveData = function (archiveName) {

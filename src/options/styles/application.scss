@@ -2,11 +2,6 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@500&display=swap');
 
-@font-face {
-  font-family: 'Taipei Sans TC';
-  src: url('../fonts/TaipeiSansTCBeta-Regular.ttf')  format('truetype');
-}
-
 // html
 html {
   height: 100vh;
@@ -153,6 +148,7 @@ $border-radius-normal: 8px;
   .btn {
     button {
       border: none;
+      color: $font-dark;
       background-color: transparent;
       font-size: $text-size;
       font-weight: 500;

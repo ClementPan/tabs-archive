@@ -1,4 +1,5 @@
 @import './application.scss';
+@import './normalize.scss';
 
 .navbar {
   background-color: $blue;
@@ -44,32 +45,38 @@
     }
   }
 
-  .get-all-btn {
+  .nav-btns {
     position: absolute;
     top: 50%;
     right: 2 * $oneUnit;
     transform: translateY(-50%);
-    height: $bar-height;
-    border: none;
-    background-color: $pure-white;
-    border-radius: 8px;
-    padding: 0 8px;
-    font-size: $text-size;
-    font-weight: $content-weight;
 
-    &:hover {
-      cursor: pointer;
+    .get-all-btn {
+      color: $font-dark;
+      height: $bar-height;
+      width: 120px;
+      border: none;
+      background-color: $pure-white;
+      border-radius: 8px;
+      padding: 0 4px;
+      font-size: $text-size;
+      font-weight: $content-weight;
+
+      &:hover {
+        cursor: pointer;
+      }
     }
-  }
 
-  .get-data {
-    @extend .get-all-btn;
-    right: 12 * $oneUnit;
-  }
+    .get-data {
+      @extend .get-all-btn;
+      right: 12 * $oneUnit;
+    }
 
-  .clear-data {
-    @extend .get-all-btn;
-    right: 20 * $oneUnit;
+    .clear-data {
+      @extend .get-all-btn;
+      right: 20 * $oneUnit;
+    }
+      
   }
 }
 

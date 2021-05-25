@@ -1,7 +1,8 @@
 body {
   margin: 0;
   padding: 0;
-  border-radius: 12px; }
+  border-radius: 12px;
+}
 
 button {
   font-weight: 700;
@@ -10,12 +11,14 @@ button {
   width: 180px;
   outline: none;
   border: none;
-  background-color: #1d3557;
+    background-color: #1d3557;
   color: #fff;
-  transition: .3s linear; }
+  transition: .3s linear;
+}
 
 button:hover {
   transition: .3s linear;
   cursor: pointer;
   background-color: #fff;
-  color: #1d3557; }
+  color: #1d3557;
+}

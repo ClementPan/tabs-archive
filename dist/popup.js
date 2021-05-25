@@ -3,6 +3,7 @@ const getAll = document.getElementById('getAll')
 
 const openTabsArchive = () => {
   chrome.runtime.openOptionsPage()
+  console.log('openOptionsPage')
 }
 
 const getAllTabs = () => {
