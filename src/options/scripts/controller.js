@@ -43,6 +43,17 @@ export const controller = {
     // store archive to storage
     model.storeArchive()
   },
+  openAllTabs(archiveId) {
+    const { unclassified } = model.searchArchiveById(data.archive, archiveId)
+    unclassified.forEach(each => {
+      const url = each.url
+      chrome.tabs.create({ url, active: false })
+    });
+  },
+  deleteAllTabs(archiveId) {
+    // model.searchArchiveById()
+
+  },
   //  developing methods
   clearStorage() {
     chrome.storage.sync.clear(() => {

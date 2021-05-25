@@ -1,7 +1,7 @@
 const openBtn = document.getElementById('open')
 const getAll = document.getElementById('getAll')
 
-const openTabsArchive = () => {
+const openOptionsPage = () => {
   console.log('Click openTabsArchive')
   chrome.runtime.openOptionsPage()
 }
@@ -20,5 +20,5 @@ const getAllTabs = () => {
   })
 }
 
-openBtn.addEventListener('click', openTabsArchive)
+openBtn.addEventListener('click', openOptionsPage)
 getAll.addEventListener('click', getAllTabs)

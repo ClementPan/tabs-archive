@@ -31,7 +31,9 @@ window.addEventListener('click', (e) => {
   }
 
   if (target.className === 'open-all') {
-    console.log(target.parentElement.parentElement)
+    // console.log(target.parentElement.parentElement)
+    const archiveId = target.dataset.id
+    controller.openAllTabs(archiveId)
   }
 
   if (target.className === 'open-tab') {
@@ -43,6 +45,11 @@ window.addEventListener('click', (e) => {
     const tabId = target.dataset.tabid
     const tabBar = target.parentElement.parentElement
     controller.deleteTab(tabBar, data.archive, tabId)
+  }
+
+  if (target.className === 'delete-all') {
+    const archiveId = target.dataset.id
+    controller.deleteAllTabs(archiveId)
   }
 
   if (target.className === 'get-data') {

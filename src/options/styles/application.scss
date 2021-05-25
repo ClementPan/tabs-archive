@@ -136,17 +136,7 @@ $border-radius-normal: 8px;
     font-weight: 500;
     overflow: hidden;
     text-align: center;
-    border: 1px solid #000;
-    p {
-      // width: 100%;
-      // line-height: 100%;
-      // box-sizing: content-box;
-      // display: block;
-      border: 1px solid #000;
-      // height: 100%;
-      // padding: 0 auto;
-      // vertical-align: middle;
-    }
+    p { }
   }
   .title {
     @extend .box;

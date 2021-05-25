@@ -204,5 +204,37 @@ export const model = {
     }
     removeTabById(archive, targetId)
     return archive
+  },
+  searchArchiveById(archive, archiveId) {
+    let targetId = archiveId
+    let targetArchive = {}
+
+    const findArchive = (archive) => {
+      if (targetId === archive.id) {
+        return targetArchive = archive
+      }
+
+      if (!archive.archivesList.length) {
+        return
+      } else {
+        for (let subArchive of archive.archivesList) {
+          if (targetId === subArchive.id) {
+            return targetArchive = subArchive
+          }
+          if (!subArchive.archivesList.length) {
+            continue
+          } else {
+            for (let innerArchive of subArchive.archivesList) {
+              findArchive(innerArchive)
+            }
+          }
+        }
+      }
+    }
+
+    findArchive(archive)
+    return targetArchive
+  },
+  searchTabById: function (archive, tabId) {
   }
 }
