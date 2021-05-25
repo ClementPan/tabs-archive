@@ -19,6 +19,37 @@ const TabData = function (id, icon, title, tags, createdAt, url, updatedAt) {
   this.tags = tags
 }
 
+const tabTemplate = function (tab) {
+  const { id, icon, title, createdAt, url, tags } = tab
+  return `
+    <div class='number'>
+      <p>${id}</p>
+          </div >
+    <div class='icon'>
+      <img src="${icon}" alt="">
+          </div>
+      <div class='title'>
+        <p>${title}</p>
+      </div>
+      <div class='tags'>
+        <p>${tags}</p>
+      </div>
+      <div class='createdAt'>
+        <p>${createdAt}</p>
+      </div>
+      <div class='btn'>
+        <button class='open-tab' data-url="${url}">
+          Open
+            </button>
+      </div>
+      <div class='btn'>
+        <button class='delete-tab' data-tabid="${id}">
+          Delete
+        </button>
+      </div>
+  `
+}
+
 export const model = {
   createArhiveDOMInSidebar(archive) {
     const { archiveName, id } = archive
@@ -32,53 +63,44 @@ export const model = {
     newArchive.dataset.archiveId = id
     return newArchive
   },
+
   // 5/25 working here  <------
   createArchiveDOMInContent(archive) {
-    // console.log(archive)
     const { archiveName, archivesList, unclassified, id } = archive
+
+    const unclassifiedDOMS = unclassified.map(each => {
+      return `
+      <div class='tab tab-style'>
+        ${tabTemplate(each)}
+      </div>
+      `
+    }).join('')
 
     const newArchive = document.createElement('div')
     newArchive.innerHTML = `
-      <p>${archiveName}</p>
-      <p>${archivesList}</p>
-      <p>${unclassified}</p>
+    <div class='archiveName'>
+      <input id="archive${id}-dropdown" type="checkbox">
+        <label for="archive${id}-dropdown">
+          <h3 unselectable="on">${archiveName}</h3>
+        </label>
+        <div class="archive-content">
+          <div class="archivesList">
+            <p>${archivesList}</p>
+          </div>
+          <div class="tabs-list">
+            ${unclassifiedDOMS}
+          </div>
+        </div>
+      </div>
     `
 
-    newArchive.classList = 'archive-style'
+    newArchive.classList = 'archive archive-style'
     newArchive.dataset.archiveId = id
     return newArchive
   },
   createTabDOMInContent(tabData) {
-    const { createdAt, finishReading, icon, id, tags, title, updatedAt, url } = tabData
     const tab = document.createElement('div')
-    tab.innerHTML = `
-        <div class='number'>
-          <p>${id}</p>
-        </div>
-        <div class='icon'>
-          <img src="${icon}" alt="">
-        </div>
-        <div class='title'>
-          <p>${title}</p>
-        </div>
-        <div class='tags'>
-          <p>${tags}</p>
-        </div>
-        <div class='createdAt'>
-          <p>${createdAt}</p>
-        </div>
-        <div class='btn'>
-          <button class='open-tab' data-url="${url}">
-            Open
-          </button>
-        </div>
-        <div class='btn'>
-          <button class='delete-tab' data-tabid="${id}">
-            Delete
-          </button>
-        </div>
-      </div>
-    `
+    tab.innerHTML = tabTemplate(tabData)
     tab.classList += 'tab tab-style'
     return tab
   },

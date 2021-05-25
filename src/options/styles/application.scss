@@ -35,6 +35,7 @@ $font-dark: #222;
 $body-background: #ccc;
 $blue: #1d3557;
 $light-blue: #CAF0F8;
+$archive-background: #a8dadc;
 
 // font size
 $brand-size: 32px;
@@ -75,6 +76,16 @@ $border-radius-normal: 8px;
   width: 100%;
 }
 
+%unselectable {
+  -webkit-user-select: none; /* Chrome/Safari */ 
+  -moz-user-select: none; /* Firefox */
+  -ms-user-select: none; /* IE10+ */
+  /* The rule below is not implemented in browsers yet */
+  -o-user-select: none;
+  /* The rule below is implemented in most browsers by now */
+  user-select: none;
+}
+
 %archive-style {
   width: $archive-width;
   height: $archive-height;
@@ -106,8 +117,8 @@ $border-radius-normal: 8px;
   }
 }
 
-
 %data-bar {
+  width: 100%;
   background-color: $light-blue;
   height: $bar-height;
   display: flex;
@@ -123,9 +134,8 @@ $border-radius-normal: 8px;
     font-size: $text-size;
     font-weight: 500;
     overflow: hidden;
-    // border: 1px solid #000;
     p {
-      border: 1px solid #000;
+      // border: 1px solid #000;
     }
   }
   .title {
@@ -157,8 +167,6 @@ $border-radius-normal: 8px;
       }
     }
   }
-  // .open-tab {
-  // }
 }
 
 %tab-style {

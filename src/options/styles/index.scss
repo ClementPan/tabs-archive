@@ -124,18 +124,65 @@ main {
     }
 
     .archive-style {
-      border: 1px solid #000;
       margin-bottom: $oneUnit;
       .data-bar {
-        @extend %data-bar
+        @extend %data-bar;
       }
       .tab-style {
-        @extend %tab-style
+        @extend %tab-style;
       }
     }
 
     .archive {
-      order: 1
+      order: 1;
+      position: relative;
+      height: auto;
+
+      .archiveName {
+        @extend %flex-all-center;
+        flex-direction: column;
+        
+        label {
+          display: block;
+          min-height: $bar-height;
+          width: 100%;
+          border-radius: $border-radius-normal;
+          background-color: $archive-background;
+          @extend %flex-all-center;
+          h3 {
+            display: block;
+            margin: auto;
+            height: $bar-height;
+            font-weight: $title-weight;
+            text-align: center;
+            font-size: $title-size;
+            line-height: $bar-height;
+            @extend %unselectable;
+            &:hover {
+              cursor: pointer;
+            }
+          }
+        }
+
+        input {
+          position: absolute;
+          left: 200px;
+          display: none;
+
+          &:checked ~ .archive-content {
+            display: block;
+          }
+        }
+
+        .archive-content {
+          display: none;
+          width: 100%;
+
+          .tab {
+            @extend %tab-style;
+          }
+        }
+      }
     }
 
     .unclassified {
