@@ -134,7 +134,6 @@ export const model = {
         chrome.tabs.query({ active: false }, (queryResult) => {
           const tabs = []
           for (let tab of queryResult) {
-            // console.log(tab)
             if (
               (tab.title === "chrome.tabs - Chrome Developers") ||
               (tab.url === "chrome://extensions/") ||
@@ -146,7 +145,9 @@ export const model = {
             chrome.tabs.remove(tab.id)
 
             // form tabData
-            const { favIconUrl: icon, title, url } = tab
+            const title = utils.escapeHtml(tab.title)
+
+            const { favIconUrl: icon, url } = tab
             const createdAt = new Date().toLocaleDateString('zh-tw')
             const updatedAt = new Date().toLocaleDateString('zh-tw')
             const tags = []
