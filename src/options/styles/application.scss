@@ -171,9 +171,13 @@ $border-radius-normal: 8px;
 
 %tab-style {
   @extend %data-bar;
+  @extend %unselectable;
   background-color: $pure-white;
   border: 1px solid $light-blue;
   margin: 12px 0;
+  &:hover {
+    cursor: pointer;
+  }
   &.none {
     display: none;
   }
