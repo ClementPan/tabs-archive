@@ -68,13 +68,25 @@ export const model = {
   createArchiveDOMInContent(archive) {
     const { archiveName, archivesList, unclassified, id } = archive
 
-    const unclassifiedDOMS = unclassified.map(each => {
-      return `
+    let unclassifiedDOMS = ''
+
+    if (unclassified.length) {
+      unclassifiedDOMS = unclassified.map(each => {
+        return `
       <div class='tab tab-style'>
         ${tabTemplate(each)}
       </div>
       `
-    }).join('')
+      }).join('')
+    } else {
+      unclassifiedDOMS = `
+      <div class='tab tab-style'>
+        No tab here yet!
+      </div>
+      `
+    }
+
+
 
     const newArchive = document.createElement('div')
     newArchive.innerHTML = `
