@@ -22,27 +22,27 @@ const TabData = function (id, icon, title, tags, createdAt, url, updatedAt) {
 const tabTemplate = function (tab) {
   const { id, icon, title, createdAt, url, tags } = tab
   return `
-    <div class='number'>
+    <div class='number box'>
       <p>${id}</p>
           </div >
-    <div class='icon'>
+    <div class='icon box'>
       <img src="${icon}" alt="">
           </div>
-      <div class='title'>
+      <div class='title box'>
         <p>${title}</p>
       </div>
-      <div class='tags'>
+      <div class='tags box'>
         <p>${tags}</p>
       </div>
-      <div class='createdAt'>
+      <div class='createdAt box'>
         <p>${createdAt}</p>
       </div>
-      <div class='btn'>
+      <div class='btn box'>
         <button class='open-tab' data-url="${url}">
           Open
             </button>
       </div>
-      <div class='btn'>
+      <div class='btn box'>
         <button class='delete-tab' data-tabid="${id}">
           Delete
         </button>
@@ -63,8 +63,6 @@ export const model = {
     newArchive.dataset.archiveId = id
     return newArchive
   },
-
-  // 5/25 working here  <------
   createArchiveDOMInContent(archive) {
     const { archiveName, archivesList, unclassified, id } = archive
 
@@ -85,8 +83,6 @@ export const model = {
       </div>
       `
     }
-
-
 
     const newArchive = document.createElement('div')
     newArchive.innerHTML = `
@@ -145,7 +141,7 @@ export const model = {
             chrome.tabs.remove(tab.id)
 
             // form tabData
-            const title = utils.escapeHtml(tab.title)
+            const title = utils.trimString(utils.escapeHtml(tab.title), 45)
 
             const { favIconUrl: icon, url } = tab
             const createdAt = new Date().toLocaleDateString('zh-tw')

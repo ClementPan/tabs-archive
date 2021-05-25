@@ -126,25 +126,31 @@ $border-radius-normal: 8px;
   justify-content: space-around;
   padding: 0 2 * $oneUnit;
   border-radius: $border-radius-normal;
-  div {
+  .box {
     flex: 1;
     @extend %flex-all-center;
     height: 100%;
+    width: 100%;
     min-width: 90px;
     font-size: $text-size;
     font-weight: 500;
     overflow: hidden;
+    text-align: center;
+    border: 1px solid #000;
     p {
-      // border: 1px solid #000;
+      // width: 100%;
+      // line-height: 100%;
+      // box-sizing: content-box;
+      // display: block;
+      border: 1px solid #000;
+      // height: 100%;
+      // padding: 0 auto;
+      // vertical-align: middle;
     }
   }
   .title {
+    @extend .box;
     flex: 3;
-    p {
-      max-width: 80%;
-      height:  $text-size;
-      overflow:hidden;
-    }
   }
   .icon {
     img {
@@ -157,6 +163,7 @@ $border-radius-normal: 8px;
   }
   .btn {
     button {
+      height: 100%;
       border: none;
       color: $font-dark;
       background-color: transparent;

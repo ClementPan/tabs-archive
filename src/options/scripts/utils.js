@@ -17,5 +17,8 @@ export const utils = {
       .replace(/>/g, "&gt;")
       .replace(/"/g, "&quot;")
       .replace(/'/g, "&#039;");
+  },
+  trimString: function (string, mexlength) {
+    return string.substring(0, mexlength)
   }
 }
