@@ -1,0 +1,177 @@
+import { utils } from './utils'
+import { data } from './data.js'
+
+// Archive proto
+const ArchiveData = function (archiveName) {
+  this.archiveName = archiveName || 'New Archive'
+  this.archivesList = []
+  this.unclassified = []
+}
+
+const TabData = function (id, icon, title, tags, createdAt, url, updatedAt) {
+  this.id = id
+  this.title = title
+  this.url = url
+  this.icon = icon
+  this.createdAt = createdAt
+  this.updatedAt = updatedAt
+  this.finishReading = false
+  this.tags = tags
+}
+
+export const model = {
+  createArhiveDOMInSidebar(archive) {
+    const { archiveName, id } = archive
+    const newArchive = document.createElement('div')
+    newArchive.innerHTML = `
+      <i class="fas fa-caret-right closed"></i>
+      <p>${archiveName}</p>
+      <i class="fas fa-plus new"></i>
+    `
+    newArchive.classList = 'archive archive-style'
+    newArchive.dataset.archiveId = id
+    return newArchive
+  },
+  // 5/25 working here  <------
+  createArchiveDOMInContent(archive) {
+    // console.log(archive)
+    const { archiveName, archivesList, unclassified, id } = archive
+
+    const newArchive = document.createElement('div')
+    newArchive.innerHTML = `
+      <p>${archiveName}</p>
+      <p>${archivesList}</p>
+      <p>${unclassified}</p>
+    `
+
+    newArchive.classList = 'archive-style'
+    newArchive.dataset.archiveId = id
+    return newArchive
+  },
+  createTabDOMInContent(tabData) {
+    const { createdAt, finishReading, icon, id, tags, title, updatedAt, url } = tabData
+    const tab = document.createElement('div')
+    tab.innerHTML = `
+        <div class='number'>
+          <p>${id}</p>
+        </div>
+        <div class='icon'>
+          <img src="${icon}" alt="">
+        </div>
+        <div class='title'>
+          <p>${title}</p>
+        </div>
+        <div class='tags'>
+          <p>${tags}</p>
+        </div>
+        <div class='createdAt'>
+          <p>${createdAt}</p>
+        </div>
+        <div class='btn'>
+          <button class='open-tab' data-url="${url}">
+            Open
+          </button>
+        </div>
+        <div class='btn'>
+          <button class='delete-tab' data-tabid="${id}">
+            Delete
+          </button>
+        </div>
+      </div>
+    `
+    tab.classList += 'tab tab-style'
+    return tab
+  },
+  async getStorageData(targetData) {
+    return new Promise((resolve, reject) => {
+      try {
+        chrome.storage.sync.get([targetData], (data) => {
+          return resolve(data)
+        })
+      } catch (error) {
+        console.log('reject!')
+        reject(error)
+      }
+    })
+  },
+  async getAllOpenedTabs() {
+    return new Promise((resolve, reject) => {
+      try {
+        chrome.tabs.query({ active: false }, (queryResult) => {
+          const tabs = []
+          for (let tab of queryResult) {
+            // console.log(tab)
+            if (
+              (tab.title === "chrome.tabs - Chrome Developers") ||
+              (tab.url === "chrome://extensions/") ||
+              (tab.url.split('://')[0] === 'chrome-extension')) {
+              console.log('continue on ' + tab.title)
+              continue
+            }
+            // clear
+            chrome.tabs.remove(tab.id)
+
+            // form tabData
+            const { favIconUrl: icon, title, url } = tab
+            const createdAt = new Date().toLocaleDateString('zh-tw')
+            const updatedAt = new Date().toLocaleDateString('zh-tw')
+            const tags = []
+
+            // set id
+            data.lastTabId++
+            const id = utils.idFormatter('tab', data.lastTabId)
+
+            tabs.push(new TabData(id, icon, title, tags, createdAt, url, updatedAt))
+          }
+          return resolve(tabs)
+        })
+      } catch (error) {
+        reject(error)
+      }
+    })
+  },
+  storeArchive() {
+    // store defaultArchive to storage
+    const { archive } = data
+    archive.archiveName = 'root-archive'
+    const request = {
+      message: 'store-archive',
+      data: archive
+    }
+
+    chrome.runtime.sendMessage(request, (message) => {
+      console.log('[Index] ', message)
+    });
+  },
+  removeTab(archive, tabId) {
+    const targetId = tabId
+
+    const removeTabById = (archive, targetId) => {
+      if (!archive.unclassified.length) {
+        if (!archive.archivesList.length) {
+          return
+        } else {
+          for (let subArchive of archive.archivesList) {
+            removeTabById(subArchive, targetId)
+          }
+        }
+      } else {
+        for (let tab of archive.unclassified) {
+          if (tab.id === targetId) {
+            const index = archive.unclassified.indexOf(tab)
+            archive.unclassified.splice(index, 1)
+          }
+        }
+        if (!archive.archivesList.length) {
+          return
+        } else {
+          for (let subArchive of archive.archivesList) {
+            removeTabById(subArchive, targetId)
+          }
+        }
+      }
+    }
+    removeTabById(archive, targetId)
+    return archive
+  }
+}
