@@ -3,6 +3,7 @@ import '../styles/application.scss'
 import '../styles/index.scss'
 import '../styles/normalize.scss'
 
+import { utils } from './utils'
 
 //to be fixed
 // const { uuid } = '../../../node_modules/uuidv4' 
@@ -31,41 +32,48 @@ const data = {
   lastArchiveId: ''
 }
 
-const utils = {
-  idFormatter: function (type, num) {
-    let mode = type === 'tab' ? 5 : 3
-    num = num + ''
-    let output = num.split('')
-    if (num.length < mode) {
-      for (let i = 0; i < mode - num.length; i++) {
-        output.unshift('0')
-      }
-    }
-    return output.join('')
-  }
-}
+// const utils = {
+//   idFormatter: function (type, num) {
+//     let mode = type === 'tab' ? 5 : 3
+//     num = num + ''
+//     let output = num.split('')
+//     if (num.length < mode) {
+//       for (let i = 0; i < mode - num.length; i++) {
+//         output.unshift('0')
+//       }
+//     }
+//     return output.join('')
+//   }
+// }
 
 const model = {
-  createArhiveDOMInSidebar(archiveName) {
-    const archive = document.createElement('div')
-    archive.innerHTML = `
+  createArhiveDOMInSidebar(archive) {
+    const { archiveName, id } = archive
+    const newArchive = document.createElement('div')
+    newArchive.innerHTML = `
       <i class="fas fa-caret-right closed"></i>
       <p>${archiveName}</p>
       <i class="fas fa-plus new"></i>
     `
-    archive.classList = 'archive-style'
-    return archive
+    newArchive.classList = 'archive archive-style'
+    newArchive.dataset.archiveId = id
+    return newArchive
   },
-  // 5/25 start here  <------
-  createArchiveDOMInContent(archiveData) {
-    const archive = document.createElement('div')
-    archive.innerHTML = `
-      <i class="fas fa-caret-right closed"></i>
+  // 5/25 working here  <------
+  createArchiveDOMInContent(archive) {
+    // console.log(archive)
+    const { archiveName, archivesList, unclassified, id } = archive
+
+    const newArchive = document.createElement('div')
+    newArchive.innerHTML = `
       <p>${archiveName}</p>
-      <i class="fas fa-plus new"></i>
+      <p>${archivesList}</p>
+      <p>${unclassified}</p>
     `
-    archive.classList = 'archive-style'
-    return archive
+
+    newArchive.classList = 'archive-style'
+    newArchive.dataset.archiveId = id
+    return newArchive
   },
   createTabDOMInContent(tabData) {
     const { createdAt, finishReading, icon, id, tags, title, updatedAt, url } = tabData
@@ -208,13 +216,14 @@ const view = {
   showRootArchiveList(list) {
     // list: root.archivesList
     const sidebarArchivesList = document.querySelector('.sidebar .archivesList')
-    const contentArchivesList = document.querySelector('.content .archivesList')
+    const content = document.querySelector('.content')
+
     for (let item of list) {
-      const newSidebarArchive = model.createArhiveDOMInSidebar(item.archiveName)
+      const newSidebarArchive = model.createArhiveDOMInSidebar(item)
       sidebarArchivesList.appendChild(newSidebarArchive)
 
-      // const newContentArchive = model.createArhiveDOMInContent(item.archiveName)
-      // contentArchivesList.appendChild(newnewContentArchiveArchive)
+      const newContentArchive = model.createArchiveDOMInContent(item)
+      content.appendChild(newContentArchive)
     }
   },
   removeTab(tabBar) {
@@ -275,9 +284,6 @@ const controller = {
     })
   }
 }
-
-// controller.setRootArchiveList()
-// controller.clearStorage()
 
 window.onload = function () {
   console.log('[Index] Index.html loaded! Ask for archive data!')

@@ -2,17 +2,19 @@ const openBtn = document.getElementById('open')
 const getAll = document.getElementById('getAll')
 
 const openTabsArchive = () => {
+  console.log('Click openTabsArchive')
   chrome.runtime.openOptionsPage()
-  console.log('openOptionsPage')
 }
 
 const getAllTabs = () => {
-  return
-  // to be fixed
+  // to be finished
+  console.log('Click getAllTabs')
   chrome.tabs.query({}, (data) => {
     const tabs = []
     for (let tab of data) {
+      console.log('tab: ', tab)
       const { favIconUrl: icon, title, url } = tab
+      // send to index.html
       tabs.push({ icon, title, url })
     }
   })

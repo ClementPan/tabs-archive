@@ -3,12 +3,19 @@
 
 <head>
   <link rel="stylesheet" href="./popup.css">
+  <script defer src="./popup.js"></script>
 </head>
 
 <body class="popup">
-  <button id="open" onclick="openTabsArchive">Open Tabs Archive!</button>
-  <button id="getAll" onclick="getAllTabs">Get all tabs!</button>
-  <script defer src="./popup.js"></script>
+  <div class="btns-panel">
+    <div class="title">
+      <h1>Tabs Archive Panel</h1>
+    </div>
+
+    <button id="open">Open Tabs Archive!</button>
+    <button id="getAll">Get all tabs!</button>
+    <button id="close">Close</button>
+  </div>
 </body>
 
 </html>

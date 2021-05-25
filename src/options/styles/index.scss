@@ -1,5 +1,4 @@
 @import './application.scss';
-@import './normalize.scss';
 
 .navbar {
   background-color: $blue;
@@ -114,17 +113,33 @@ main {
     height: calc(100vh - 100px);
     flex: 1;
     // max-width: 1440px;
+    display: flex;
+    flex-direction: column;
     background-color: $pure-white;
     padding: 2 * $oneUnit;
     overflow-y: scroll;
+    
     &::-webkit-scrollbar {
       display: none;
     }
-    .data-bar {
-      @extend %data-bar
+
+    .archive-style {
+      border: 1px solid #000;
+      margin-bottom: $oneUnit;
+      .data-bar {
+        @extend %data-bar
+      }
+      .tab-style {
+        @extend %tab-style
+      }
     }
-    .tab-style {
-      @extend %tab-style
+
+    .archive {
+      order: 1
+    }
+
+    .unclassified {
+      order: 2
     }
   }
 }

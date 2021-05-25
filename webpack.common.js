@@ -31,9 +31,9 @@ module.exports = {
         { from: './src/manifest.json' },
         { from: './src/images' },
         { from: './src/background.js', },
-        { from: './src/popup/popup.html' },
-        { from: './src/popup/scripts/popup.js', },
-        { from: './src/popup/styles/popup.css' }
+        { from: './src/popup' },
+        // { from: './src/popup/popup.js', },
+        // { from: './src/popup/popup.css' }
       ],
     }),
   ],

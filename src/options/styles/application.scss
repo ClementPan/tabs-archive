@@ -2,11 +2,13 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@500&display=swap');
 
-// html
+@import './normalize.scss';
+
 html {
   height: 100vh;
   min-width: 960px;
   font-size: 16px;
+  font-size: 36px;
   font-weight: normal;
   font-family: 'Taipei Sans TC','Montserrat', 'Noto Serif TC', sans-serif;
   line-height: 1.5;
@@ -123,14 +125,12 @@ $border-radius-normal: 8px;
     overflow: hidden;
     // border: 1px solid #000;
     p {
-      // border: 1px solid #000;
+      border: 1px solid #000;
     }
   }
   .title {
     flex: 3;
-    // border: 1px solid #000;
     p {
-      // border: 1px solid #000;
       max-width: 80%;
       height:  $text-size;
       overflow:hidden;
