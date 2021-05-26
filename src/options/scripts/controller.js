@@ -34,6 +34,7 @@ export const controller = {
     view.showRootArchiveList(archivesList)
   },
   deleteTab(target, archive, tabId) {
+    // target: DOM elemnt
     // remove tab
     const newArchive = model.removeTab(data.archive, tabId)
 
@@ -66,6 +67,39 @@ export const controller = {
 
     // store archive to storage
     model.storeArchive()
+  },
+  showNewArchiveInput() {
+    view.showNewArchiveInput()
+  },
+  createNewArchive() {
+    // get user input
+    const archiveName = document.getElementById('archiveName-input').value
+
+    // no empty input allowed
+    if (!archiveName) {
+      view.cancelInput()
+      console.log('No empty input allowed!')
+      return
+    }
+
+    // creat archive data, add new archive in data
+    // newArchive: data
+    const newArchive = model.createNewArchiveInData(archiveName)
+
+    // rerender view
+    view.createNewArchiveInSidebar(newArchive)
+    view.createNewArchiveInContent(newArchive)
+
+    // store archive to storage
+    model.storeArchive()
+
+    // restore UI
+    view.cancelInput()
+
+    return
+  },
+  cancelInput() {
+    view.cancelInput()
   },
   //  developing methods
   clearStorage() {

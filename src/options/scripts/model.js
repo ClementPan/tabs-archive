@@ -1,9 +1,13 @@
 import { utils } from './utils'
 import { data } from './data.js'
+//   archive: {},
+//   lastTabId: '',
+//   lastArchiveId: ''
 
 // Archive proto
-const ArchiveData = function (archiveName) {
+const ArchiveData = function (archiveName, id) {
   this.archiveName = archiveName || 'New Archive'
+  this.id = id
   this.archivesList = []
   this.unclassified = []
 }
@@ -51,13 +55,25 @@ const tabTemplate = function (tab) {
 }
 
 export const model = {
+  createNewArchiveInData(archiveName) {
+    const newId = data.lastArchiveId += 1
+    const id = utils.idFormatter('archive', newId)
+
+    const newArchiveData = new ArchiveData(archiveName, id)
+
+    // push newArchiveData to data.archive
+    data.archive.archivesList.push(newArchiveData)
+
+    return newArchiveData
+  },
   createArhiveDOMInSidebar(archive) {
     const { archiveName, id } = archive
     const newArchive = document.createElement('div')
     newArchive.innerHTML = `
-      <i class="fas fa-caret-right closed"></i>
+      <div class="icon">
+        <i class="fas fa-folder"></i>
+      </div>
       <p>${archiveName}</p>
-      <i class="fas fa-plus new"></i>
     `
     newArchive.classList = 'archive archive-style'
     newArchive.dataset.archiveId = id
@@ -110,6 +126,7 @@ export const model = {
     const tab = document.createElement('div')
     tab.innerHTML = tabTemplate(tabData)
     tab.classList += 'tab tab-style'
+    tab.dataset.id = tabData.id
     return tab
   },
   async getStorageData(targetData) {

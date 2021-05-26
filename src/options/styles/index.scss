@@ -1,5 +1,9 @@
 @import './application.scss';
 
+.none {
+  display: none;
+}
+
 .navbar {
   background-color: transparent;
   height: $navbar-height;
@@ -60,6 +64,7 @@
     top: 50%;
     right: 2 * $oneUnit;
     transform: translateY(-50%);
+    @extend %flex-all-center;
 
     .get-all-btn {
       color: $font-dark;
@@ -111,11 +116,6 @@ main {
       
       .archive-style {
         @extend %archive-style;
-      }
-      .create-new {
-        i:first-child {
-          font-size: 16px;
-        }
       }
     }
   }

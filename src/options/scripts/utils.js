@@ -1,5 +1,6 @@
 export const utils = {
   idFormatter: function (type, num) {
+    // type = "tab" || "archive"
     let mode = type === 'tab' ? 5 : 3
     num = num + ''
     let output = num.split('')

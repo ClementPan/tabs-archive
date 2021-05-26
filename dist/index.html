@@ -28,9 +28,17 @@
       <div class="root-archive">
         <div class="archivesList">
           <div class="archive-style create-new">
-            <i class="fas fa-star-of-life"></i>
-            <p>New Folder</p>
-            <i class="fas fa-plus new"></i>
+            <div class="icon">
+              <i class="fas fa-plus new"></i>
+            </div>
+            <div class="icon cancel none">
+              <i class="fas fa-times-circle"></i>
+            </div>
+            <p class='new'>New Folder</p>
+            <input class='none' id='archiveName-input' type="text" maxlength="25">
+            <div class="icon confirm none">
+              <i class="fas fa-check-circle new-archive-name-input"></i>
+            </div>
           </div>
         </div>
       </div>

@@ -52,6 +52,20 @@ window.addEventListener('click', (e) => {
     controller.deleteAllTabs(archiveId)
   }
 
+  if (target.className.includes('new')) {
+    controller.showNewArchiveInput()
+  }
+
+  if (target.className === 'fas fa-times-circle') {
+    controller.cancelInput()
+  }
+
+  // console.log(target)
+  if (target.classList.contains('new-archive-name-input')) {
+    controller.createNewArchive()
+  }
+
+  // for developing
   if (target.className === 'get-data') {
     controller.showStorage('archive')
   }
@@ -59,4 +73,4 @@ window.addEventListener('click', (e) => {
   if (target.className === 'clear-data') {
     controller.clearStorage()
   }
-})
+}, true)

@@ -46,7 +46,7 @@ $content-weight: 500;
 $oneUnit: 12px;
 $navbar-height: 100px;
 $bar-height: 40px;
-$search-bar-width: 400px;
+$search-bar-width: 500px;
 $sidebar-width: 240px;
 $archive-width: 200px;
 $archive-height: 40px;
@@ -115,26 +115,40 @@ body {
   @extend %flex-vertical-center;
   position: relative;
   border-radius: $border-radius-normal;
+  .icon {
+    @extend %unselectable;
+    width: 3 * $oneUnit;
+    text-align: center;
+    @extend %flex-all-center;
+    height: 100%;
+
+    i{
+      height: 100%;
+      width: 100%;
+      line-height: $archive-height;
+      font-size: $title-size;
+    }
+    &.none {
+      display: none;
+    }
+  }
   p {
+    @extend %unselectable;
     flex: 1;
     height: 100%;
     font-size: $title-size;
     line-height: $archive-height;
     overflow-x: hidden;
-    margin-right: 24px;
     vertical-align: middle;
+    margin-right: $oneUnit;
   }
-  i {
-    font-size: $title-size;
-    width: 24px;
-    text-align: center;
+
+  input {
+    @extend p;
+    height: 80%;
   }
-  i:hover {
+  &.create-new:hover {
     cursor: pointer;
-  }
-  i.new {
-    position: absolute;
-    right: 6px;
   }
 }
 
@@ -212,8 +226,5 @@ body {
   }
   &:hover {
     cursor: pointer;
-  }
-  &.none {
-    display: none;
   }
 }

@@ -23,12 +23,67 @@ export const view = {
       content.appendChild(newContentArchive)
     }
   },
-  removeTab(tabBar) {
-    tabBar.classList += ' none'
+  showNewArchiveInput() {
+    // hide input icon
+    const icon = document.querySelector('.sidebar .create-new .icon')
+    icon.className += ' none'
+
+    // hide <p>
+    const p = document.querySelector('.sidebar .create-new p')
+    if (!p.className.includes('none')) {
+      p.className += ' none'
+    }
+
+    // show input UI
+    const input = document.querySelector('.sidebar .create-new input')
+    const cancelIcon = document.querySelector('.sidebar .create-new .cancel')
+    const confirmIcon = document.querySelector('.sidebar .create-new .confirm')
+    input.classList.remove('none')
+    confirmIcon.classList.remove('none')
+    cancelIcon.classList.remove('none')
   },
+  cancelInput() {
+    //restore 
+    // hide input UI
+    const input = document.querySelector('.sidebar .create-new input')
+    const cancelIcon = document.querySelector('.sidebar .create-new .cancel')
+    const confirmIcon = document.querySelector('.sidebar .create-new .confirm')
+    input.classList += ' none'
+    confirmIcon.classList += ' none'
+    cancelIcon.classList += ' none'
+
+    // show input icon
+    const icon = document.querySelector('.sidebar .create-new .icon')
+    icon.classList.remove('none')
+
+    // show <p>
+    const p = document.querySelector('.sidebar .create-new p.new')
+    p.classList.remove('none')
+
+    // clear input value
+    document.getElementById('archiveName-input').value = ''
+  },
+  createNewArchiveInSidebar(newArchive) {
+    const newArchiveDOM = model.createArhiveDOMInSidebar(newArchive)
+
+    // push newArchiveDOM into sidebarArchivesList
+    const sidebarArchivesList = document.querySelector('.sidebar .archivesList')
+    sidebarArchivesList.appendChild(newArchiveDOM)
+
+    return
+  },
+  createNewArchiveInContent(newArchive) {
+    const content = document.querySelector('.content')
+    const newArchiveDOM = model.createArchiveDOMInContent(newArchive)
+    content.appendChild(newArchiveDOM)
+    return
+  },
+  removeTab(tabBar) {
+    tabBar.remove()
+  },
+  // inacheve
   clearArchive(archiveId) {
     console.log('archiveId: ', archiveId)
     // const ArchiveDOM = document.querySelector('')
-
   }
 }
