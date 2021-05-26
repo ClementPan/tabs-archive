@@ -1,7 +1,6 @@
-// css bundle
+import '../styles/normalize.scss'
 import '../styles/application.scss'
 import '../styles/index.scss'
-import '../styles/normalize.scss'
 
 import { data } from './data.js'
 import { controller } from './controller.js'

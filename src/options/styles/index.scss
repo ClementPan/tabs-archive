@@ -1,19 +1,21 @@
 @import './application.scss';
 
 .navbar {
-  background-color: $blue;
+  background-color: transparent;
   height: $navbar-height;
   @extend %flex-vertical-center;
   flex-direction: row;
   position: relative;
 
   h1 {
+    background-color: $blue;
     height: 40px;
     width: 240px;
     font-size: $brand-size;
     font-weight: $title-weight;
     color: $pure-white;
-    line-height: 100%;
+    line-height: $navbar-height;
+    height: 100%;
     text-align: center;
   }
 
@@ -37,7 +39,16 @@
       }
     }
 
-    i,
+    .search-icon {
+      height: 100%;
+      padding: 0 auto;
+      @extend %flex-all-center;
+      i {
+        font-size: $title-size;
+      }    
+    }
+
+    .search-icon,
     input::placeholder {
       color: $light-grey;
       background-color: $pure-white;
@@ -84,12 +95,12 @@ main {
   height: calc(100vh - 100px);
   display: flex;
   flex-direction: row;
-  background-color: #fff;
+  background-color: transparent;
 
   .sidebar {
     width: $sidebar-width;
     min-width: $sidebar-width;
-    background-color: #457b9d;
+    background-color: $blue;
     height: 100%;
 
     .root-archive {
@@ -115,7 +126,6 @@ main {
     // max-width: 1440px;
     display: flex;
     flex-direction: column;
-    background-color: $pure-white;
     padding: 2 * $oneUnit;
     overflow-y: scroll;
     
@@ -157,6 +167,7 @@ main {
             text-align: center;
             font-size: $title-size;
             line-height: $bar-height;
+            color: $pure-white;
             @extend %unselectable;
             &:hover {
               cursor: pointer;
@@ -180,6 +191,9 @@ main {
 
           .tab {
             @extend %tab-style;
+            .empty-tab {
+              font-size: $text-size;
+            }
           }
         }
       }

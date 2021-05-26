@@ -32,8 +32,6 @@ module.exports = {
         { from: './src/images' },
         { from: './src/background.js', },
         { from: './src/popup' },
-        // { from: './src/popup/popup.js', },
-        // { from: './src/popup/popup.css' }
       ],
     }),
   ],

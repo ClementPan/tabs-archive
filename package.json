@@ -1,6 +1,6 @@
 {
-  "name": "tabs-archive-vanilla",
-  "version": "1.0.0",
+  "name": "tabs-archive",
+  "version": "1.2.0",
   "description": "",
   "main": "background.js",
   "scripts": {

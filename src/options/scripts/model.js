@@ -79,7 +79,7 @@ export const model = {
     } else {
       unclassifiedDOMS = `
       <div class='tab tab-style'>
-        No tab here yet!
+        <p class='empty-tab'>No tab here yet!</p>
       </div>
       `
     }
