@@ -153,9 +153,9 @@ main {
         flex-direction: column;
         
         label {
-          display: block;
           min-height: $bar-height;
           width: 100%;
+          position: relative;
           border-radius: $border-radius-normal;
           background-color: $archive-background;
           @extend %flex-all-center;
@@ -171,6 +171,37 @@ main {
             @extend %unselectable;
             &:hover {
               cursor: pointer;
+            }
+          }
+
+          .btns {
+            position: absolute;
+            right: 2 * $oneUnit;
+            height: 100%;
+            width: calc(20% - 6px);
+            min-width: 180px;
+            background-color: transparent;
+            display: flex;
+            .btn {
+              background-color: transparent;
+              height: 100%;
+              width: 50%;
+              button {
+                background-color: transparent;
+                display: block;
+                width: 100%;
+                height: 100%;
+                border: none;
+                outline: none;
+                font-size: $text-size;
+                color: $pure-white;
+                font-weight: $content-weight;
+                &:hover {
+                  background-color: $pure-white;
+                  color: $archive-background;    
+                  cursor: pointer;          
+                }
+              }
             }
           }
         }

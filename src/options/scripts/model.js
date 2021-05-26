@@ -23,7 +23,7 @@ const TabData = function (id, icon, title, tags, createdAt, url, updatedAt) {
   this.tags = tags
 }
 
-const tabTemplate = function (tab) {
+const tabInnerTemplate = function (tab) {
   const { id, icon, title, createdAt, url, tags } = tab
   return `
     <div class='number box'>
@@ -31,26 +31,26 @@ const tabTemplate = function (tab) {
           </div >
     <div class='icon box'>
       <img src="${icon}" alt="">
-          </div>
-      <div class='title box'>
-        <p>${title}</p>
-      </div>
-      <div class='tags box'>
-        <p>${tags}</p>
-      </div>
-      <div class='createdAt box'>
-        <p>${createdAt}</p>
-      </div>
-      <div class='btn box'>
-        <button class='open-tab' data-url="${url}">
-          Open
-            </button>
-      </div>
-      <div class='btn box'>
-        <button class='delete-tab' data-tabid="${id}">
-          Delete
-        </button>
-      </div>
+    </div>
+    <div class='title box'>
+      <p>${title}</p>
+    </div>
+    <div class='tags box'>
+      <p>${tags}</p>
+    </div>
+    <div class='createdAt box'>
+      <p>${createdAt}</p>
+    </div>
+    <div class='btn box'>
+      <button class='open-tab' data-url="${url}">
+        open
+      </button>
+    </div>
+    <div class='btn box'>
+      <button class='delete-tab' data-tabid="${id}">
+        delete
+      </button>
+    </div>
   `
 }
 
@@ -90,10 +90,10 @@ export const model = {
     if (unclassified.length) {
       unclassifiedDOMS = unclassified.map(each => {
         return `
-      <div class='tab tab-style'>
-        ${tabTemplate(each)}
-      </div>
-      `
+          <div class='tab tab-style'>
+            ${tabInnerTemplate(each)}
+          </div>
+        `
       }).join('')
     } else {
       unclassifiedDOMS = `
@@ -105,10 +105,22 @@ export const model = {
 
     const newArchive = document.createElement('div')
     newArchive.innerHTML = `
-    <div class='archiveName'>
-      <input id="archive${id}-dropdown" type="checkbox">
+      <div class='archiveName'>
+        <input id="archive${id}-dropdown" type="checkbox">
         <label for="archive${id}-dropdown">
           <h3 unselectable="on">${archiveName}</h3>
+          <div class="btns">
+            <div class="btn">
+              <button>
+                Open All
+              </button>
+            </div>
+            <div class="btn">
+              <button>
+                Delete All
+              </button>
+            </div>
+          </div>
         </label>
         <div class="archive-content">
           <div class="archivesList">
@@ -127,7 +139,7 @@ export const model = {
   },
   createTabDOMInContent(tabData) {
     const tab = document.createElement('div')
-    tab.innerHTML = tabTemplate(tabData)
+    tab.innerHTML = tabInnerTemplate(tabData)
     tab.classList += 'tab tab-style'
     tab.dataset.id = tabData.id
     return tab
