@@ -111,7 +111,7 @@ export const model = {
           <h3 unselectable="on">${archiveName}</h3>
           <div class="btns">
             <div class="btn">
-              <button>
+              <button class="open-all" data-id="${id}">
                 Open All
               </button>
             </div>

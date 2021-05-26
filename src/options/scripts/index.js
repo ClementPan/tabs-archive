@@ -31,7 +31,6 @@ window.addEventListener('click', (e) => {
 
   // oepn all tabs in archive
   if (target.className === 'open-all') {
-    // console.log(target.parentElement.parentElement)
     const archiveId = target.dataset.id
     controller.openAllTabs(archiveId)
   }
