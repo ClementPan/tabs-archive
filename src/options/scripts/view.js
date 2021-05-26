@@ -25,5 +25,10 @@ export const view = {
   },
   removeTab(tabBar) {
     tabBar.classList += ' none'
+  },
+  clearArchive(archiveId) {
+    console.log('archiveId: ', archiveId)
+    // const ArchiveDOM = document.querySelector('')
+
   }
 }

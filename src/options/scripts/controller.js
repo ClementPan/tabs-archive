@@ -34,8 +34,11 @@ export const controller = {
     view.showRootArchiveList(archivesList)
   },
   deleteTab(target, archive, tabId) {
-    // remove tab from data.archive
-    data.archive = model.removeTab(data.archive, tabId)
+    // remove tab
+    const newArchive = model.removeTab(data.archive, tabId)
+
+    // update archive
+    data.archive = newArchive
 
     // rerender view
     view.removeTab(target)
@@ -51,8 +54,18 @@ export const controller = {
     });
   },
   deleteAllTabs(archiveId) {
-    // model.searchArchiveById()
+    // remove tab
+    const newArchive = model.clearArchiveById(data.archive, archiveId)
 
+    // update archive
+    data.archive = newArchive
+
+    // rerender view
+    view.clearArchive(archiveId)
+    return
+
+    // store archive to storage
+    model.storeArchive()
   },
   //  developing methods
   clearStorage() {

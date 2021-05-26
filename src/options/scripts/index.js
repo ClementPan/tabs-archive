@@ -47,6 +47,7 @@ window.addEventListener('click', (e) => {
   }
 
   if (target.className === 'delete-all') {
+    console.log()
     const archiveId = target.dataset.id
     controller.deleteAllTabs(archiveId)
   }

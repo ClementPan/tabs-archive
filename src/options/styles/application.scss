@@ -146,7 +146,6 @@ body {
   align-items: center;
   justify-content: space-around;
   padding: 0 2 * $oneUnit;
-  // border-radius: $border-radius-normal;
   border-radius: $border-radius-light;
   .box {
     flex: 1;
@@ -187,6 +186,12 @@ body {
         cursor: pointer;
       }
     }
+    &:hover {
+      button {
+        color: $light-blue;
+        background-color: #fff;
+      }
+    }
   }
 }
 
@@ -194,7 +199,6 @@ body {
   @extend %data-bar;
   @extend %unselectable;
   background-color: $pure-white;
-  // border: 1px solid $light-blue;
   margin: 12px 0;
   .box {
     p {

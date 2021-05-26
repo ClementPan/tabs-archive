@@ -20,7 +20,7 @@
   }
 
   .search-bar {
-    margin-left: 40px;
+    margin-left: 2 * $oneUnit;
     height: $bar-height;
     width: $search-bar-width;
     background-color: $pure-white;
@@ -144,7 +144,7 @@ main {
     }
 
     .archive {
-      order: 1;
+      // order: 1;
       position: relative;
       height: auto;
 
@@ -200,7 +200,7 @@ main {
     }
 
     .unclassified {
-      order: 2
+      // order: 2
     }
   }
 }
