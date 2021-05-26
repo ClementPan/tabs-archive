@@ -10,12 +10,28 @@ $font-white: #ddd;
 $pure-white: #fff;
 $footer-background: #20201a;
 $font-dark: #222;
+$font-original: #444;
 $body-background: #e9ecef;
 $body-background: #eee;
 $blue: #1d3557;
-$light-blue: #CAF0F8;
 $light-blue: #a8dadc;
 $archive-background: #457b9d;
+$archive-background: #a8dadc;
+
+// $body-background: #faf9f9;
+// $blue: #555b6e;
+// $light-blue: #89b0ae;
+// $archive-background: #bee3db;
+
+$blue: #01161e;
+$archive-background: #124559;
+$light-blue: #598392;
+$body-background: #aec3b0;
+$body-background: #d8e2dc;
+
+
+
+
 
 // font size
 $brand-size: 28px;
@@ -37,6 +53,7 @@ $archive-height: 40px;
 
 // box model
 $border-radius-normal: 8px;
+$border-radius-light: 4px;
 
 * {
   box-sizing: border-box;
@@ -54,7 +71,6 @@ html {
   font-weight: normal;
   font-family: 'Taipei Sans TC','Montserrat', 'Noto Serif TC', sans-serif;
   line-height: 1.5;
-  color: #222;
   outline: none;
   box-sizing: border-box;
 }
@@ -130,7 +146,8 @@ body {
   align-items: center;
   justify-content: space-around;
   padding: 0 2 * $oneUnit;
-  border-radius: $border-radius-normal;
+  // border-radius: $border-radius-normal;
+  border-radius: $border-radius-light;
   .box {
     flex: 1;
     @extend %flex-all-center;
@@ -141,7 +158,9 @@ body {
     font-weight: 500;
     overflow: hidden;
     text-align: center;
-    p { }
+    p {
+      color:$pure-white;
+    }
   }
   .title {
     @extend .box;
@@ -160,7 +179,7 @@ body {
     button {
       height: 100%;
       border: none;
-      color: $font-dark;
+      color: $pure-white;
       background-color: transparent;
       font-size: $text-size;
       font-weight: 500;
@@ -177,6 +196,16 @@ body {
   background-color: $pure-white;
   // border: 1px solid $light-blue;
   margin: 12px 0;
+  .box {
+    p {
+      color: $font-original;
+    }
+  }
+  .btn {
+    button {
+      color: $font-original;
+    }
+  }
   &:hover {
     cursor: pointer;
   }
