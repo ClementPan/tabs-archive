@@ -33,9 +33,10 @@ export const controller = {
     const { archivesList } = data.archive
     view.showRootArchiveList(archivesList)
   },
-  deleteTab(target, archive, tabId) {
+  deleteTab(target, tabId) {
     // target: DOM elemnt
-    // remove tab
+
+    // return newArchive with target tab
     const newArchive = model.removeTab(data.archive, tabId)
 
     // update archive
@@ -54,15 +55,16 @@ export const controller = {
       chrome.tabs.create({ url, active: false })
     });
   },
+  // not done
   deleteAllTabs(archiveId) {
     // remove tab
-    const newArchive = model.clearArchiveById(data.archive, archiveId)
+    const newArchive = model.clearTabsInArchiveById(data.archive, archiveId)
 
     // update archive
     data.archive = newArchive
 
     // rerender view
-    view.clearArchive(archiveId)
+    view.clearTabsInArchive(archiveId)
     return
 
     // store archive to storage
@@ -101,6 +103,21 @@ export const controller = {
   cancelInput() {
     view.cancelInput()
   },
+  deleteArchive(archiveBar, archiveId) {
+    // return newArchive with target archive
+    const newArchive = model.removeArchive(data.archive, archiveId)
+
+    // update archive
+    data.archive = newArchive
+
+    // rerender view, both in sidebar & content (need archiveId)
+    view.removeArchive(archiveBar, archiveId)
+
+    // store archive to storage
+    model.storeArchive()
+  },
+
+
   //  developing methods
   clearStorage() {
     chrome.storage.sync.clear(() => {

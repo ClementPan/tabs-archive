@@ -122,6 +122,10 @@ body {
     @extend %flex-all-center;
     height: 100%;
 
+    &:hover {
+      cursor: pointer;
+    }
+
     i{
       height: 100%;
       width: 100%;
@@ -132,6 +136,7 @@ body {
       display: none;
     }
   }
+
   p {
     @extend %unselectable;
     flex: 1;

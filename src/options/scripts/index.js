@@ -23,46 +23,59 @@ window.onload = function () {
 // eventListener
 window.addEventListener('click', (e) => {
   const target = e.target
-  // console.log(target)
 
+  // get all opened tabs
   if (target.className === 'get-all-btn') {
     controller.getAllOpenedTabs()
   }
 
+  // oepn all tabs in archive
   if (target.className === 'open-all') {
     // console.log(target.parentElement.parentElement)
     const archiveId = target.dataset.id
     controller.openAllTabs(archiveId)
   }
 
+  // open cetain tab in archive
   if (target.className === 'open-tab') {
     const url = target.dataset.url
     chrome.tabs.create({ url, active: false })
   }
 
-  if (target.className === 'delete-tab') {
-    const tabId = target.dataset.tabid
-    const tabBar = target.parentElement.parentElement
-    controller.deleteTab(tabBar, data.archive, tabId)
-  }
-
+  // delete all unclassified tabs in certain archive
+  // not done
   if (target.className === 'delete-all') {
-    console.log()
     const archiveId = target.dataset.id
     controller.deleteAllTabs(archiveId)
   }
 
-  if (target.className.includes('new')) {
+  // open new archive input
+  if (target.classList.contains('new')) {
     controller.showNewArchiveInput()
   }
 
+  // cancel input
   if (target.className === 'fas fa-times-circle') {
     controller.cancelInput()
   }
 
-  // console.log(target)
+  // create new archive
   if (target.classList.contains('new-archive-name-input')) {
     controller.createNewArchive()
+  }
+
+  // delete certain tab in archive
+  if (target.className === 'delete-tab') {
+    const tabId = target.dataset.tabid
+    const tabBar = target.parentElement.parentElement
+    controller.deleteTab(tabBar, tabId)
+  }
+
+  // delete certain archive from sidebar
+  if (target.classList.contains('delete-archive')) {
+    const archiveBar = target.parentElement.parentElement
+    const targetArchiveId = target.dataset.id
+    controller.deleteArchive(archiveBar, targetArchiveId)
   }
 
   // for developing

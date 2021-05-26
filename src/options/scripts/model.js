@@ -74,6 +74,9 @@ export const model = {
         <i class="fas fa-folder"></i>
       </div>
       <p>${archiveName}</p>
+      <div class="icon">
+        <i class="fas fa-times-circle delete-archive" data-id="${id}"></i>
+      </div> 
     `
     newArchive.classList = 'archive archive-style'
     newArchive.dataset.archiveId = id
@@ -118,7 +121,7 @@ export const model = {
       </div>
     `
 
-    newArchive.classList = 'archive archive-style'
+    newArchive.classList = `archive archive-style archive-${id}-content`
     newArchive.dataset.archiveId = id
     return newArchive
   },
@@ -222,7 +225,33 @@ export const model = {
     removeTabById(archive, targetId)
     return archive
   },
-  clearArchiveById(archive, archiveId) {
+  removeArchive(archive, archiveId) {
+    let targetId = archiveId
+
+    const deleteArchiveById = (archive) => {
+      if (!archive.archivesList.length) {
+        return
+      } else {
+        for (let subArchive of archive.archivesList) {
+          if (targetId === subArchive.id) {
+            const index = archive.archivesList.indexOf(subArchive)
+            // console.log(index)
+            archive.archivesList.splice(index, 1)
+            return
+          } else {
+            if (subArchive.archivesList.length) {
+              deleteArchiveById(subArchive)
+            }
+          }
+
+        }
+      }
+    }
+
+    deleteArchiveById(archive)
+    return archive
+  },
+  clearTabsInArchiveById(archive, archiveId) {
     let targetId = archiveId
     let targetArchive = {}
 

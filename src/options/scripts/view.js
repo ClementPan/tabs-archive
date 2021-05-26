@@ -81,8 +81,18 @@ export const view = {
   removeTab(tabBar) {
     tabBar.remove()
   },
-  // inacheve
-  clearArchive(archiveId) {
+  removeArchive(archiveBar, archiveId) {
+    // remove archive from sidebar
+    archiveBar.remove()
+
+    // remove archive in content
+    console.log(`archive-${archiveId}-content`)
+    const archiveBarInContent = document.querySelector(`.archive-${archiveId}-content`)
+    archiveBarInContent.remove()
+
+  },
+  // not done
+  clearTabsInArchive(archiveId) {
     console.log('archiveId: ', archiveId)
     // const ArchiveDOM = document.querySelector('')
   }
