@@ -85,4 +85,18 @@ window.addEventListener('click', (e) => {
   if (target.className === 'clear-data') {
     controller.clearStorage()
   }
-}, true)
+}, false)
+// false = event.preventDefault()
+// to stop bubbling: event.stopPropagation()
+
+
+// KeyboardEvent
+window.addEventListener('keydown', (e) => {
+  const target = e.target
+
+  if ((e.code === 'Enter') || (e.code === 'NumpadEnter')) {
+    if (target.id !== 'archiveName-input') return
+    console.log("Input!")
+    controller.createNewArchive()
+  }
+})
