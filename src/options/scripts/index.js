@@ -11,12 +11,16 @@ window.onload = function () {
     message: 'get-archive-data',
     data: null
   }
+
   chrome.runtime.sendMessage(request, (response) => {
     console.log('[Index] received archive data', response)
     const { archive, lastTabId, lastArchiveId } = response
     data.lastTabId = lastTabId
     data.lastArchiveId = lastArchiveId
     controller.initLocalArchiveData(archive)
+
+    // setup drop item & drop zone
+    controller.setUpDragAndDropSystem()
   });
 }
 
@@ -111,7 +115,6 @@ window.addEventListener('click', (e) => {
 // false = event.preventDefault()
 // to stop bubbling: event.stopPropagation()
 
-
 // KeyboardEvent
 window.addEventListener('keydown', (e) => {
   const target = e.target
@@ -130,5 +133,8 @@ window.addEventListener('keydown', (e) => {
       controller.updateTabName(targetTabDOM)
     }
   }
-
 })
+
+
+
+

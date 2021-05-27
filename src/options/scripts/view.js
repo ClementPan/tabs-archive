@@ -142,7 +142,6 @@ export const view = {
     archiveBarInContent.remove()
 
   },
-  // not done
   clearTabsInArchive(archiveId) {
     console.log('archiveId: ', archiveId)
     // return
@@ -160,5 +159,84 @@ export const view = {
         <p class='empty-tab'>No tab here yet!</p>
       </div>
       `
+  },
+  setUpDragAndDropSystem() {
+    const tabs = document.querySelectorAll('.tab')
+    tabs.forEach(tab => {
+      // empty tab is not draggable
+      if (tab.classList.contains('empty')) return
+
+      tab.addEventListener('dragstart', (e) => {
+        const target = e.target
+
+        const payload = target.id
+
+        // dataTransfer.setData
+        e.dataTransfer.setData('text/plain', payload)
+      })
+    })
+
+    // set up dropzone: unclassified, dropzone
+    const dropzones = document.querySelectorAll('.dropzone')
+    const unclassified = document.querySelector('.unclassified')
+
+    // set up dropzone for archives
+    dropzones.forEach(dropzone => {
+
+      dropzone.addEventListener('dragenter', (e) => {
+        // default: tag cannot be dragged
+        e.preventDefault();
+        // then our DOM can be dragged inside
+      })
+
+      dropzone.addEventListener('dragover', (e) => {
+        e.preventDefault();
+      });
+
+      dropzone.addEventListener('dragleave', (e) => {
+        e.preventDefault();
+      })
+
+      dropzone.addEventListener('drop', (e) => {
+        // default: tag cannot be dragged
+        e.preventDefault();
+        // then our DOM can be dragged inside
+
+        const tabDOMId = e.dataTransfer.getData('text/plain')
+        console.log('tabDOMId: ', tabDOMId)
+        const tabDOM = document.querySelector(`#${tabDOMId}`)
+        console.log('tabDOM: ', tabDOM)
+        const tabsList = dropzone.querySelector('.tabs-list')
+
+        // use .insertBefore():
+        tabsList.appendChild(tabDOM)
+
+        // call model to store data
+        console.log()
+      })
+    })
+
+    // set up dropzone for root.unclassified
+    unclassified.addEventListener('dragenter', (e) => {
+      e.preventDefault();
+    })
+    unclassified.addEventListener('dragover', (e) => {
+      e.preventDefault();
+    });
+    unclassified.addEventListener('dragleave', (e) => {
+      e.preventDefault();
+    })
+    unclassified.addEventListener('drop', (e) => {
+      e.preventDefault()
+      const tabDOMId = e.dataTransfer.getData('text/plain')
+      const tabDOM = document.querySelector(`#${tabDOMId}`)
+      const tabsList = unclassified.querySelector('.tabs-list')
+
+      // use .insertBefore():
+      tabsList.appendChild(tabDOM)
+
+      // call model to store data
+      console.log()
+    })
   }
 }

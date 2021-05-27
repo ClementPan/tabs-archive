@@ -155,6 +155,11 @@ export const controller = {
 
     return
   },
+  setUpDragAndDropSystem() {
+    // eventListener in view
+    // view calls model to store data
+    view.setUpDragAndDropSystem()
+  },
 
   //  developing methods
   clearStorage() {

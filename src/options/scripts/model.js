@@ -98,7 +98,7 @@ export const model = {
     if (unclassified.length) {
       unclassifiedDOMS = unclassified.map(each => {
         return `
-          <div class='tab tab-style' data-id="${each.id}">
+          <div class='tab tab-style' draggable="true" id="tab-${each.id}" data-id="${each.id}">
             ${tabInnerTemplate(each)}
           </div>
         `
@@ -141,7 +141,7 @@ export const model = {
       </div>
     `
 
-    newArchive.classList = `archive archive-style archive-${id}-content`
+    newArchive.classList = `archive dropzone archive-style archive-${id}-content`
     newArchive.dataset.archiveId = id
     return newArchive
   },
@@ -149,7 +149,9 @@ export const model = {
     const tab = document.createElement('div')
     tab.innerHTML = tabInnerTemplate(tabData)
     tab.classList += 'tab tab-style'
+    tab.id = `tab-${tabData.id}`
     tab.dataset.id = tabData.id
+    tab.draggable = true
     return tab
   },
   async getStorageData(targetData) {
@@ -173,8 +175,9 @@ export const model = {
             if (
               (tab.title === "chrome.tabs - Chrome Developers") ||
               (tab.url === "chrome://extensions/") ||
-              (tab.url.split('://')[0] === 'chrome-extension')) {
-              console.log('continue on ' + tab.title)
+              (tab.url.split('://')[0] === 'chrome-extension') ||
+              (tab.url === 'chrome://newtab/')
+            ) {
               continue
             }
             // clear
