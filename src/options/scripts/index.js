@@ -24,6 +24,9 @@ window.onload = function () {
 window.addEventListener('click', (e) => {
   const target = e.target
 
+  // cancel show input
+  controller.cancelNewArchiveInput()
+
   // get all opened tabs
   if (target.className === 'get-all-btn') {
     controller.getAllOpenedTabs()
@@ -42,13 +45,13 @@ window.addEventListener('click', (e) => {
   }
 
   // open new archive input
-  if (target.classList.contains('new')) {
+  if (target.classList.contains('show-new-archive-input')) {
     controller.showNewArchiveInput()
   }
 
-  // cancel input
-  if (target.className === 'fas fa-times-circle') {
-    controller.cancelInput()
+  // cancel new archive input
+  if (target.classList.contains('cancel-new-archive-input')) {
+    controller.cancelNewArchiveInput()
   }
 
   // create new archive
@@ -74,6 +77,18 @@ window.addEventListener('click', (e) => {
   if (target.className === 'delete-all-in-archive') {
     const archiveId = target.dataset.id
     controller.deleteAllTabsInArchive(archiveId)
+  }
+
+  // edit tab name
+  if (target.classList.contains('show-edit-tab-name')) {
+    const targetTabDOM = target.parentElement.parentElement
+    controller.showTabNameEditInput(targetTabDOM)
+  }
+
+  // cancel edit tab name
+  if (target.classList.contains('cancel-edit-tab-input')) {
+    const targetTabDOM = target.parentElement.parentElement
+    controller.cancelEditTabInput(targetTabDOM)
   }
 
   // for developing

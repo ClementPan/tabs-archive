@@ -97,7 +97,7 @@ export const controller = {
 
     // no empty input allowed
     if (!archiveName) {
-      view.cancelInput()
+      view.cancelNewArchiveInput()
       console.log('No empty input allowed!')
       return
     }
@@ -114,12 +114,19 @@ export const controller = {
     model.storeArchive()
 
     // restore UI
-    view.cancelInput()
+    view.cancelNewArchiveInput()
 
     return
   },
-  cancelInput() {
-    view.cancelInput()
+  cancelNewArchiveInput() {
+    view.cancelNewArchiveInput()
+  },
+  showTabNameEditInput(targetTabDOM) {
+    view.showTabNameEditInput(targetTabDOM)
+    return
+  },
+  cancelEditTabInput(targetTabDOM) {
+    view.cancelEditTabInput(targetTabDOM)
   },
 
   //  developing methods

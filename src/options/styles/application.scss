@@ -221,6 +221,26 @@ body {
       color: $font-original;
     }
   }
+  .title {
+    @extend %flex-all-center;
+    p, i {
+    }
+    p {
+      height: 100%;
+      line-height: $bar-height;
+      flex: 1;
+      // border: 1px solid #000;
+    }
+    input.edit-tab-name-input {
+      flex: 1;
+      height: 100%;
+    }
+    i {
+      width: 2 * $oneUnit;
+      height: 100%;
+      line-height: $bar-height;
+    }
+  }
   .btn {
     button {
       color: $font-original;

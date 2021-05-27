@@ -33,7 +33,15 @@ const tabInnerTemplate = function (tab) {
       <img src="${icon}" alt="">
     </div>
     <div class='title box'>
+      <i class="fas fa-times-circle none cancel-edit-tab-input"></i>
+
       <p>${title}</p>
+
+      <input class='edit-tab-name-input none' placeholder='${title}' type="text" maxlength="45">
+
+      <i class="fas fa-pen-alt show-edit-tab-name"></i>
+      <i class="fas fa-check-circle none confirm-tab-edit"></i>
+
     </div>
     <div class='tags box'>
       <p>${tags}</p>
@@ -90,7 +98,7 @@ export const model = {
     if (unclassified.length) {
       unclassifiedDOMS = unclassified.map(each => {
         return `
-          <div class='tab tab-style'>
+          <div class='tab tab-style' data-id="${each.id}">
             ${tabInnerTemplate(each)}
           </div>
         `
