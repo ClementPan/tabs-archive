@@ -369,6 +369,17 @@ export const model = {
     findArchive(archive)
     return targetArchive
   },
+  getTabDataViaTabDOM(tabDOM) {
+    return ({
+      id: tabDOM.querySelector('.number p').textContent,
+      icon: tabDOM.querySelector('.icon img').src,
+      title: tabDOM.querySelector('.title p').textContent,
+      tags: tabDOM.querySelector('.tags p').textContent,
+      createdAt: tabDOM.querySelector('.createdAt p').textContent,
+      url: tabDOM.querySelector('.btn button').dataset.url,
+      updatedAt: ''
+    })
+  },
   // recursive search prototype //
   searchTabById: function (archive, tabId) {
     let targetId = tabId
