@@ -5,6 +5,15 @@ export const view = {
     // data: root.unclassified
     const tabsList = document.querySelector('.tabs-list')
     tabsList.innerHTML = ''
+
+    if (!data.length) {
+      tabsList.innerHTML = `
+      <div class='tab empty tab-style'>
+        <p class='empty-tab'>No tab here yet!</p>
+      </div>
+      `
+    }
+
     for (let tab of data) {
       const newTab = model.createTabDOMInContent(tab)
       tabsList.appendChild(newTab)
@@ -86,13 +95,27 @@ export const view = {
     archiveBar.remove()
 
     // remove archive in content
-    const archiveBarInContent = document.querySelector(`.archive-${archiveId}-content`)
+    const archiveBarInContent = document.querySelector(`.archive - ${archiveId} -content`)
     archiveBarInContent.remove()
 
   },
   // not done
   clearTabsInArchive(archiveId) {
     console.log('archiveId: ', archiveId)
-    // const ArchiveDOM = document.querySelector('')
+    // return
+    let unclassifiedList = ''
+
+    if (archiveId === '001') {
+      unclassifiedList = document.querySelector('.unclassified .tabs-list')
+    } else {
+      const className = `.archive-${archiveId}-content .tabs-list`
+      unclassifiedList = document.querySelector(className)
+    }
+
+    unclassifiedList.innerHTML = `
+      <div class='tab empty tab-style'>
+        <p class='empty-tab'>No tab here yet!</p>
+      </div>
+      `
   }
 }

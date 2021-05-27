@@ -97,7 +97,7 @@ export const model = {
       }).join('')
     } else {
       unclassifiedDOMS = `
-      <div class='tab tab-style'>
+      <div class='tab empty tab-style'>
         <p class='empty-tab'>No tab here yet!</p>
       </div>
       `
@@ -116,7 +116,7 @@ export const model = {
               </button>
             </div>
             <div class="btn">
-              <button>
+              <button class='delete-all-in-archive' data-id="${id}">
                 Delete All
               </button>
             </div>

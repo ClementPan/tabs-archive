@@ -33,6 +33,13 @@ export const controller = {
     const { archivesList } = data.archive
     view.showRootArchiveList(archivesList)
   },
+  openAllTabs(archiveId) {
+    const { unclassified } = model.searchArchiveById(data.archive, archiveId)
+    unclassified.forEach(each => {
+      const url = each.url
+      chrome.tabs.create({ url, active: false })
+    });
+  },
   deleteTab(target, tabId) {
     // target: DOM elemnt
 
@@ -48,15 +55,14 @@ export const controller = {
     // store archive to storage
     model.storeArchive()
   },
-  openAllTabs(archiveId) {
-    const { unclassified } = model.searchArchiveById(data.archive, archiveId)
-    unclassified.forEach(each => {
-      const url = each.url
-      chrome.tabs.create({ url, active: false })
-    });
-  },
-  // not done
-  deleteAllTabs(archiveId) {
+  deleteAllTabsInArchive(archiveId) {
+    // check: if is already empty
+    const className = `.archive-${archiveId}-content .tabs-list .tab`
+    const tabItems = document.querySelectorAll(className)
+    if ((tabItems.length === 1) && (tabItems[0].classList.contains('empty'))) {
+      return
+    }
+
     // remove tab
     const newArchive = model.clearTabsInArchiveById(data.archive, archiveId)
 
@@ -65,7 +71,19 @@ export const controller = {
 
     // rerender view
     view.clearTabsInArchive(archiveId)
-    return
+
+    // store archive to storage
+    model.storeArchive()
+  },
+  deleteArchive(archiveBar, archiveId) {
+    // return newArchive with target archive
+    const newArchive = model.removeArchive(data.archive, archiveId)
+
+    // update archive
+    data.archive = newArchive
+
+    // rerender view, both in sidebar & content (need archiveId)
+    view.removeArchive(archiveBar, archiveId)
 
     // store archive to storage
     model.storeArchive()
@@ -103,20 +121,6 @@ export const controller = {
   cancelInput() {
     view.cancelInput()
   },
-  deleteArchive(archiveBar, archiveId) {
-    // return newArchive with target archive
-    const newArchive = model.removeArchive(data.archive, archiveId)
-
-    // update archive
-    data.archive = newArchive
-
-    // rerender view, both in sidebar & content (need archiveId)
-    view.removeArchive(archiveBar, archiveId)
-
-    // store archive to storage
-    model.storeArchive()
-  },
-
 
   //  developing methods
   clearStorage() {

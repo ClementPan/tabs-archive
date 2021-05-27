@@ -140,6 +140,9 @@ main {
       }
       .tab-style {
         @extend %tab-style;
+        .empty-tab {
+          font-size: $text-size;
+        }
       }
     }
 
@@ -228,10 +231,6 @@ main {
           }
         }
       }
-    }
-
-    .unclassified {
-      // order: 2
     }
   }
 }

@@ -41,13 +41,6 @@ window.addEventListener('click', (e) => {
     chrome.tabs.create({ url, active: false })
   }
 
-  // delete all unclassified tabs in certain archive
-  // not done
-  if (target.className === 'delete-all') {
-    const archiveId = target.dataset.id
-    controller.deleteAllTabs(archiveId)
-  }
-
   // open new archive input
   if (target.classList.contains('new')) {
     controller.showNewArchiveInput()
@@ -63,7 +56,7 @@ window.addEventListener('click', (e) => {
     controller.createNewArchive()
   }
 
-  // delete certain tab in archive
+  // delete one certain tab in archive
   if (target.className === 'delete-tab') {
     const tabId = target.dataset.tabid
     const tabBar = target.parentElement.parentElement
@@ -75,6 +68,12 @@ window.addEventListener('click', (e) => {
     const archiveBar = target.parentElement.parentElement
     const targetArchiveId = target.dataset.id
     controller.deleteArchive(archiveBar, targetArchiveId)
+  }
+
+  // delete all unclassified tabs in certain archive
+  if (target.className === 'delete-all-in-archive') {
+    const archiveId = target.dataset.id
+    controller.deleteAllTabsInArchive(archiveId)
   }
 
   // for developing
