@@ -128,6 +128,33 @@ export const controller = {
   cancelEditTabInput(targetTabDOM) {
     view.cancelEditTabInput(targetTabDOM)
   },
+  updateTabName(targetTabDOM) {
+    // get user input
+    const tabId = targetTabDOM.dataset.id
+    const tabNameInput = targetTabDOM.querySelector('.title input').value
+
+    // check
+    const originalTitle = targetTabDOM.querySelector('.title p').textContent
+    if (originalTitle === tabNameInput) {
+      view.cancelEditTabInput(targetTabDOM)
+      return
+    }
+
+
+    // find tab in archive via tabId, update it
+    model.updateTab(data.archive, tabId, tabNameInput)
+
+    // rerender view 
+    view.updateTabName(targetTabDOM, tabNameInput)
+
+    // store archive to storage
+    model.storeArchive()
+
+    // restore UI
+    view.cancelEditTabInput(targetTabDOM)
+
+    return
+  },
 
   //  developing methods
   clearStorage() {

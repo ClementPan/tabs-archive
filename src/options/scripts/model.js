@@ -33,14 +33,14 @@ const tabInnerTemplate = function (tab) {
       <img src="${icon}" alt="">
     </div>
     <div class='title box'>
-      <i class="fas fa-times-circle none cancel-edit-tab-input"></i>
+      <i class="fas fa-times-circle cancel-edit-tab-input none"></i>
 
       <p>${title}</p>
 
       <input class='edit-tab-name-input none' placeholder='${title}' type="text" maxlength="45">
 
       <i class="fas fa-pen-alt show-edit-tab-name"></i>
-      <i class="fas fa-check-circle none confirm-tab-edit"></i>
+      <i class="fas fa-check-circle confirm-tab-edit none" data-id="${id}"></i>
 
     </div>
     <div class='tags box'>
@@ -114,7 +114,7 @@ export const model = {
     const newArchive = document.createElement('div')
     newArchive.innerHTML = `
       <div class='archiveName'>
-        <input id="archive${id}-dropdown" type="checkbox">
+        <input id="archive${id}-dropdown" class='archive-dropdown' type="checkbox">
         <label for="archive${id}-dropdown">
           <h3 unselectable="on">${archiveName}</h3>
           <div class="btns">
@@ -213,6 +213,39 @@ export const model = {
     chrome.runtime.sendMessage(request, (message) => {
       console.log('[Index] ', message)
     });
+  },
+  updateTab(archive, tabId, tabNameInput) {
+    let targetId = tabId
+    console.log('in updateTab', tabNameInput)
+
+    const findTabById = (archive, targetId) => {
+      console.log('in findTabById', tabNameInput)
+      if (!archive.unclassified.length) {
+        if (!archive.archivesList.length) {
+          return
+        } else {
+          for (let subArchive of archive.archivesList) {
+            findTabById(subArchive, targetId)
+          }
+        }
+      } else {
+        for (let tab of archive.unclassified) {
+          if (tab.id === targetId) {
+            console.log('in hit: ', tabNameInput)
+            tab.title = tabNameInput
+            return
+          }
+        }
+        if (!archive.archivesList.length) {
+          return
+        } else {
+          for (let subArchive of archive.archivesList) {
+            findTabById(subArchive, targetId)
+          }
+        }
+      }
+    }
+    findTabById(archive, targetId)
   },
   removeTab(archive, tabId) {
     const targetId = tabId
@@ -333,6 +366,34 @@ export const model = {
     findArchive(archive)
     return targetArchive
   },
+  // recursive search prototype //
   searchTabById: function (archive, tabId) {
+    let targetId = tabId
+
+    const findTabById = (archive, targetId) => {
+      if (!archive.unclassified.length) {
+        if (!archive.archivesList.length) {
+          return
+        } else {
+          for (let subArchive of archive.archivesList) {
+            findTabById(subArchive, targetId)
+          }
+        }
+      } else {
+        for (let tab of archive.unclassified) {
+          if (tab.id === targetId) {
+            console.log(tab)
+          }
+        }
+        if (!archive.archivesList.length) {
+          return
+        } else {
+          for (let subArchive of archive.archivesList) {
+            findTabById(subArchive, targetId)
+          }
+        }
+      }
+    }
+    findTabById(archive, targetId)
   }
 }

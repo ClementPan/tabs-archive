@@ -25,7 +25,7 @@ window.addEventListener('click', (e) => {
   const target = e.target
 
   // cancel show input
-  controller.cancelNewArchiveInput()
+  // controller.cancelNewArchiveInput()
 
   // get all opened tabs
   if (target.className === 'get-all-btn') {
@@ -44,7 +44,7 @@ window.addEventListener('click', (e) => {
     chrome.tabs.create({ url, active: false })
   }
 
-  // open new archive input
+  // show new archive input
   if (target.classList.contains('show-new-archive-input')) {
     controller.showNewArchiveInput()
   }
@@ -57,6 +57,24 @@ window.addEventListener('click', (e) => {
   // create new archive
   if (target.classList.contains('new-archive-name-input')) {
     controller.createNewArchive()
+  }
+
+  // show edit tab name input
+  if (target.classList.contains('show-edit-tab-name')) {
+    const targetTabDOM = target.parentElement.parentElement
+    controller.showTabNameEditInput(targetTabDOM)
+  }
+
+  // cancel edit tab name
+  if (target.classList.contains('cancel-edit-tab-input')) {
+    const targetTabDOM = target.parentElement.parentElement
+    controller.cancelEditTabInput(targetTabDOM)
+  }
+
+  // update tab name
+  if (target.classList.contains('confirm-tab-edit')) {
+    const targetTabDOM = target.parentElement.parentElement
+    controller.updateTabName(targetTabDOM)
   }
 
   // delete one certain tab in archive
@@ -79,19 +97,9 @@ window.addEventListener('click', (e) => {
     controller.deleteAllTabsInArchive(archiveId)
   }
 
-  // edit tab name
-  if (target.classList.contains('show-edit-tab-name')) {
-    const targetTabDOM = target.parentElement.parentElement
-    controller.showTabNameEditInput(targetTabDOM)
-  }
 
-  // cancel edit tab name
-  if (target.classList.contains('cancel-edit-tab-input')) {
-    const targetTabDOM = target.parentElement.parentElement
-    controller.cancelEditTabInput(targetTabDOM)
-  }
 
-  // for developing
+  ///// for developing /////
   if (target.className === 'get-data') {
     controller.showStorage('archive')
   }
@@ -108,9 +116,19 @@ window.addEventListener('click', (e) => {
 window.addEventListener('keydown', (e) => {
   const target = e.target
 
-  if ((e.code === 'Enter') || (e.code === 'NumpadEnter')) {
-    if (target.id !== 'archiveName-input') return
-    console.log("Input!")
-    controller.createNewArchive()
+  // input new archive name
+  if (target.id === 'archiveName-input') {
+    if ((e.code === 'Enter') || (e.code === 'NumpadEnter')) {
+      controller.createNewArchive()
+    }
   }
+
+  // input update tab name
+  if (target.classList.contains('edit-tab-name-input')) {
+    if ((e.code === 'Enter') || (e.code === 'NumpadEnter')) {
+      const targetTabDOM = target.parentElement.parentElement
+      controller.updateTabName(targetTabDOM)
+    }
+  }
+
 })

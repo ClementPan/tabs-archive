@@ -52,25 +52,6 @@ export const view = {
     confirmIcon.classList.remove('none')
     cancelIcon.classList.remove('none')
   },
-  showTabNameEditInput(targetTabDOM) {
-    const cancelEditTabInput = targetTabDOM.querySelector('.cancel-edit-tab-input')
-    const titleP = targetTabDOM.querySelector('.title p')
-    const input = targetTabDOM.querySelector('.edit-tab-name-input')
-    const confirmTabEdit = targetTabDOM.querySelector('.confirm-tab-edit')
-    const showEditTabName = targetTabDOM.querySelector('.show-edit-tab-name')
-
-    // hide .title p
-    titleP.classList.add('none')
-    showEditTabName.classList.add('none')
-
-    // pass title to input value
-    input.value = titleP.textContent
-
-    // show input
-    cancelEditTabInput.classList.remove('none')
-    input.classList.remove('none')
-    confirmTabEdit.classList.remove('none')
-  },
   cancelNewArchiveInput() {
     console.log('cancel New Archive Input')
 
@@ -94,6 +75,40 @@ export const view = {
     // clear input value
     document.getElementById('archiveName-input').value = ''
   },
+  createNewArchiveInSidebar(newArchive) {
+    const newArchiveDOM = model.createArhiveDOMInSidebar(newArchive)
+
+    // push newArchiveDOM into sidebarArchivesList
+    const sidebarArchivesList = document.querySelector('.sidebar .archivesList')
+    sidebarArchivesList.appendChild(newArchiveDOM)
+
+    return
+  },
+  createNewArchiveInContent(newArchive) {
+    const content = document.querySelector('.content')
+    const newArchiveDOM = model.createArchiveDOMInContent(newArchive)
+    content.appendChild(newArchiveDOM)
+    return
+  },
+  showTabNameEditInput(targetTabDOM) {
+    const cancelEditTabInput = targetTabDOM.querySelector('.cancel-edit-tab-input')
+    const titleP = targetTabDOM.querySelector('.title p')
+    const input = targetTabDOM.querySelector('.edit-tab-name-input')
+    const confirmTabEdit = targetTabDOM.querySelector('.confirm-tab-edit')
+    const showEditTabName = targetTabDOM.querySelector('.show-edit-tab-name')
+
+    // hide .title p
+    titleP.classList.add('none')
+    showEditTabName.classList.add('none')
+
+    // pass title to input value
+    input.value = titleP.textContent
+
+    // show input
+    cancelEditTabInput.classList.remove('none')
+    input.classList.remove('none')
+    confirmTabEdit.classList.remove('none')
+  },
   cancelEditTabInput(targetTabDOM) {
     console.log('cancel-Edit-Tab-Input')
 
@@ -111,20 +126,9 @@ export const view = {
     input.classList.add('none')
     confirmTabEdit.classList.add('none')
   },
-  createNewArchiveInSidebar(newArchive) {
-    const newArchiveDOM = model.createArhiveDOMInSidebar(newArchive)
-
-    // push newArchiveDOM into sidebarArchivesList
-    const sidebarArchivesList = document.querySelector('.sidebar .archivesList')
-    sidebarArchivesList.appendChild(newArchiveDOM)
-
-    return
-  },
-  createNewArchiveInContent(newArchive) {
-    const content = document.querySelector('.content')
-    const newArchiveDOM = model.createArchiveDOMInContent(newArchive)
-    content.appendChild(newArchiveDOM)
-    return
+  updateTabName(targetTabDOM, tabNameInput) {
+    const titleP = targetTabDOM.querySelector('.title p')
+    titleP.textContent = tabNameInput
   },
   removeTab(tabBar) {
     tabBar.remove()

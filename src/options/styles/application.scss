@@ -65,7 +65,8 @@ $border-radius-light: 4px;
 
 html {
   height: 100vh;
-  min-width: 960px;
+  // min-width: 960px;
+  min-width: 1200px;
   font-size: 16px;
   font-size: 36px;
   font-weight: normal;
@@ -222,24 +223,8 @@ body {
     }
   }
   .title {
-    @extend %flex-all-center;
-    p, i {
-    }
-    p {
-      height: 100%;
-      line-height: $bar-height;
-      flex: 1;
-      // border: 1px solid #000;
-    }
-    input.edit-tab-name-input {
-      flex: 1;
-      height: 100%;
-    }
-    i {
-      width: 2 * $oneUnit;
-      height: 100%;
-      line-height: $bar-height;
-    }
+    flex: 3;
+
   }
   .btn {
     button {

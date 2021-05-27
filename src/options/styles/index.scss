@@ -1,9 +1,5 @@
 @import './application.scss';
 
-.none {
-  display: none;
-}
-
 .navbar {
   background-color: transparent;
   height: $navbar-height;
@@ -143,9 +139,32 @@ main {
         .empty-tab {
           font-size: $text-size;
         }
+
+        .title {
+          display: flex;
+          flex-direction: row;
+          p {
+            height: 100%;
+            line-height: $bar-height;
+            flex: 1;
+          }
+          input.edit-tab-name-input {
+            flex: 1;
+            width: 100px;
+            height: 80%;
+            font-size: $text-size;
+          }
+          i {
+            min-width: 2 * $oneUnit;
+            width: 2 * $oneUnit;
+            height: 100%;
+            line-height: $bar-height;
+          }
+        }
       }
     }
 
+    // for archive in content
     .archive {
       // order: 1;
       position: relative;
@@ -209,7 +228,7 @@ main {
           }
         }
 
-        input {
+        input.archive-dropdown {
           position: absolute;
           left: 200px;
           display: none;
@@ -233,4 +252,8 @@ main {
       }
     }
   }
+}
+
+.none {
+  display: none !important;
 }
