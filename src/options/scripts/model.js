@@ -131,7 +131,18 @@ export const model = {
             <i class="far fa-folder fold"></i>
           </div>
 
-          <h3 unselectable="on">${archiveName}</h3>
+
+
+          <div class='archive-title'>
+            <i class='fas fa-times-circle cancel-edit-archive-title-content none'></i>
+            <h3 class='title-text'>${archiveName}</h3>
+            <input type="text" value="${archiveName}" class='archive-title-input-content none'>
+            <i class="fas fa-pen-alt edit-archive-title-content"></i>
+            <i class="fas fa-check-circle confirm-archive-title-content-input none"></i>
+          </div>
+
+
+
           <div class="btns">
             <div class="btn">
               <button class="open-all" data-id="${id}">
@@ -199,9 +210,9 @@ export const model = {
             chrome.tabs.remove(tab.id)
 
             // form tabData
-            const title = utils.trimString(utils.escapeHtml(tab.title), 45)
+            // const title = utils.trimString(utils.escapeHtml(tab.title), 45)
 
-            const { favIconUrl: icon, url } = tab
+            const { favIconUrl: icon, url, title } = tab
             const createdAt = new Date().toLocaleDateString('zh-tw')
             const updatedAt = new Date().toLocaleDateString('zh-tw')
             const tags = []

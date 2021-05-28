@@ -194,7 +194,7 @@ main {
           background-color: $archive-background;
           @extend %flex-all-center;
 
-          // eyes
+          // folder
           .show-indicator {
             position: absolute;
             left:  2 * $oneUnit;
@@ -202,29 +202,81 @@ main {
             width: calc(10% - 3px);
             min-width: 90px;
             background-color: transparent;
-            background-color: $pure-white;
             text-align: center;
             font-size: $title-size;
             line-height: $bar-height;
+
+            .fold, .unfold {
+              color: $pure-white;
+            }
 
             .unfold {
               display: none;
             }
           }
 
-          h3 {
-            display: block;
-            margin: auto;
+          .archive-title {
+            // border: 1px solid #000;
+            width: 400px;
             height: $bar-height;
-            font-weight: $title-weight;
-            text-align: center;
-            font-size: $title-size;
-            line-height: $bar-height;
-            color: $pure-white;
-            @extend %unselectable;
-            &:hover {
-              cursor: pointer;
+            @extend %flex-all-center;
+            position: relative;
+            border: 1px solid #000;
+
+            h3.title-text {
+              text-align: center;
+              display: block;
+              height: $bar-height;
+              font-weight: $title-weight;
+              text-align: center;
+              font-size: $title-size;
+              line-height: $bar-height;
+              color: $pure-white;
+              @extend %unselectable;
+              border: 1px solid #000;
+              &:hover {
+                cursor: pointer;
+              }
             }
+
+            .cancel-edit-archive-title-content,
+            .confirm-archive-title-content-input,
+            .edit-archive-title-content {
+              position: absolute;
+              top: 50%;
+              transform: translateY(-50%);
+              width: 2 * $oneUnit;
+              line-height: $bar-height;
+              width: 2 * $oneUnit;
+              min-width: 2 * $oneUnit;
+              color: $pure-white;
+              font-size: $title-size;
+              text-align: center;
+
+              &:hover {
+                cursor: pointer;
+              }
+            }
+
+            .cancel-edit-archive-title-content {
+              left: 0;
+            }
+
+            .confirm-archive-title-content-input,
+            .edit-archive-title-content {
+              right: 0;
+            }
+
+            input.archive-title-input-content {
+              border: 1px solid #000;
+              flex: 1;
+              width: 100px;
+              height: 80%;
+              font-size: $text-size;
+              margin: 0 3 * $oneUnit;
+            }
+
+            
           }
 
           .btns {

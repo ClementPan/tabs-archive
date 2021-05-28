@@ -88,6 +88,7 @@ export const controller = {
     // store archive to storage
     model.storeArchive()
   },
+  // creating new archive
   showNewArchiveInput() {
     view.showNewArchiveInput()
   },
@@ -121,6 +122,7 @@ export const controller = {
   cancelNewArchiveInput() {
     view.cancelNewArchiveInput()
   },
+  // editing tab name(title)
   showTabNameEditInput(targetTabDOM) {
     view.showTabNameEditInput(targetTabDOM)
     return
@@ -155,6 +157,15 @@ export const controller = {
 
     return
   },
+  // editing archive title
+  showEditArchiveInputContent(titleDOM) {
+    view.showEditArchiveInputContent(titleDOM)
+  },
+  cancelEditArchiveInputContent(titleDOM) {
+    view.cancelEditArchiveInputContent(titleDOM)
+  },
+
+  // set up drag and drop system
   setUpDragAndDropSystem() {
     // eventListener in view
     // view calls model to store data

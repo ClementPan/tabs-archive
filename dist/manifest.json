@@ -1,6 +1,6 @@
 {
   "name": "Tabs Archive",
-  "description": "To ease your pain when you are and have way too many tabs!",
+  "description": "Test version of Tabs Archive!",
   "version": "1.2",
   "manifest_version": 3,
   "background": {

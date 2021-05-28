@@ -176,6 +176,39 @@ export const view = {
     const titleP = targetTabDOM.querySelector('.title p')
     titleP.textContent = tabNameInput
   },
+  showEditArchiveInputContent(titleDOM) {
+    const titleText = titleDOM.querySelector('.title-text')
+    const editIcon = titleDOM.querySelector('.edit-archive-title-content')
+    const updateIcon = titleDOM.querySelector('.confirm-archive-title-content-input')
+    const cancelIcon = titleDOM.querySelector('.cancel-edit-archive-title-content')
+    const input = titleDOM.querySelector('input')
+
+    // to hide: .title-text, editIcon
+    titleText.classList.add('none')
+    editIcon.classList.add('none')
+
+    // to show: updateIcon, cancelIcon
+    updateIcon.classList.remove('none')
+    cancelIcon.classList.remove('none')
+    input.classList.remove('none')
+  },
+  cancelEditArchiveInputContent(titleDOM) {
+    const titleText = titleDOM.querySelector('.title-text')
+    const editIcon = titleDOM.querySelector('.edit-archive-title-content')
+    const updateIcon = titleDOM.querySelector('.confirm-archive-title-content-input')
+    const cancelIcon = titleDOM.querySelector('.cancel-edit-archive-title-content')
+    const input = titleDOM.querySelector('input')
+
+    // to hide: updateIcon, cancelIcon
+    updateIcon.classList.add('none')
+    cancelIcon.classList.add('none')
+    input.classList.add('none')
+
+    // to show: titleText, editIcon
+    titleText.classList.remove('none')
+    editIcon.classList.remove('none')
+
+  },
   removeTab(tabBar) {
     tabBar.remove()
   },

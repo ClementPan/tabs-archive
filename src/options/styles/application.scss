@@ -28,10 +28,6 @@ $archive-background: #124559;
 $light-blue: #598392;
 $body-background: #d8e2dc;
 
-
-
-
-
 // font size
 $brand-size: 28px;
 $title-size: 18px;
@@ -143,7 +139,7 @@ body {
     height: 100%;
     font-size: $title-size;
     line-height: $archive-height;
-    overflow-x: hidden;
+    overflow: hidden;
     vertical-align: middle;
     margin-right: $oneUnit;
   }

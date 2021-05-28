@@ -81,6 +81,17 @@ window.addEventListener('click', (e) => {
     controller.updateTabName(targetTabDOM)
   }
 
+  // show edit archive name content
+  if (target.classList.contains('edit-archive-title-content')) {
+    const titleDOM = target.parentElement
+    controller.showEditArchiveInputContent(titleDOM)
+  }
+
+  if (target.classList.contains('cancel-edit-archive-title-content')) {
+    const titleDOM = target.parentElement
+    controller.cancelEditArchiveInputContent(titleDOM)
+  }
+
   // delete one certain tab in archive
   if (target.className === 'delete-tab') {
     const tabId = target.dataset.tabid
