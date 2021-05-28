@@ -138,6 +138,9 @@ export const view = {
   },
   // edit tab name
   showTabNameEditInput(targetTabDOM) {
+    // make tab undraggable
+    targetTabDOM.draggable = false
+
     const cancelEditTabInput = targetTabDOM.querySelector('.cancel-edit-tab-input')
     const titleP = targetTabDOM.querySelector('.title p')
     const input = targetTabDOM.querySelector('.edit-tab-name-input')
@@ -157,7 +160,7 @@ export const view = {
     confirmTabEdit.classList.remove('none')
   },
   cancelEditTabInput(targetTabDOM) {
-    console.log('cancel-Edit-Tab-Input')
+    targetTabDOM.draggable = true
 
     const cancelEditTabInput = targetTabDOM.querySelector('.cancel-edit-tab-input')
     const titleP = targetTabDOM.querySelector('.title p')
