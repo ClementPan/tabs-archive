@@ -7,7 +7,7 @@
   flex-direction: row;
   position: relative;
 
-  h1 {
+  .brand-title {
     background-color: $blue;
     height: 40px;
     width: 240px;
@@ -17,6 +17,11 @@
     line-height: $navbar-height;
     height: 100%;
     text-align: center;
+    @extend %unselectable;
+
+    &:hover {
+      cursor: pointer;
+    }
   }
 
   .search-bar {

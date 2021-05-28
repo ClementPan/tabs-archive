@@ -203,10 +203,12 @@ export const controller = {
     console.log('queryBody: ' + queryBody)
 
     // model: search for tabs and return tabs data
-    let tabsData = { lorem: 'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Eum sit maiores delectus, recusandae ad debitis repellendus quod quos praesentium repudiandae nam deserunt et? At molestias, voluptate atque dolores quidem ullam?' }
+    const tabsArray = model.searchTabs(data.archive, queryBody.toLowerCase())
+
+    console.log(tabsArray)
 
     // hide all archives in content
-    view.showSearchResult(tabsData)
+    view.showSearchResult(tabsArray)
   },
   cancelSearch() {
     view.restoreContent()

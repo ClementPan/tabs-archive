@@ -23,6 +23,6 @@ export const utils = {
     return string.substring(0, mexlength)
   },
   imageHolder: function () {
-    return 'https://via.placeholder.com/32/598392/fff?text=?'
+    return 'https://via.placeholder.com/32/01161e/fff?text=?'
   }
 }

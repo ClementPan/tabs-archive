@@ -27,7 +27,10 @@ const tabInnerTemplate = function (tab) {
   const { id, createdAt, url, tags } = tab
 
   let { icon } = tab
-  if (!icon) { icon = utils.imageHolder() };
+  if (!icon) {
+    console.log('No image!')
+    icon = utils.imageHolder()
+  };
 
   let { title } = tab
   title = utils.escapeHtml(title)
@@ -76,7 +79,7 @@ const archiveInnerTemplate = function (archive, unclassifiedDOMS) {
         <div class='archive-title' data-id="${id}">
           <i class='fas fa-times-circle cancel-edit-archive-title-content none'></i>
           <h3 class='title-text'>${archiveName}</h3>
-          <input type="text" value="${archiveName}" class='archive-title-input-content none'>
+          <input type="text" maxlength="25" value="${archiveName}" class='archive-title-input-content none'>
           <i class="fas fa-pen-alt edit-archive-title-content"></i>
           <i class="fas fa-check-circle confirm-archive-title-content-input none"></i>
         </div>
@@ -172,7 +175,7 @@ export const model = {
     }
 
     const newArchive = document.createElement('div')
-    newArchive.innerHTML = archiveInnerTemplate(archive, unclassifiedDOMS,)
+    newArchive.innerHTML = archiveInnerTemplate(archive, unclassifiedDOMS)
 
     newArchive.id = `archive-${id}`
     newArchive.classList = `archive dropzone archive-style archive-${id}-content`
@@ -411,6 +414,45 @@ export const model = {
       url: tabDOM.querySelector('.btn button').dataset.url,
       updatedAt: ''
     })
+  },
+  searchTabs(archive, queryBody) {
+    if (!isNaN(queryBody)) {
+      // queryBody is numeric
+      console.log('Perhaps user is searching with tabs numbers...')
+    }
+
+    const result = []
+
+    const findTabByQueryBody = (archive, queryBody) => {
+      if (!archive.unclassified.length) {
+        if (!archive.archivesList.length) {
+          return
+        } else {
+          for (let subArchive of archive.archivesList) {
+            findTabByQueryBody(subArchive, queryBody)
+          }
+        }
+      } else {
+        for (let tab of archive.unclassified) {
+          if (
+            (tab.title.toLowerCase().includes(queryBody)) ||
+            (tab.id.includes(queryBody))
+          ) {
+            result.push(tab)
+          }
+        }
+        if (!archive.archivesList.length) {
+          return
+        } else {
+          for (let subArchive of archive.archivesList) {
+            findTabByQueryBody(subArchive, queryBody)
+          }
+        }
+      }
+    }
+    findTabByQueryBody(archive, queryBody)
+
+    return result
   },
 
   // recursive search prototype //

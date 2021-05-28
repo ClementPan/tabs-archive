@@ -249,7 +249,7 @@ export const view = {
       </div>
       `
   },
-  showSearchResult(tabsData) {
+  showSearchResult(tabsArray) {
     const content = document.querySelector('.content')
     const archives = content.querySelectorAll('.archive')
     const unclassifiedTabsList = document.querySelector('.unclassified .tabs-list')
@@ -261,13 +261,16 @@ export const view = {
     // show search result
     // if !tabsData.length
     // this will not work
-    // if (!tabsData.length) {
-    //   unclassifiedTabsList.innerHTML += emptyTab
-    //   return
-    // }
+    if (!tabsArray.length) {
+      unclassifiedTabsList.innerHTML += emptyTab
+      return
+    }
+    const tabsDOM = tabsArray.map(tab => model.createTabDOMInContent(tab))
 
     // if tabsData.length
-    unclassifiedTabsList.innerHTML += tabsData
+    tabsDOM.forEach(tabDOM => {
+      unclassifiedTabsList.appendChild(tabDOM)
+    })
   },
   restoreContent() {
     const content = document.querySelector('.content')

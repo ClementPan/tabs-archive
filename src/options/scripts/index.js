@@ -131,6 +131,10 @@ window.addEventListener('click', (e) => {
     controller.cancelSearch()
   }
 
+  if (target.className === 'brand-title') {
+    controller.cancelSearch()
+  }
+
   ///// for developing /////
   if (target.className === 'get-data') {
     controller.showStorage('archive')
@@ -145,7 +149,7 @@ window.addEventListener('click', (e) => {
 
 
 // KeyboardEvent eventListener
-window.addEventListener('keydown', (e) => {
+window.addEventListener('keyup', (e) => {
   const target = e.target
 
   // input new archive name
@@ -173,13 +177,31 @@ window.addEventListener('keydown', (e) => {
 
   // input tabs search input
   if (target.classList.contains('tabs-search-input')) {
-    if ((e.code === 'Enter') || (e.code === 'NumpadEnter')) {
-      const queryBody = target.value
-      if (!queryBody) return
-      controller.searchTab(queryBody)
+    // if ((e.code === 'Enter') || (e.code === 'NumpadEnter')) {
+    const queryBody = target.value
+    if (!queryBody) {
+      console.log('NO queryBody!')
+      controller.cancelSearch()
+      return
     }
+    controller.searchTab(queryBody)
+    // }
   }
 })
+
+// window.addEventListener('keyup', (e) => {
+//   const target = e.target
+
+//   // User clear search!
+//   if (target.classList.contains('tabs-search-input')) {
+//     if ((e.code === 'Delete') || (e.code === 'Backspace')) {
+//       const queryBody = target.value
+//       if (!queryBody) {
+//         controller.cancelSearch()
+//       }
+//     }
+//   }
+// })
 
 
 
