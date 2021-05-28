@@ -24,7 +24,11 @@ const TabData = function (id, icon, title, tags, createdAt, url, updatedAt) {
 }
 
 const tabInnerTemplate = function (tab) {
-  const { id, icon, title, createdAt, url, tags } = tab
+  const { id, title, createdAt, url, tags } = tab
+
+  let { icon } = tab
+  if (!icon) icon = utils.imageHolder()
+
   return `
     <div class='number box'>
       <p>${id}</p>

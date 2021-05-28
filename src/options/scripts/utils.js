@@ -21,5 +21,8 @@ export const utils = {
   },
   trimString: function (string, mexlength) {
     return string.substring(0, mexlength)
+  },
+  imageHolder: function () {
+    return 'https://via.placeholder.com/32/598392/fff?text=?'
   }
 }
