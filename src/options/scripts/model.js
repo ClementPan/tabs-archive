@@ -123,16 +123,7 @@ export const model = {
     const newArchive = document.createElement('div')
     newArchive.innerHTML = `
       <div class='archiveName'>
-        <input id="archive${id}-dropdown" class='archive-dropdown' type="checkbox">
-        <label for="archive${id}-dropdown">
-
-          <div class='show-indicator'>
-            <i class="far fa-folder-open unfold"></i>
-            <i class="far fa-folder fold"></i>
-          </div>
-
-
-
+        <div class="archive-bar">
           <div class='archive-title'>
             <i class='fas fa-times-circle cancel-edit-archive-title-content none'></i>
             <h3 class='title-text'>${archiveName}</h3>
@@ -140,7 +131,6 @@ export const model = {
             <i class="fas fa-pen-alt edit-archive-title-content"></i>
             <i class="fas fa-check-circle confirm-archive-title-content-input none"></i>
           </div>
-
 
 
           <div class="btns">
@@ -155,7 +145,17 @@ export const model = {
               </button>
             </div>
           </div>
+        </div>
+
+        <input id="archive${id}-dropdown" class='archive-dropdown none' type="checkbox">
+
+        <label for="archive${id}-dropdown">
+          <div class='show-indicator'>
+            <i class="far fa-folder-open unfold"></i>
+            <i class="far fa-folder fold"></i>
+          </div>
         </label>
+
         <div class="archive-content">
           <div class="archivesList">
             <p>${archivesList}</p>
@@ -335,12 +335,12 @@ export const model = {
   },
   clearTabsInArchiveById(archive, archiveId) {
     let targetId = archiveId
-    let targetArchive = {}
+    // let targetArchive = {}
 
     const findArchive = (archive) => {
       if (targetId === archive.id) {
         archive.unclassified = []
-        return targetArchive = archive
+        // return targetArchive = archive
       }
 
       if (!archive.archivesList.length) {
@@ -349,7 +349,7 @@ export const model = {
         for (let subArchive of archive.archivesList) {
           if (targetId === subArchive.id) {
             subArchive.unclassified = []
-            return targetArchive = subArchive
+            // return targetArchive = subArchive
           }
           if (!subArchive.archivesList.length) {
             continue
@@ -363,7 +363,7 @@ export const model = {
     }
 
     findArchive(archive)
-    return targetArchive
+    return archive
   },
   searchArchiveById(archive, archiveId) {
     let targetId = archiveId

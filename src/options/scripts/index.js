@@ -111,6 +111,7 @@ window.addEventListener('click', (e) => {
   // delete all unclassified tabs in certain archive
   if (target.className === 'delete-all-in-archive') {
     const archiveId = target.dataset.id
+    console.log('archiveId: ' + archiveId)
     controller.deleteAllTabsInArchive(archiveId)
   }
 
