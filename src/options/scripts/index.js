@@ -90,7 +90,9 @@ window.addEventListener('click', (e) => {
 
   // delete certain archive from sidebar
   if (target.classList.contains('delete-archive')) {
-    const archiveBar = target.parentElement.parentElement
+    const archiveBar = target.parentElement.parentElement.parentElement
+    console.log(archiveBar)
+    // return
     const targetArchiveId = target.dataset.id
     controller.deleteArchive(archiveBar, targetArchiveId)
   }

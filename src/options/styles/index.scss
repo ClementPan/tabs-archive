@@ -120,6 +120,9 @@ main {
         
         .archive-style {
           @extend %archive-style;
+          a {
+            @extend %archive-style;
+          }
         }
       }
     }

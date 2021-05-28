@@ -82,13 +82,15 @@ export const model = {
     const { archiveName, id } = archive
     const newArchive = document.createElement('div')
     newArchive.innerHTML = `
-      <div class="icon">
-        <i class="fas fa-folder"></i>
-      </div>
-      <p>${archiveName}</p>
-      <div class="icon">
-        <i class="fas fa-times-circle delete-archive" data-id="${id}"></i>
-      </div> 
+      <a href="#archive-${id}">
+        <div class="icon">
+          <i class="fas fa-folder"></i>
+        </div>
+        <p>${archiveName}</p>
+        <div class="icon">
+          <i class="fas fa-times-circle delete-archive" data-id="${id}"></i>
+        </div>
+      </a>
     `
     newArchive.classList = 'archive archive-style'
     newArchive.dataset.archiveId = id
@@ -150,7 +152,7 @@ export const model = {
         </div>
       </div>
     `
-
+    newArchive.id = `archive-${id}`
     newArchive.classList = `archive dropzone archive-style archive-${id}-content`
     newArchive.dataset.archiveId = id
     return newArchive

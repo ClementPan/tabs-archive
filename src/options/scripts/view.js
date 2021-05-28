@@ -184,7 +184,7 @@ export const view = {
     archiveBar.remove()
 
     // remove archive in content
-    const archiveBarInContent = document.querySelector(`.archive-${archiveId}-content`)
+    const archiveBarInContent = document.querySelector(`#archive-${archiveId}`)
     archiveBarInContent.remove()
 
   },
