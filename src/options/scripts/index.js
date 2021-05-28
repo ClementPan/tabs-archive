@@ -24,7 +24,7 @@ window.onload = function () {
   });
 }
 
-// eventListener
+// click eventListener
 window.addEventListener('click', (e) => {
   const target = e.target
 
@@ -122,7 +122,14 @@ window.addEventListener('click', (e) => {
     controller.deleteAllTabsInArchive(archiveId)
   }
 
+  // cacnel tabs search
+  if (target.classList.contains('cancel-search')) {
+    const searchBar = target.parentElement
+    searchBar.querySelector('input').value = ''
 
+    // cancel search
+    controller.cancelSearch()
+  }
 
   ///// for developing /////
   if (target.className === 'get-data') {
@@ -137,7 +144,7 @@ window.addEventListener('click', (e) => {
 // to stop bubbling: event.stopPropagation()
 
 
-// KeyboardEvent
+// KeyboardEvent eventListener
 window.addEventListener('keydown', (e) => {
   const target = e.target
 
@@ -161,6 +168,15 @@ window.addEventListener('keydown', (e) => {
     if ((e.code === 'Enter') || (e.code === 'NumpadEnter')) {
       const titleDOM = target.parentElement
       controller.updateArchiveTitleContent(titleDOM)
+    }
+  }
+
+  // input tabs search input
+  if (target.classList.contains('tabs-search-input')) {
+    if ((e.code === 'Enter') || (e.code === 'NumpadEnter')) {
+      const queryBody = target.value
+      if (!queryBody) return
+      controller.searchTab(queryBody)
     }
   }
 })

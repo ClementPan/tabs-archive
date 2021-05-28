@@ -198,6 +198,20 @@ export const controller = {
     view.setUpDragAndDropSystem()
   },
 
+  // search tabs
+  searchTab(queryBody) {
+    console.log('queryBody: ' + queryBody)
+
+    // model: search for tabs and return tabs data
+    let tabsData = { lorem: 'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Eum sit maiores delectus, recusandae ad debitis repellendus quod quos praesentium repudiandae nam deserunt et? At molestias, voluptate atque dolores quidem ullam?' }
+
+    // hide all archives in content
+    view.showSearchResult(tabsData)
+  },
+  cancelSearch() {
+    view.restoreContent()
+  },
+
   //  developing methods
   clearStorage() {
     chrome.storage.sync.clear(() => {

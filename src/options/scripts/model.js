@@ -117,6 +117,12 @@ const archiveInnerTemplate = function (archive, unclassifiedDOMS) {
   `
 }
 
+export const emptyTab = `
+  <div class='tab empty tab-style'>
+    <p class='empty-tab'>No tab here yet!</p>
+  </div>
+`
+
 export const model = {
   createNewArchiveInData(archiveName) {
     const newId = data.lastArchiveId += 1
@@ -162,11 +168,7 @@ export const model = {
         `
       }).join('')
     } else {
-      unclassifiedDOMS = `
-      <div class='tab empty tab-style'>
-        <p class='empty-tab'>No tab here yet!</p>
-      </div>
-      `
+      unclassifiedDOMS = emptyTab
     }
 
     const newArchive = document.createElement('div')

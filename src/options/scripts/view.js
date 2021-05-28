@@ -1,6 +1,6 @@
 import { model } from './model.js'
 import { data } from './data.js'
-
+import { emptyTab } from './model.js'
 
 // not done
 const detectDropLocation = function (tabId, dragenter, dragleave) {
@@ -39,12 +39,6 @@ const detectDropLocation = function (tabId, dragenter, dragleave) {
 // (dragenter !== dragleave) && (tabId !== dragleave) && (tabId !== dragenter)
 // A B C
 // dragleave 的前一個
-
-const emptyTab = `
-  <div class='tab empty tab-style'>
-    <p class='empty-tab'>No tab here yet!</p>
-  </div>
-`
 
 export const view = {
   showTabsInContent(data) {
@@ -254,6 +248,41 @@ export const view = {
         <p class='empty-tab'>No tab here yet!</p>
       </div>
       `
+  },
+  showSearchResult(tabsData) {
+    const content = document.querySelector('.content')
+    const archives = content.querySelectorAll('.archive')
+    const unclassifiedTabsList = document.querySelector('.unclassified .tabs-list')
+    const unclassifiedTabs = unclassifiedTabsList.querySelectorAll('.tab')
+
+    archives.forEach(each => each.classList.add('none'))
+    unclassifiedTabs.forEach(each => each.classList.add('none'))
+
+    // show search result
+    // if !tabsData.length
+    // this will not work
+    // if (!tabsData.length) {
+    //   unclassifiedTabsList.innerHTML += emptyTab
+    //   return
+    // }
+
+    // if tabsData.length
+    unclassifiedTabsList.innerHTML += tabsData
+  },
+  restoreContent() {
+    const content = document.querySelector('.content')
+    const archives = content.querySelectorAll('.archive')
+    const unclassifiedTabs = document.querySelectorAll('.unclassified .tab')
+
+    archives.forEach(each => each.classList.remove('none'))
+    unclassifiedTabs.forEach(each => {
+      if (!each.classList.contains('empty')) {
+        each.classList.remove('none')
+      } else {
+        // hide empty tab
+        each.classList.add('none')
+      }
+    })
   },
   // drag and drop handlers
   // set up drag and drop system for current data

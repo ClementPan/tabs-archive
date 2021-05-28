@@ -25,33 +25,42 @@
     width: $search-bar-width;
     background-color: $pure-white;
     padding-left: 2 * $oneUnit;
+    padding-right: 2 * $oneUnit;
     @extend %flex-vertical-center;
     border-radius: $border-radius-normal;
 
     input {
+      height: 100%;
       @extend %child-full-size;
-      font-size: 2 * $oneUnit;
+      font-size: $title-size;
       margin-left: $oneUnit;
       background-color: transparent;
       border: none;
+      padding: 0;
       &:focus {
         outline: none;
       }
     }
 
+    .cancel-search,
     .search-icon {
       height: 100%;
+      width: 2 * $oneUnit;
       padding: 0 auto;
-      @extend %flex-all-center;
-      i {
-        font-size: $title-size;
-      }    
+      @extend %flex-all-center; 
     }
 
+    .cancel-search,
     .search-icon,
     input::placeholder {
+      height: 100%;
+      font-size: $title-size;
       color: $light-grey;
       background-color: $pure-white;
+    }
+
+    .cancel-search:hover {
+      cursor: pointer;
     }
   }
 
