@@ -416,11 +416,6 @@ export const model = {
     })
   },
   searchTabs(archive, queryBody) {
-    if (!isNaN(queryBody)) {
-      // queryBody is numeric
-      console.log('Perhaps user is searching with tabs numbers...')
-    }
-
     const result = []
 
     const findTabByQueryBody = (archive, queryBody) => {

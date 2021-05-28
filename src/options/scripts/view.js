@@ -253,21 +253,23 @@ export const view = {
     const content = document.querySelector('.content')
     const archives = content.querySelectorAll('.archive')
     const unclassifiedTabsList = document.querySelector('.unclassified .tabs-list')
-    const unclassifiedTabs = unclassifiedTabsList.querySelectorAll('.tab')
+    // const unclassifiedTabs = unclassifiedTabsList.querySelectorAll('.tab')
 
+    // hide archives
     archives.forEach(each => each.classList.add('none'))
-    unclassifiedTabs.forEach(each => each.classList.add('none'))
 
-    // show search result
+    // clear unclassifiedTabs
+    unclassifiedTabsList.innerHTML = ''
+
     // if !tabsData.length
-    // this will not work
     if (!tabsArray.length) {
       unclassifiedTabsList.innerHTML += emptyTab
       return
     }
-    const tabsDOM = tabsArray.map(tab => model.createTabDOMInContent(tab))
 
     // if tabsData.length
+    const tabsDOM = tabsArray.map(tab => model.createTabDOMInContent(tab))
+
     tabsDOM.forEach(tabDOM => {
       unclassifiedTabsList.appendChild(tabDOM)
     })
@@ -275,17 +277,25 @@ export const view = {
   restoreContent() {
     const content = document.querySelector('.content')
     const archives = content.querySelectorAll('.archive')
-    const unclassifiedTabs = document.querySelectorAll('.unclassified .tab')
-
+    const unclassifiedTabsList = document.querySelector('.unclassified .tabs-list')
+    // const unclassifiedTabs = document.querySelectorAll('.unclassified .tab')
+    const emptyTabInUncliassified = document.querySelectorAll('.unclassified .empty')
+    console.log()
+    // show archives
     archives.forEach(each => each.classList.remove('none'))
-    unclassifiedTabs.forEach(each => {
-      if (!each.classList.contains('empty')) {
-        each.classList.remove('none')
-      } else {
-        // hide empty tab
-        each.classList.add('none')
-      }
+
+    // clear unclassifiedTabs
+    unclassifiedTabsList.innerHTML = ''
+
+    // restore unclassified tabs, get data via model
+    const { unclassified } = data.archive
+    unclassified.forEach(tab => {
+      const originalTabInUnclassified = model.createTabDOMInContent(tab)
+      unclassifiedTabsList.appendChild(originalTabInUnclassified)
     })
+
+    // hide empty tab
+    // emptyTabInUncliassified.classList.add('none')
   },
   // drag and drop handlers
   // set up drag and drop system for current data
