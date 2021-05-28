@@ -132,6 +132,7 @@ export const view = {
   createNewArchiveInContent(newArchive) {
     const content = document.querySelector('.content')
     const newArchiveDOM = model.createArchiveDOMInContent(newArchive)
+    this.setUpArchiveDragAndDropSystem(newArchiveDOM)
     content.appendChild(newArchiveDOM)
     return
   },
@@ -206,6 +207,8 @@ export const view = {
       `
   },
   // drag and drop handlers
+  // set up drag and drop system for current data
+  // archives and tabs
   setUpDragAndDropSystem() {
     const tabs = document.querySelectorAll('.tab')
 
@@ -225,6 +228,7 @@ export const view = {
     unclassified.addEventListener('dragleave', (e) => { this.preventDefaultHandler(e) })
     unclassified.addEventListener('drop', (e) => { this.unclassifiedDroppedHandler(e, unclassified) })
   },
+  // set up drag and drop system for new created tab
   setUpTabDragAndDropSystem(tabDOM) {
     // empty tab is not draggable
     if (tabDOM.classList.contains('empty')) return
@@ -250,6 +254,7 @@ export const view = {
       // dragleave = tab.id
     });
   },
+  // set up drag and drop system for new created archive
   setUpArchiveDragAndDropSystem(archiveDOM) {
     archiveDOM.addEventListener('dragenter', (e) => { this.preventDefaultHandler(e) })
     archiveDOM.addEventListener('dragover', (e) => { this.preventDefaultHandler(e) })
@@ -271,13 +276,10 @@ export const view = {
 
     const tabDOMId = e.dataTransfer.getData('text/plain')
     const tabDOM = document.getElementById(`${tabDOMId}`)
-    console.log('-----------------')
-    console.log(archiveDOM)
-    console.log('-----------------')
     const tabsList = archiveDOM.querySelector('.tabs-list')
 
     const isTabsListEmpty = this.tabsListCheck(tabsList)
-    console.log('isTabsListEmpty: ' + isTabsListEmpty)
+    // console.log('isTabsListEmpty: ' + isTabsListEmpty)
     if (isTabsListEmpty) {
       // remove "NO tab here yet" 
       tabsList.innerHTML = ''
