@@ -140,6 +140,7 @@ main {
       display: none;
     }
 
+    // for root.unclassified & archives
     .archive-style {
       margin-bottom: $oneUnit;
       .data-bar {
@@ -152,6 +153,7 @@ main {
         }
 
         .title {
+          @extend %unselectable;
           display: flex;
           flex-direction: row;
           p {
@@ -179,161 +181,172 @@ main {
       }
     }
 
+    // for archives
     .archive {
-      position: relative;
-      height: auto;
-      min-height: $bar-height;
 
-      label {
-        .show-indicator {
-          position: absolute;
-          top: 0;
-          left: 0;
-          left:  2 * $oneUnit;
-          width: calc(10% - 3px);
-          height: $bar-height;
-          min-width: 90px;
-          text-align: center;
-          font-size: $title-size;
-          line-height: $bar-height;
-
-          i {
-            color: $pure-white;
-            &:hover {
-              cursor: pointer;
-            }
-          }
-
-          .unfold {
-            display: none;
-          }
-        }
-      }
-
-      .archive-bar {
-        position: absolute;
+      .archive-container {
+        position: relative;
         top: 0;
         left: 0;
-        height: $bar-height;
-        width: 100%;
-        background-color:$archive-background;
-        display: flex;
-        border-radius: 4px;
+        height: auto;
+        min-height: $bar-height;
 
-        .archive-title {
-          position: absolute;
-          top: 0;
-          left: 50%;
-          transform: translateX(-50%);
-          width: 400px;
-          height: $bar-height;
-
-          h3.title-text {
-            text-align: center;
-            display: block;
+        label {
+          .show-indicator {
+            position: absolute;
+            top: 0;
+            left: 0;
+            left:  2 * $oneUnit;
+            width: calc(10% - 3px);
             height: $bar-height;
-            font-weight: $title-weight;
+            min-width: 90px;
             text-align: center;
             font-size: $title-size;
             line-height: $bar-height;
-            color: $pure-white;
-            @extend %unselectable;
-            &:hover {
-              cursor: pointer;
+
+            i {
+              color: $pure-white;
+              &:hover {
+                cursor: pointer;
+              }
+            }
+
+            .unfold {
+              display: none;
             }
           }
         }
 
-          .cancel-edit-archive-title-content,
+        .archive-bar {
+          position: absolute;
+          top: 0;
+          left: 0;
+          height: $bar-height;
+          width: 100%;
+          background-color:$archive-background;
+          display: flex;
+          border-radius: 4px;
+
+          .archive-title {
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 400px;
+            height: $bar-height;
+
+            h3.title-text {
+              text-align: center;
+              display: block;
+              height: $bar-height;
+              font-weight: $title-weight;
+              text-align: center;
+              font-size: $title-size;
+              line-height: $bar-height;
+              color: $pure-white;
+              @extend %unselectable;
+              &:hover {
+                cursor: pointer;
+              }
+            }
+          }
+
+            .cancel-edit-archive-title-content,
+            .confirm-archive-title-content-input,
+            .edit-archive-title-content {
+              position: absolute;
+              top: 50%;
+              transform: translateY(-50%);
+              width: 2 * $oneUnit;
+              line-height: $bar-height;
+              width: 2 * $oneUnit;
+              min-width: 2 * $oneUnit;
+              color: $pure-white;
+              font-size: $title-size;
+              text-align: center;
+
+              &:hover {
+                cursor: pointer;
+              }
+            }
+
+          .cancel-edit-archive-title-content {
+            left: 0;
+          }
+
           .confirm-archive-title-content-input,
           .edit-archive-title-content {
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            width: 2 * $oneUnit;
-            line-height: $bar-height;
-            width: 2 * $oneUnit;
-            min-width: 2 * $oneUnit;
-            color: $pure-white;
-            font-size: $title-size;
-            text-align: center;
-
-            &:hover {
-              cursor: pointer;
-            }
+            right: 0;
           }
 
-        .cancel-edit-archive-title-content {
-          left: 0;
-        }
+          input.archive-title-input-content {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            flex: 1;
+            height: 80%;
+            width: 80%;
+            font-size: $text-size;
+          }
 
-        .confirm-archive-title-content-input,
-        .edit-archive-title-content {
-          right: 0;
-        }
-
-        input.archive-title-input-content {
-          position: absolute;
-          top: 50%;
-          left: 50%;
-          transform: translate(-50%, -50%);
-          flex: 1;
-          height: 80%;
-          width: 80%;
-          font-size: $text-size;
-        }
-
-        .btns {
-          position: absolute;
-          top: 0;
-          display: flex;
-          position: absolute;
-          right: 2 * $oneUnit;
-          height: 100%;
-          width: calc(20% - 6px);
-          min-width: 180px;
-          background-color: transparent;
-          display: flex;
-          .btn {
-            background-color: transparent;
+          .btns {
+            position: absolute;
+            top: 0;
+            display: flex;
+            position: absolute;
+            right: 2 * $oneUnit;
             height: 100%;
-            width: 50%;
-            button {
+            width: calc(20% - 6px);
+            min-width: 180px;
+            background-color: transparent;
+            display: flex;
+            .btn {
               background-color: transparent;
-              display: block;
-              width: 100%;
               height: 100%;
-              border: none;
-              outline: none;
-              font-size: $text-size;
-              color: $pure-white;
-              font-weight: $content-weight;
-              &:hover {
-                background-color: $pure-white;
-                color: $archive-background;    
-                cursor: pointer;          
+              width: 50%;
+              button {
+                background-color: transparent;
+                display: block;
+                width: 100%;
+                height: 100%;
+                border: none;
+                outline: none;
+                font-size: $text-size;
+                color: $pure-white;
+                font-weight: $content-weight;
+                &:hover {
+                  background-color: $pure-white;
+                  color: $archive-background;    
+                  cursor: pointer;          
+                }
               }
             }
           }
         }
-      }
 
-      .archive-content {
-        margin-top: 52px;
-        display: none;
-      }
-
-      input.archive-dropdown {
-        &:checked ~ .archive-content {
-          display: block;
-        }
-
-        &:checked ~ label .show-indicator .unfold {
-          display: block;
-          line-height: $bar-height;
-        }
-        &:checked ~ label .show-indicator .fold {
+        .archive-content {
+          height: auto;
           display: none;
+          
+          .tabs-list {
+            padding-top: $bar-height;
+            
+          }
+        }
+
+        input.archive-dropdown {
+          &:checked ~ .archive-content {
+            display: block;
+          }
+
+          &:checked ~ label .show-indicator .unfold {
+            display: block;
+            line-height: $bar-height;
+          }
+          &:checked ~ label .show-indicator .fold {
+            display: none;
+          }
         }
       }
     }    

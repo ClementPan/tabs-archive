@@ -39,7 +39,7 @@ const tabInnerTemplate = function (tab) {
     <div class='icon box'>
       <img src="${icon}" draggable="false" alt="">
     </div>
-    <div class='title box'>
+    <div class='title box' draggable="false">
       <i class="fas fa-times-circle cancel-edit-tab-input none"></i>
       <p>${title}</p>
       <input class='edit-tab-name-input none' placeholder='${title}' type="text" maxlength="45">
@@ -71,7 +71,7 @@ const archiveInnerTemplate = function (archive, unclassifiedDOMS) {
   const { archiveName, archivesList, id } = archive
 
   return `
-    <div class='archiveName'>
+    <div class='archive-container'>
       <div class="archive-bar">
         <div class='archive-title' data-id="${id}">
           <i class='fas fa-times-circle cancel-edit-archive-title-content none'></i>
