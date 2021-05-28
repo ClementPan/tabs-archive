@@ -24,10 +24,13 @@ const TabData = function (id, icon, title, tags, createdAt, url, updatedAt) {
 }
 
 const tabInnerTemplate = function (tab) {
-  const { id, title, createdAt, url, tags } = tab
+  const { id, createdAt, url, tags } = tab
 
   let { icon } = tab
-  if (!icon) icon = utils.imageHolder()
+  if (!icon) { icon = utils.imageHolder() };
+
+  let { title } = tab
+  title = utils.escapeHtml(title)
 
   return `
     <div class='number box'>
