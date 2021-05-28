@@ -116,6 +116,12 @@ export const model = {
       <div class='archiveName'>
         <input id="archive${id}-dropdown" class='archive-dropdown' type="checkbox">
         <label for="archive${id}-dropdown">
+
+          <div class='show-indicator'>
+            <i class="far fa-folder-open unfold"></i>
+            <i class="far fa-folder fold"></i>
+          </div>
+
           <h3 unselectable="on">${archiveName}</h3>
           <div class="btns">
             <div class="btn">

@@ -40,6 +40,11 @@ const detectDropLocation = function (tabId, dragenter, dragleave) {
 // A B C
 // dragleave 的前一個
 
+const emptyTab = `
+  <div class='tab empty tab-style'>
+    <p class='empty-tab'>No tab here yet!</p>
+  </div>
+`
 
 export const view = {
   showTabsInContent(data) {
@@ -48,11 +53,7 @@ export const view = {
     tabsList.innerHTML = ''
 
     if (!data.length) {
-      tabsList.innerHTML = `
-      <div class='tab empty tab-style'>
-        <p class='empty-tab'>No tab here yet!</p>
-      </div>
-      `
+      tabsList.innerHTML = emptyTab
     }
 
     for (let tab of data) {
@@ -270,10 +271,22 @@ export const view = {
 
     const tabDOMId = e.dataTransfer.getData('text/plain')
     const tabDOM = document.getElementById(`${tabDOMId}`)
+    console.log('-----------------')
+    console.log(archiveDOM)
+    console.log('-----------------')
     const tabsList = archiveDOM.querySelector('.tabs-list')
 
+    const isTabsListEmpty = this.tabsListCheck(tabsList)
+    console.log('isTabsListEmpty: ' + isTabsListEmpty)
+    if (isTabsListEmpty) {
+      // remove "NO tab here yet" 
+      tabsList.innerHTML = ''
+    }
+
+    // append new tabDOM into tabsList
     tabsList.appendChild(tabDOM)
 
+    // create tabData for storage
     const tabData = model.getTabDataViaTabDOM(tabDOM)
 
     // find archive by Id, archive.unclassified.push(tab)
@@ -295,6 +308,15 @@ export const view = {
     const tabDOM = document.getElementById(`${tabDOMId}`)
     const tabsList = unclassified.querySelector('.tabs-list')
 
+    const isTabsListEmpty = this.tabsListCheck(tabsList)
+    console.log('isTabsListEmpty: ' + isTabsListEmpty)
+
+    if (isTabsListEmpty) {
+      // remove "NO tab here yet" 
+      tabsList.innerHTML = ''
+    }
+
+    // append new tabDOM into tabsList
     // alternative .insertBefore():
     tabsList.appendChild(tabDOM)
 
@@ -314,5 +336,9 @@ export const view = {
     model.storeArchive()
 
     // detectDropLocation(tabDOMId, dragenter, dragleave)
+  },
+  tabsListCheck(tabsList) {
+    const content = tabsList.querySelectorAll('.tab')
+    return ((content.length === 1) && (content[0].classList.contains('empty')))
   }
 }

@@ -104,14 +104,23 @@ main {
     background-color: $blue;
     height: 100%;
 
+    overflow-y: scroll;
+    
+    &::-webkit-scrollbar {
+      display: none;
+    }
+
     .root-archive {
       display: flex;
       flex-direction: column;
       align-items: center;
       padding-top: 2 * $oneUnit;
-      
-      .archive-style {
-        @extend %archive-style;
+
+      .archivesList {
+        
+        .archive-style {
+          @extend %archive-style;
+        }
       }
     }
   }
@@ -181,6 +190,25 @@ main {
           border-radius: $border-radius-normal;
           background-color: $archive-background;
           @extend %flex-all-center;
+
+          // eyes
+          .show-indicator {
+            position: absolute;
+            left:  2 * $oneUnit;
+            height: 100%;
+            width: calc(10% - 3px);
+            min-width: 90px;
+            background-color: transparent;
+            background-color: $pure-white;
+            text-align: center;
+            font-size: $title-size;
+            line-height: $bar-height;
+
+            .unfold {
+              display: none;
+            }
+          }
+
           h3 {
             display: block;
             margin: auto;
@@ -235,6 +263,14 @@ main {
 
           &:checked ~ .archive-content {
             display: block;
+          }
+
+          &:checked ~ label .show-indicator .unfold {
+            display: block;
+            line-height: $bar-height;
+          }
+          &:checked ~ label .show-indicator .fold {
+            display: none;
           }
         }
 
