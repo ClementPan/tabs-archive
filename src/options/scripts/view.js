@@ -136,6 +136,7 @@ export const view = {
     content.appendChild(newArchiveDOM)
     return
   },
+  // edit tab name
   showTabNameEditInput(targetTabDOM) {
     const cancelEditTabInput = targetTabDOM.querySelector('.cancel-edit-tab-input')
     const titleP = targetTabDOM.querySelector('.title p')
@@ -176,6 +177,7 @@ export const view = {
     const titleP = targetTabDOM.querySelector('.title p')
     titleP.textContent = tabNameInput
   },
+  // edit archive title
   showEditArchiveInputContent(titleDOM) {
     const titleText = titleDOM.querySelector('.title-text')
     const editIcon = titleDOM.querySelector('.edit-archive-title-content')
@@ -209,6 +211,17 @@ export const view = {
     editIcon.classList.remove('none')
 
   },
+  updateArchiveTitle(targetTabDOM, archiveId, tabNameInput) {
+    // update archive title in content
+    const archiveTitleContent = targetTabDOM.querySelector('.title-text')
+    archiveTitleContent.textContent = tabNameInput
+
+    // update archive title in sidebar
+    const archiveTitleSidebar = document.querySelector(`#archive-${archiveId}-sidebar`)
+    archiveTitleSidebar.querySelector('p').textContent = tabNameInput
+    return
+  },
+  // 
   removeTab(tabBar) {
     tabBar.remove()
   },
@@ -268,8 +281,11 @@ export const view = {
 
     tabDOM.addEventListener('dragstart', (e) => {
       const target = e.target
-      console.log('target id: ' + target.id)
+      console.log('target: ')
+      console.log(target)
+
       const payload = target.id
+      console.log('payload: ' + payload)
 
       // dataTransfer.setData
       e.dataTransfer.setData('text/plain', payload)
@@ -309,6 +325,7 @@ export const view = {
 
     const tabDOMId = e.dataTransfer.getData('text/plain')
     const tabDOM = document.getElementById(`${tabDOMId}`)
+    console.log('tabDOMId: ' + tabDOMId)
     const tabsList = archiveDOM.querySelector('.tabs-list')
 
     const isTabsListEmpty = this.tabsListCheck(tabsList)
@@ -340,6 +357,7 @@ export const view = {
   unclassifiedDroppedHandler(e, unclassified) {
     e.preventDefault()
     const tabDOMId = e.dataTransfer.getData('text/plain')
+    console.log('tabDOMId: ' + tabDOMId)
     const tabDOM = document.getElementById(`${tabDOMId}`)
     const tabsList = unclassified.querySelector('.tabs-list')
 

@@ -158,11 +158,37 @@ export const controller = {
     return
   },
   // editing archive title
-  showEditArchiveInputContent(titleDOM) {
-    view.showEditArchiveInputContent(titleDOM)
+  showEditArchiveInputContent(targetTabDOM) {
+    view.showEditArchiveInputContent(targetTabDOM)
   },
-  cancelEditArchiveInputContent(titleDOM) {
-    view.cancelEditArchiveInputContent(titleDOM)
+  cancelEditArchiveInputContent(targetTabDOM) {
+    view.cancelEditArchiveInputContent(targetTabDOM)
+  },
+  updateArchiveTitleContent(targetTabDOM) {
+    // get user input
+    const archiveId = targetTabDOM.dataset.id
+    const archiveTitleInput = targetTabDOM.querySelector('.archive-title-input-content').value
+    const originalTitle = targetTabDOM.querySelector('.title-text').textContent
+
+    // check
+    if (archiveTitleInput === originalTitle) {
+      view.cancelEditArchiveInputContent(targetTabDOM)
+      return
+    }
+
+    // find archive in data via archiveId, update it
+    model.updateArchive(data.archive, archiveId, archiveTitleInput)
+
+    // rerender view 
+    view.updateArchiveTitle(targetTabDOM, archiveId, archiveTitleInput)
+
+    // store archive to storage
+    model.storeArchive()
+
+    // restore UI
+    view.cancelEditArchiveInputContent(targetTabDOM)
+
+    return
   },
 
   // set up drag and drop system

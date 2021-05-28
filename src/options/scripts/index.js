@@ -81,15 +81,22 @@ window.addEventListener('click', (e) => {
     controller.updateTabName(targetTabDOM)
   }
 
-  // show edit archive name content
+  // show edit archive name in content
   if (target.classList.contains('edit-archive-title-content')) {
     const titleDOM = target.parentElement
     controller.showEditArchiveInputContent(titleDOM)
   }
 
+  // cancel edit archive name in content
   if (target.classList.contains('cancel-edit-archive-title-content')) {
     const titleDOM = target.parentElement
     controller.cancelEditArchiveInputContent(titleDOM)
+  }
+
+  // update archive name in content
+  if (target.classList.contains('confirm-archive-title-content-input')) {
+    const titleDOM = target.parentElement
+    controller.updateArchiveTitleContent(titleDOM)
   }
 
   // delete one certain tab in archive
@@ -129,6 +136,7 @@ window.addEventListener('click', (e) => {
 // false = event.preventDefault()
 // to stop bubbling: event.stopPropagation()
 
+
 // KeyboardEvent
 window.addEventListener('keydown', (e) => {
   const target = e.target
@@ -145,6 +153,14 @@ window.addEventListener('keydown', (e) => {
     if ((e.code === 'Enter') || (e.code === 'NumpadEnter')) {
       const targetTabDOM = target.parentElement.parentElement
       controller.updateTabName(targetTabDOM)
+    }
+  }
+
+  // unput update archive name
+  if (target.classList.contains('archive-title-input-content')) {
+    if ((e.code === 'Enter') || (e.code === 'NumpadEnter')) {
+      const titleDOM = target.parentElement
+      controller.updateArchiveTitleContent(titleDOM)
     }
   }
 })

@@ -172,6 +172,10 @@ main {
             line-height: $bar-height;
           }
         }
+
+        .icon {
+          @extend %unselectable;
+        }
       }
     }
 

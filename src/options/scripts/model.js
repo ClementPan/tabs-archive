@@ -37,13 +37,11 @@ const tabInnerTemplate = function (tab) {
       <p>${id}</p>
           </div >
     <div class='icon box'>
-      <img src="${icon}" alt="">
+      <img src="${icon}" draggable="false" alt="">
     </div>
     <div class='title box'>
       <i class="fas fa-times-circle cancel-edit-tab-input none"></i>
-
       <p>${title}</p>
-
       <input class='edit-tab-name-input none' placeholder='${title}' type="text" maxlength="45">
 
       <i class="fas fa-pen-alt show-edit-tab-name"></i>
@@ -65,6 +63,56 @@ const tabInnerTemplate = function (tab) {
       <button class='delete-tab' data-tabid="${id}">
         delete
       </button>
+    </div>
+  `
+}
+
+const archiveInnerTemplate = function (archive, unclassifiedDOMS) {
+  const { archiveName, archivesList, id } = archive
+
+  return `
+    <div class='archiveName'>
+      <div class="archive-bar">
+        <div class='archive-title' data-id="${id}">
+          <i class='fas fa-times-circle cancel-edit-archive-title-content none'></i>
+          <h3 class='title-text'>${archiveName}</h3>
+          <input type="text" value="${archiveName}" class='archive-title-input-content none'>
+          <i class="fas fa-pen-alt edit-archive-title-content"></i>
+          <i class="fas fa-check-circle confirm-archive-title-content-input none"></i>
+        </div>
+
+
+        <div class="btns">
+          <div class="btn">
+            <button class="open-all" data-id="${id}">
+              Open All
+            </button>
+          </div>
+          <div class="btn">
+            <button class='delete-all-in-archive' data-id="${id}">
+              Delete All
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <input id="archive${id}-dropdown" class='archive-dropdown none' type="checkbox">
+
+      <label for="archive${id}-dropdown">
+        <div class='show-indicator'>
+          <i class="far fa-folder-open unfold"></i>
+          <i class="far fa-folder fold"></i>
+        </div>
+      </label>
+
+      <div class="archive-content">
+        <div class="archivesList">
+          <p>${archivesList}</p>
+        </div>
+        <div class="tabs-list">
+          ${unclassifiedDOMS}
+        </div>
+      </div>
     </div>
   `
 }
@@ -96,11 +144,12 @@ export const model = {
       </a>
     `
     newArchive.classList = 'archive archive-style'
+    newArchive.id = `archive-${id}-sidebar`
     newArchive.dataset.archiveId = id
     return newArchive
   },
   createArchiveDOMInContent(archive) {
-    const { archiveName, archivesList, unclassified, id } = archive
+    const { unclassified, id } = archive
 
     let unclassifiedDOMS = ''
 
@@ -121,51 +170,8 @@ export const model = {
     }
 
     const newArchive = document.createElement('div')
-    newArchive.innerHTML = `
-      <div class='archiveName'>
-        <div class="archive-bar">
-          <div class='archive-title'>
-            <i class='fas fa-times-circle cancel-edit-archive-title-content none'></i>
-            <h3 class='title-text'>${archiveName}</h3>
-            <input type="text" value="${archiveName}" class='archive-title-input-content none'>
-            <i class="fas fa-pen-alt edit-archive-title-content"></i>
-            <i class="fas fa-check-circle confirm-archive-title-content-input none"></i>
-          </div>
+    newArchive.innerHTML = archiveInnerTemplate(archive, unclassifiedDOMS,)
 
-
-          <div class="btns">
-            <div class="btn">
-              <button class="open-all" data-id="${id}">
-                Open All
-              </button>
-            </div>
-            <div class="btn">
-              <button class='delete-all-in-archive' data-id="${id}">
-                Delete All
-              </button>
-            </div>
-          </div>
-        </div>
-
-        <input id="archive${id}-dropdown" class='archive-dropdown none' type="checkbox">
-
-        <label for="archive${id}-dropdown">
-          <div class='show-indicator'>
-            <i class="far fa-folder-open unfold"></i>
-            <i class="far fa-folder fold"></i>
-          </div>
-        </label>
-
-        <div class="archive-content">
-          <div class="archivesList">
-            <p>${archivesList}</p>
-          </div>
-          <div class="tabs-list">
-            ${unclassifiedDOMS}
-          </div>
-        </div>
-      </div>
-    `
     newArchive.id = `archive-${id}`
     newArchive.classList = `archive dropzone archive-style archive-${id}-content`
     newArchive.dataset.archiveId = id
@@ -276,6 +282,34 @@ export const model = {
     }
     findTabById(archive, targetId)
   },
+  updateArchive(archive, archiveId, archiveTitleInput) {
+    let targetId = archiveId
+
+    const findArchive = (archive) => {
+      if (targetId === archive.id) {
+        archive.archiveName = archiveTitleInput
+      }
+
+      if (!archive.archivesList.length) {
+        return
+      } else {
+        for (let subArchive of archive.archivesList) {
+          if (targetId === subArchive.id) {
+            subArchive.archiveName = archiveTitleInput
+          }
+          if (!subArchive.archivesList.length) {
+            continue
+          } else {
+            for (let innerArchive of subArchive.archivesList) {
+              findArchive(innerArchive)
+            }
+          }
+        }
+      }
+    }
+
+    findArchive(archive)
+  },
   removeTab(archive, tabId) {
     const targetId = tabId
 
@@ -365,6 +399,48 @@ export const model = {
     findArchive(archive)
     return archive
   },
+  getTabDataViaTabDOM(tabDOM) {
+    return ({
+      id: tabDOM.querySelector('.number p').textContent,
+      icon: tabDOM.querySelector('.icon img').src,
+      title: tabDOM.querySelector('.title p').textContent,
+      tags: tabDOM.querySelector('.tags p').textContent,
+      createdAt: tabDOM.querySelector('.createdAt p').textContent,
+      url: tabDOM.querySelector('.btn button').dataset.url,
+      updatedAt: ''
+    })
+  },
+
+  // recursive search prototype //
+  searchTabById(archive, tabId) {
+    let targetId = tabId
+
+    const findTabById = (archive, targetId) => {
+      if (!archive.unclassified.length) {
+        if (!archive.archivesList.length) {
+          return
+        } else {
+          for (let subArchive of archive.archivesList) {
+            findTabById(subArchive, targetId)
+          }
+        }
+      } else {
+        for (let tab of archive.unclassified) {
+          if (tab.id === targetId) {
+            console.log(tab)
+          }
+        }
+        if (!archive.archivesList.length) {
+          return
+        } else {
+          for (let subArchive of archive.archivesList) {
+            findTabById(subArchive, targetId)
+          }
+        }
+      }
+    }
+    findTabById(archive, targetId)
+  },
   searchArchiveById(archive, archiveId) {
     let targetId = archiveId
     let targetArchive = {}
@@ -395,45 +471,4 @@ export const model = {
     findArchive(archive)
     return targetArchive
   },
-  getTabDataViaTabDOM(tabDOM) {
-    return ({
-      id: tabDOM.querySelector('.number p').textContent,
-      icon: tabDOM.querySelector('.icon img').src,
-      title: tabDOM.querySelector('.title p').textContent,
-      tags: tabDOM.querySelector('.tags p').textContent,
-      createdAt: tabDOM.querySelector('.createdAt p').textContent,
-      url: tabDOM.querySelector('.btn button').dataset.url,
-      updatedAt: ''
-    })
-  },
-  // recursive search prototype //
-  searchTabById: function (archive, tabId) {
-    let targetId = tabId
-
-    const findTabById = (archive, targetId) => {
-      if (!archive.unclassified.length) {
-        if (!archive.archivesList.length) {
-          return
-        } else {
-          for (let subArchive of archive.archivesList) {
-            findTabById(subArchive, targetId)
-          }
-        }
-      } else {
-        for (let tab of archive.unclassified) {
-          if (tab.id === targetId) {
-            console.log(tab)
-          }
-        }
-        if (!archive.archivesList.length) {
-          return
-        } else {
-          for (let subArchive of archive.archivesList) {
-            findTabById(subArchive, targetId)
-          }
-        }
-      }
-    }
-    findTabById(archive, targetId)
-  }
 }
