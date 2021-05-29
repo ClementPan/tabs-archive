@@ -210,7 +210,6 @@ export const model = {
         chrome.tabs.query({ active: false, status: "complete" }, (queryResult) => {
           const tabs = []
           for (let tab of queryResult) {
-            console.log(tab)
             if (
               (tab.title === "chrome.tabs - Chrome Developers") ||
               (tab.url === "chrome://extensions/") ||

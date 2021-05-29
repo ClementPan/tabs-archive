@@ -4,6 +4,7 @@ import '../styles/index.scss'
 
 import { data } from './data.js'
 import { controller } from './controller.js'
+import { view } from './view'
 
 window.onload = function () {
   console.log('[Index] Index.html loaded! Ask for archive data!')
@@ -114,8 +115,6 @@ window.addEventListener('click', (e) => {
   // delete certain archive from sidebar
   if (target.classList.contains('delete-archive')) {
     const archiveBar = target.parentElement.parentElement.parentElement
-    console.log(archiveBar)
-    // return
     const targetArchiveId = target.dataset.id
     controller.deleteArchive(archiveBar, targetArchiveId)
   }

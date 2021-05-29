@@ -64,37 +64,51 @@ export const controller = {
     model.storeArchive()
   },
   deleteAllTabsInArchive(archiveId) {
-    // check: if is already empty
-    const className = `.archive-${archiveId}-content .tabs-list .tab`
-    const tabItems = document.querySelectorAll(className)
-    if ((tabItems.length === 1) && (tabItems[0].classList.contains('empty'))) {
-      return
-    }
+    const text = 'delete all tabs in this archive?'
+    view.confirm(text, (res) => {
+      if (res) {
+        // check: if is already empty
+        const className = `.archive-${archiveId}-content .tabs-list .tab`
+        const tabItems = document.querySelectorAll(className)
+        if ((tabItems.length === 1) && (tabItems[0].classList.contains('empty'))) {
+          return
+        }
 
-    // remove tab
-    const newArchive = model.clearTabsInArchiveById(data.archive, archiveId)
+        // remove tab
+        const newArchive = model.clearTabsInArchiveById(data.archive, archiveId)
 
-    // update archive
-    data.archive = newArchive
+        // update archive
+        data.archive = newArchive
 
-    // rerender view
-    view.clearTabsInArchive(archiveId)
+        // rerender view
+        view.clearTabsInArchive(archiveId)
 
-    // store archive to storage
-    model.storeArchive()
+        // store archive to storage
+        model.storeArchive()
+      } else {
+        return
+      }
+    })
   },
   deleteArchive(archiveBar, archiveId) {
-    // return newArchive with target archive
-    const newArchive = model.removeArchive(data.archive, archiveId)
+    const text = 'delete this archive?'
+    view.confirm(text, (res) => {
+      if (res) {
+        // return newArchive with target archive
+        const newArchive = model.removeArchive(data.archive, archiveId)
 
-    // update archive
-    data.archive = newArchive
+        // update archive
+        data.archive = newArchive
 
-    // rerender view, both in sidebar & content (need archiveId)
-    view.removeArchive(archiveBar, archiveId)
+        // rerender view, both in sidebar & content (need archiveId)
+        view.removeArchive(archiveBar, archiveId)
 
-    // store archive to storage
-    model.storeArchive()
+        // store archive to storage
+        model.storeArchive()
+      } else {
+        return
+      }
+    })
   },
   // creating new archive
   showNewArchiveInput() {

@@ -310,6 +310,42 @@ export const view = {
     })
   },
 
+  // confirm alert
+  confirm(text, callback) {
+    const alert = document.querySelector('.alert')
+    const backdrop = document.querySelector('.backdrop')
+
+    // to show alert
+    alert.classList.remove('none')
+    backdrop.classList.remove('none')
+
+    // overwrite text
+    const alertContent = alert.querySelector('.text-content')
+    alertContent.textContent = text
+
+    const affirmative = document.querySelector('.confirm-affirmative')
+    const negative = document.querySelector('.confirm-negative')
+
+    // add eventListener to buttons
+    affirmative.addEventListener('click', () => {
+      this.hideconfirm()
+      callback(true)
+    })
+
+    negative.addEventListener('click', () => {
+      this.hideconfirm()
+      callback(false)
+    })
+  },
+
+  hideconfirm() {
+    const alert = document.querySelector('.alert')
+    const backdrop = document.querySelector('.backdrop')
+
+    alert.classList.add('none')
+    backdrop.classList.add('none')
+  },
+
   // drag and drop handlers
   // set up drag and drop system for current data
   // archives and tabs

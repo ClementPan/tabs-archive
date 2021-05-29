@@ -12,17 +12,8 @@ $footer-background: #20201a;
 $font-dark: #222;
 $font-original: #444;
 $body-background: #e9ecef;
-// $body-background: #eee;
-// $blue: #1d3557;
 $light-blue: #a8dadc;
-// $archive-background: #457b9d;
-// $archive-background: #a8dadc;
-
-// $body-background: #faf9f9;
-// $blue: #555b6e;
-// $light-blue: #89b0ae;
-// $archive-background: #bee3db;
-
+// main view
 $blue: #01161e;
 $archive-background: #124559;
 $light-blue: #598392;
@@ -69,6 +60,7 @@ html {
   line-height: 1.5;
   outline: none;
   box-sizing: border-box;
+  // position: relative;
 }
 
 body {
