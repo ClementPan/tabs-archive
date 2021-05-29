@@ -194,7 +194,8 @@ export const model = {
   async getStorageData(targetData) {
     return new Promise((resolve, reject) => {
       try {
-        chrome.storage.sync.get([targetData], (data) => {
+        // chrome.storage.sync.get([targetData], (data) => {
+        chrome.storage.local.get([targetData], (data) => {
           return resolve(data)
         })
       } catch (error) {

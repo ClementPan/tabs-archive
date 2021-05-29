@@ -135,7 +135,8 @@ const methods = {
     return new Promise((resolve, reject) => {
       try {
         // console.log(archive)
-        chrome.storage.sync.get([archive], (data) => {
+        // chrome.storage.sync.get([archive], (data) => {
+        chrome.storage.local.get([archive], (data) => {
           // console.log(data)
           return resolve(data)
         })
@@ -148,7 +149,8 @@ const methods = {
     return new Promise((resolve, reject) => {
       try {
         // console.log(archive)
-        chrome.storage.sync.set({ archive }, () => {
+        // chrome.storage.sync.set({ archive }, () => {
+        chrome.storage.local.set({ archive }, () => {
           console.log('Archive data set!')
           return resolve()
         })

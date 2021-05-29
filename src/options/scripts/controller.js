@@ -224,25 +224,34 @@ export const controller = {
 
   //  developing methods
   clearStorage() {
-    chrome.storage.sync.clear(() => {
+    // chrome.storage.sync.clear(() => {
+    chrome.storage.local.clear(() => {
       console.log('Storage cleared!')
     })
   },
   showStorage() {
-    chrome.storage.sync.get(['archive'], (data) => {
-      const currentSyncStorage = utils.sizeOfData(data)
-      console.log('Data size: ' + currentSyncStorage)
+    // chrome.storage.sync.get(['archive'], (data) => {
+    chrome.storage.local.get(['archive'], (data) => {
+      // const { QUOTA_BYTES, QUOTA_BYTES_PER_ITEM } = chrome.storage.sync
+      const { QUOTA_BYTES } = chrome.storage.local
+      // console.log(chrome.storage.local)
+      console.log(QUOTA_BYTES)
+      // console.log('Quota bytes per item: ' + QUOTA_BYTES_PER_ITEM)
 
-      const maxSyncStorage = chrome.storage.sync.QUOTA_BYTES
-      // local max storage: 5,242,880 bytes = 5 mb
-      // sync max storage:   102,400
 
-      const tabsCount = model.searchTabs(data.archive, 'all').length
+      // const currentSyncStorage = utils.sizeOfData(data)
+      // console.log('Data size: ' + currentSyncStorage)
 
-      const storageRate = Math.round(100 * (currentSyncStorage / maxSyncStorage))
-      const maxTabs = Math.round((tabsCount * 100) / storageRate)
-      const text = 'Storage: ' + tabsCount + ' / ' + maxTabs + ' tabs (' + storageRate + '%)'
-      console.log(text)
+      // // const maxSyncStorage = QUOTA_BYTES
+      // // local max storage: 5,242,880 bytes = 5 mb
+      // // sync max storage:   102,400
+
+      // const tabsCount = model.searchTabs(data.archive, 'all').length
+
+      // const storageRate = Math.round(100 * (currentSyncStorage / maxSyncStorage))
+      // const maxTabs = Math.round((tabsCount * 100) / storageRate)
+      // const text = 'Storage: ' + tabsCount + ' / ' + maxTabs + ' tabs (' + storageRate + '%)'
+      // console.log(text)
       // console.log('Tabs In Storage: ' + tabsCount + ' tabs')
       // console.log('Max Tabs In Storage: ' + maxTabs + ' tabs')
     })
