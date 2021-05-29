@@ -2,6 +2,39 @@ import { model } from './model.js'
 import { view } from './view.js'
 import { data } from './data.js'
 
+function roughSizeOfObject(object) {
+
+  var objectList = [];
+  var stack = [object];
+  var bytes = 0;
+
+  while (stack.length) {
+    var value = stack.pop();
+
+    if (typeof value === 'boolean') {
+      bytes += 4;
+    }
+    else if (typeof value === 'string') {
+      bytes += value.length * 2;
+    }
+    else if (typeof value === 'number') {
+      bytes += 8;
+    }
+    else if
+      (
+      typeof value === 'object'
+      && objectList.indexOf(value) === -1
+    ) {
+      objectList.push(value);
+
+      for (var i in value) {
+        stack.push(value[i]);
+      }
+    }
+  }
+  return bytes;
+}
+
 export const controller = {
   async getAllOpenedTabs() {
     try {
@@ -36,6 +69,13 @@ export const controller = {
   openAllTabs(archiveId) {
     const { unclassified } = model.searchArchiveById(data.archive, archiveId)
     unclassified.forEach(each => {
+      const url = each.url
+      chrome.tabs.create({ url, active: false })
+    });
+  },
+  openAllSearchTabs() {
+    const searchTabs = data.searchResult
+    searchTabs.forEach(each => {
       const url = each.url
       chrome.tabs.create({ url, active: false })
     });
@@ -201,14 +241,14 @@ export const controller = {
   // search tabs
   searchTab(queryBody) {
     console.log('queryBody: ' + queryBody)
+    queryBody = queryBody.toLowerCase().trim()
 
-    // model: search for tabs and return tabs data
-    const tabsArray = model.searchTabs(data.archive, queryBody.toLowerCase())
 
-    console.log(tabsArray)
+    // model: search for tabs, store them in local data, and return tabs data: Array
+    const searchResult = model.searchTabs(data.archive, queryBody)
 
     // hide all archives in content
-    view.showSearchResult(tabsArray)
+    view.showSearchResult(searchResult)
   },
   cancelSearch() {
     view.restoreContent()
@@ -222,7 +262,20 @@ export const controller = {
   },
   showStorage() {
     chrome.storage.sync.get(['archive'], (data) => {
-      console.log(data)
+      // console.log(data)
+      const currentSyncStorage = roughSizeOfObject(data)
+      const maxSyncStorage = chrome.storage.sync.QUOTA_BYTES
+      // local max storage: 5242,880
+      // sync max storage:   102,400
+
+      const tabsCount = model.searchTabs(data.archive, 'all').length
+
+      const storageRate = Math.round(100 * (currentSyncStorage / maxSyncStorage))
+      const maxTabs = Math.round((tabsCount * 100) / storageRate)
+
+      console.log('Storage: ' + tabsCount + ' / ' + maxTabs + ' tabs (' + storageRate + '%)')
+      // console.log('Tabs In Storage: ' + tabsCount + ' tabs')
+      // console.log('Max Tabs In Storage: ' + maxTabs + ' tabs')
     })
   }
 }

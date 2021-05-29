@@ -429,12 +429,18 @@ export const model = {
         }
       } else {
         for (let tab of archive.unclassified) {
+          if (queryBody === 'all') {
+            result.push(tab)
+            continue
+          }
+
           if (
             (tab.title.toLowerCase().includes(queryBody)) ||
             (tab.id.includes(queryBody))
           ) {
             result.push(tab)
           }
+
         }
         if (!archive.archivesList.length) {
           return
@@ -447,6 +453,10 @@ export const model = {
     }
     findTabByQueryBody(archive, queryBody)
 
+    // store search result in local data
+    data.searchResult = result
+
+    // return result for view
     return result
   },
 

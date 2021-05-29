@@ -252,8 +252,16 @@ export const view = {
   showSearchResult(tabsArray) {
     const content = document.querySelector('.content')
     const archives = content.querySelectorAll('.archive')
-    const unclassifiedTabsList = document.querySelector('.unclassified .tabs-list')
-    // const unclassifiedTabs = unclassifiedTabsList.querySelectorAll('.tab')
+    const unclassified = document.querySelector('.unclassified')
+    const unclassifiedTabsList = unclassified.querySelector('.tabs-list')
+
+    const unclassifiedDataBar = unclassified.querySelector('.data-bar')
+    const openAllBtn = unclassifiedDataBar.querySelector('.open-all')
+    const deleteAllBtn = unclassifiedDataBar.querySelector('.delete-all-in-archive')
+
+    // set open-all button & delete-all button on search
+    openAllBtn.classList.add('on-search')
+    deleteAllBtn.classList.add('on-search')
 
     // hide archives
     archives.forEach(each => each.classList.add('none'))
@@ -277,10 +285,17 @@ export const view = {
   restoreContent() {
     const content = document.querySelector('.content')
     const archives = content.querySelectorAll('.archive')
-    const unclassifiedTabsList = document.querySelector('.unclassified .tabs-list')
-    // const unclassifiedTabs = document.querySelectorAll('.unclassified .tab')
-    const emptyTabInUncliassified = document.querySelectorAll('.unclassified .empty')
-    console.log()
+    const unclassified = document.querySelector('.unclassified')
+    const unclassifiedTabsList = unclassified.querySelector('.tabs-list')
+
+    const unclassifiedDataBar = unclassified.querySelector('.data-bar')
+    const openAllBtn = unclassifiedDataBar.querySelector('.open-all')
+    const deleteAllBtn = unclassifiedDataBar.querySelector('.delete-all-in-archive')
+
+    // set open-all button & delete-all button on search
+    openAllBtn.classList.remove('on-search')
+    deleteAllBtn.classList.remove('on-search')
+
     // show archives
     archives.forEach(each => each.classList.remove('none'))
 
@@ -288,15 +303,13 @@ export const view = {
     unclassifiedTabsList.innerHTML = ''
 
     // restore unclassified tabs, get data via model
-    const { unclassified } = data.archive
-    unclassified.forEach(tab => {
+    const OriginalUnclassifiedData = data.archive.unclassified
+    OriginalUnclassifiedData.forEach(tab => {
       const originalTabInUnclassified = model.createTabDOMInContent(tab)
       unclassifiedTabsList.appendChild(originalTabInUnclassified)
     })
-
-    // hide empty tab
-    // emptyTabInUncliassified.classList.add('none')
   },
+
   // drag and drop handlers
   // set up drag and drop system for current data
   // archives and tabs

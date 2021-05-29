@@ -37,9 +37,14 @@ window.addEventListener('click', (e) => {
   }
 
   // oepn all tabs in archive
-  if (target.className === 'open-all') {
+  if (target.classList.contains('open-all')) {
     const archiveId = target.dataset.id
+    if (target.classList.contains('on-search')) {
+      controller.openAllSearchTabs()
+      return
+    }
     controller.openAllTabs(archiveId)
+    return
   }
 
   // open cetain tab in archive
