@@ -65,8 +65,8 @@ export const controller = {
   },
   deleteAllTabsInArchive(archiveId) {
     const text = 'delete all tabs in this archive?'
-    view.confirm(text, (res) => {
-      if (res) {
+    view.confirm(text, (confirmed) => {
+      if (confirmed) {
         // check: if is already empty
         const className = `.archive-${archiveId}-content .tabs-list .tab`
         const tabItems = document.querySelectorAll(className)
@@ -92,8 +92,8 @@ export const controller = {
   },
   deleteArchive(archiveBar, archiveId) {
     const text = 'delete this archive?'
-    view.confirm(text, (res) => {
-      if (res) {
+    view.confirm(text, (confirmed) => {
+      if (confirmed) {
         // return newArchive with target archive
         const newArchive = model.removeArchive(data.archive, archiveId)
 

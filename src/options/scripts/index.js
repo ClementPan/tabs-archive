@@ -192,21 +192,3 @@ window.addEventListener('keyup', (e) => {
     // }
   }
 })
-
-// window.addEventListener('keyup', (e) => {
-//   const target = e.target
-
-//   // User clear search!
-//   if (target.classList.contains('tabs-search-input')) {
-//     if ((e.code === 'Delete') || (e.code === 'Backspace')) {
-//       const queryBody = target.value
-//       if (!queryBody) {
-//         controller.cancelSearch()
-//       }
-//     }
-//   }
-// })
-
-
-
-

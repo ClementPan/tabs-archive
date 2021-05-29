@@ -6,7 +6,7 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 module.exports = {
   entry: {
-    options: './src/options/scripts/index.js'
+    options: './src/options/scripts/index.js',
   },
   module: {
     rules: [

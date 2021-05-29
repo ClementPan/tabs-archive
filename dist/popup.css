@@ -11,19 +11,21 @@ body {
 
 .btns-panel {
   border-radius: 12px;
+  text-align: center;
 }
 
 button {
   border-radius: 12px;
   font-weight: 700;
   height: 40px;
-  width: 100%;
+  width: 80%;
   outline: none;
   border: none;
   background-color: #fff;
   color: #1d3557;
   margin-bottom: 12px;
   transition: .3s linear;
+  font-size: 14px;
 }
 
 button:hover {

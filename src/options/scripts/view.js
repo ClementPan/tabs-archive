@@ -328,22 +328,16 @@ export const view = {
 
     // add eventListener to buttons
     affirmative.addEventListener('click', () => {
-      this.hideconfirm()
+      alert.classList.add('none')
+      backdrop.classList.add('none')
       callback(true)
     })
 
     negative.addEventListener('click', () => {
-      this.hideconfirm()
+      alert.classList.add('none')
+      backdrop.classList.add('none')
       callback(false)
     })
-  },
-
-  hideconfirm() {
-    const alert = document.querySelector('.alert')
-    const backdrop = document.querySelector('.backdrop')
-
-    alert.classList.add('none')
-    backdrop.classList.add('none')
   },
 
   // drag and drop handlers
