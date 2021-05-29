@@ -206,9 +206,10 @@ export const model = {
   async getAllOpenedTabs() {
     return new Promise((resolve, reject) => {
       try {
-        chrome.tabs.query({ active: false }, (queryResult) => {
+        chrome.tabs.query({ active: false, status: "complete" }, (queryResult) => {
           const tabs = []
           for (let tab of queryResult) {
+            console.log(tab)
             if (
               (tab.title === "chrome.tabs - Chrome Developers") ||
               (tab.url === "chrome://extensions/") ||
@@ -250,6 +251,8 @@ export const model = {
       data: archive
     }
 
+    const currentSyncStorage = utils.sizeOfData(archive)
+    console.log(currentSyncStorage)
     chrome.runtime.sendMessage(request, (message) => {
       console.log('[Index] ', message)
     });
@@ -259,7 +262,6 @@ export const model = {
     console.log('in updateTab', tabNameInput)
 
     const findTabById = (archive, targetId) => {
-      console.log('in findTabById', tabNameInput)
       if (!archive.unclassified.length) {
         if (!archive.archivesList.length) {
           return

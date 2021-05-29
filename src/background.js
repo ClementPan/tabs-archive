@@ -185,7 +185,7 @@ const methods = {
     // console.log(archive)
     this.setStorageData(archive)
     sendResponse('Archive stored!')
-  },
+  }
 }
 
 // onInstalled:
@@ -210,3 +210,6 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
     return true
   }
 });
+
+// error
+// chrome.runtime.lastError(error => console.error(error))
