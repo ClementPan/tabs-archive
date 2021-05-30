@@ -144,12 +144,15 @@ export const model = {
     newArchive.innerHTML = `
       <a href="#archive-${id}">
         <div class="icon">
-          <i class="fas fa-pen-alt"></i>
+          <i class="fas fa-pen-alt edit-archive-sidebar"></i>
           <i class="fas fa-folder"></i>
+          <i class="fas fa-times-circle cancel-new-archive-input-sidebar none"></i>
         </div>
         <p>${archiveName}</p>
+        <input value="${archiveName}" class="none" type="text">
         <div class="icon">
           <i class="fas fa-times-circle delete-archive" data-id="${id}"></i>
+          <i class="fas fa-check-circle new-archive-name-input-sidebar none"></i>
         </div>
       </a>
     `

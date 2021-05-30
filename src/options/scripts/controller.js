@@ -179,7 +179,7 @@ export const controller = {
 
     return
   },
-  // editing archive title
+  // editing archive title in sidebar
   showEditArchiveInputContent(targetTabDOM) {
     view.showEditArchiveInputContent(targetTabDOM)
   },
@@ -211,6 +211,13 @@ export const controller = {
     view.cancelEditArchiveInputContent(targetTabDOM)
 
     return
+  },
+  // editing archive title in sidebar
+  showEditArchiveSidebar(targetTabDOM) {
+    view.showEditArchiveInputSidebar(targetTabDOM)
+  },
+  cancelNewArchiveInputSidebar(targetTabDOM) {
+    view.cancelEditArchiveInputSidebar(targetTabDOM)
   },
 
   // set up drag and drop system

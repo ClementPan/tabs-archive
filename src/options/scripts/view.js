@@ -218,7 +218,47 @@ export const view = {
     archiveTitleSidebar.querySelector('p').textContent = tabNameInput
     return
   },
-  // 
+  // edit archive title sidebar
+  showEditArchiveInputSidebar(targetTabDOM) {
+    console.log(targetTabDOM)
+    const cancel = targetTabDOM.querySelector('.cancel-new-archive-input-sidebar')
+    const folder = targetTabDOM.querySelector('.fa-folder')
+    const edit = targetTabDOM.querySelector('.edit-archive-sidebar')
+    const update = targetTabDOM.querySelector('.new-archive-name-input-sidebar')
+    const deleteIcon = targetTabDOM.querySelector('.delete-archive')
+    const title = targetTabDOM.querySelector('p')
+    const input = targetTabDOM.querySelector('input')
+
+    title.classList.add('none')
+    cancel.classList.remove('none')
+    update.classList.remove('none')
+    edit.classList.add('none')
+    folder.classList.add('none')
+    deleteIcon.classList.add('none')
+    input.classList.remove('none')
+
+  },
+  cancelEditArchiveInputSidebar(targetTabDOM) {
+    const cancel = targetTabDOM.querySelector('.cancel-new-archive-input-sidebar')
+    const folder = targetTabDOM.querySelector('.fa-folder')
+    const edit = targetTabDOM.querySelector('.edit-archive-sidebar')
+    const update = targetTabDOM.querySelector('.new-archive-name-input-sidebar')
+    const deleteIcon = targetTabDOM.querySelector('.delete-archive')
+    const title = targetTabDOM.querySelector('p')
+    const input = targetTabDOM.querySelector('input')
+
+    title.classList.remove('none')
+    cancel.classList.add('none')
+    update.classList.add('none')
+    edit.classList.remove('none')
+    folder.classList.remove('none')
+    deleteIcon.classList.remove('none')
+    input.classList.add('none')
+
+  },
+  updateArchiveTitleSidebar(targetTabDOM) {
+    console.log(targetTabDOM)
+  },
   removeTab(tabBar) {
     tabBar.remove()
   },

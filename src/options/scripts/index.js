@@ -105,6 +105,20 @@ window.addEventListener('click', (e) => {
     controller.updateArchiveTitleContent(titleDOM)
   }
 
+  // show edit-archive-sidebar
+  if (target.classList.contains('edit-archive-sidebar')) {
+    console.log('show archive edit sidebar')
+    const titleDOM = target.parentElement.parentElement
+    controller.showEditArchiveSidebar(titleDOM)
+  }
+
+  // cancel
+  if (target.classList.contains('cancel-new-archive-input-sidebar')) {
+    console.log('cancel archive edit sidebar')
+    const titleDOM = target.parentElement.parentElement
+    controller.cancelNewArchiveInputSidebar(titleDOM)
+  }
+
   // delete one certain tab in archive
   if (target.className === 'delete-tab') {
     const tabId = target.dataset.tabid
