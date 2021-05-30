@@ -367,13 +367,33 @@ export const view = {
     // empty tab is not draggable
     if (tabDOM.classList.contains('empty')) return
 
+    tabDOM.addEventListener('drag', (e) => {
+      const viewportHeight = window.innerHeight
+      const content = document.querySelector('.content')
+      const { clientY } = e
+      const currenHeightPercent = clientY / viewportHeight * 100
+
+      if (currenHeightPercent < 50) {
+        content.scrollBy({
+          top: -300,
+          left: 0,
+          behavior: 'smooth'
+        });
+      }
+
+      if (currenHeightPercent > 60) {
+        content.scrollBy({
+          top: 300,
+          left: 0,
+          behavior: 'smooth'
+        });
+      }
+    })
+
     tabDOM.addEventListener('dragstart', (e) => {
       const target = e.target
-      console.log('target: ')
-      console.log(target)
 
       const payload = target.id
-      console.log('payload: ' + payload)
 
       // dataTransfer.setData
       e.dataTransfer.setData('text/plain', payload)

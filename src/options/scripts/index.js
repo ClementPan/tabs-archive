@@ -164,20 +164,20 @@ window.addEventListener('keyup', (e) => {
   }
 
   // input update tab name
-  if (target.classList.contains('edit-tab-name-input')) {
-    if ((e.code === 'Enter') || (e.code === 'NumpadEnter')) {
-      const targetTabDOM = target.parentElement.parentElement
-      controller.updateTabName(targetTabDOM)
-    }
-  }
+  // if (target.classList.contains('edit-tab-name-input')) {
+  //   if ((e.code === 'Enter') || (e.code === 'NumpadEnter')) {
+  //     const targetTabDOM = target.parentElement.parentElement
+  //     controller.updateTabName(targetTabDOM)
+  //   }
+  // }
 
   // unput update archive name
-  if (target.classList.contains('archive-title-input-content')) {
-    if ((e.code === 'Enter') || (e.code === 'NumpadEnter')) {
-      const titleDOM = target.parentElement
-      controller.updateArchiveTitleContent(titleDOM)
-    }
-  }
+  // if (target.classList.contains('archive-title-input-content')) {
+  //   if ((e.code === 'Enter') || (e.code === 'NumpadEnter')) {
+  //     const titleDOM = target.parentElement
+  //     controller.updateArchiveTitleContent(titleDOM)
+  //   }
+  // }
 
   // input tabs search input
   if (target.classList.contains('tabs-search-input')) {

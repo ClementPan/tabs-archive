@@ -252,7 +252,7 @@ export const model = {
     }
 
     const currentSyncStorage = utils.sizeOfData(archive)
-    console.log(currentSyncStorage)
+    // console.log(currentSyncStorage)
     chrome.runtime.sendMessage(request, (message) => {
       console.log('[Index] ', message)
     });
