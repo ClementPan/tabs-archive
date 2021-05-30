@@ -144,6 +144,7 @@ export const model = {
     newArchive.innerHTML = `
       <a href="#archive-${id}">
         <div class="icon">
+          <i class="fas fa-pen-alt"></i>
           <i class="fas fa-folder"></i>
         </div>
         <p>${archiveName}</p>

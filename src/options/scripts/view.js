@@ -372,8 +372,8 @@ export const view = {
       const content = document.querySelector('.content')
       const { clientY } = e
       const currenHeightPercent = clientY / viewportHeight * 100
-
-      if (currenHeightPercent < 50) {
+      console.log(currenHeightPercent)
+      if (currenHeightPercent < 15) {
         content.scrollBy({
           top: -300,
           left: 0,
@@ -381,7 +381,7 @@ export const view = {
         });
       }
 
-      if (currenHeightPercent > 60) {
+      if (currenHeightPercent > 95) {
         content.scrollBy({
           top: 300,
           left: 0,
@@ -402,8 +402,6 @@ export const view = {
     // detect drop location
     tabDOM.addEventListener('dragenter', (e) => {
       e.preventDefault();
-      // dragenter = tab.id
-      // console.log('dragenter: ' + dragenter)
     });
 
     tabDOM.addEventListener('dragleave', (e) => {

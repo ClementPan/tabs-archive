@@ -16,8 +16,10 @@ $light-blue: #a8dadc;
 // main view
 $blue: #01161e;
 $archive-background: #124559;
+$archive-background-light: rgb(38,89,119);
 $light-blue: #598392;
 $body-background: #d8e2dc;
+
 
 // font size
 $brand-size: 28px;
@@ -103,6 +105,11 @@ body {
   @extend %flex-vertical-center;
   position: relative;
   border-radius: $border-radius-normal;
+
+  a {
+    margin-bottom: 0;
+  }
+
   .icon {
     @extend %unselectable;
     width: 3 * $oneUnit;
@@ -143,6 +150,28 @@ body {
   &.create-new:hover {
     cursor: pointer;
   }
+
+  // when hover 
+  .delete-archive {
+    opacity: 0;
+  }
+  &.archive:hover .delete-archive {
+    opacity: 1;
+  }
+  
+  
+  &.archive:hover .fa-folder {
+    display: none;
+  }
+  
+  .fa-pen-alt {
+    display: none;
+  }
+
+  &.archive:hover .fa-pen-alt {
+    display: block;
+  }
+
 }
 
 %data-bar {

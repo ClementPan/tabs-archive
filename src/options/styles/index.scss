@@ -228,6 +228,10 @@ main {
             .unfold {
               display: none;
             }
+
+            &:hover {
+              background-color: $archive-background-light;
+            }
           }
         }
 
@@ -265,24 +269,24 @@ main {
             }
           }
 
-            .cancel-edit-archive-title-content,
-            .confirm-archive-title-content-input,
-            .edit-archive-title-content {
-              position: absolute;
-              top: 50%;
-              transform: translateY(-50%);
-              width: 2 * $oneUnit;
-              line-height: $bar-height;
-              width: 2 * $oneUnit;
-              min-width: 2 * $oneUnit;
-              color: $pure-white;
-              font-size: $title-size;
-              text-align: center;
+          .cancel-edit-archive-title-content,
+          .confirm-archive-title-content-input,
+          .edit-archive-title-content {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 2 * $oneUnit;
+            line-height: $bar-height;
+            width: 2 * $oneUnit;
+            min-width: 2 * $oneUnit;
+            color: $pure-white;
+            font-size: $title-size;
+            text-align: center;
 
-              &:hover {
-                cursor: pointer;
-              }
+            &:hover {
+              cursor: pointer;
             }
+          }
 
           .cancel-edit-archive-title-content {
             left: 0;
@@ -291,6 +295,10 @@ main {
           .confirm-archive-title-content-input,
           .edit-archive-title-content {
             right: 0;
+          }
+
+          .edit-archive-title-content {
+            opacity: 0;
           }
 
           input.archive-title-input-content {
@@ -337,6 +345,16 @@ main {
               }
             }
           }
+
+          &:hover {
+            background-color: $archive-background-light;
+
+            .edit-archive-title-content {
+              opacity: 1;
+            }
+          }
+
+
         }
 
         .archive-content {
