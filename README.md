@@ -1,5 +1,5 @@
 # Tabs Archive
-![Display](.src/image/tabs.png)
+![Display](./src/image/tabs.png)
 
 ## About The Project
 ### Description:
