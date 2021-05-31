@@ -1,5 +1,6 @@
 # Tabs Archive
-![Display](./src/image/tabs.png)
+![Display](https://github.com/ClementPan/tabs-archive/blob/master/src/images/tabs.png)
+
 
 ## About The Project
 ### Description:
