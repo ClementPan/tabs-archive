@@ -31,7 +31,7 @@
 #### Edit:
 ##### :white_check_mark: Users can edit archive name in content
 ##### :white_check_mark: Users can edit tab name in content
-##### :white_medium_square: Users can edit archive name in sidebar.
+##### :white_large_square: Users can edit archive name in sidebar.
 
 #### Delete:
 ##### :white_check_mark: Users can delete certain tab in content archive.
@@ -41,9 +41,9 @@
 
 #### Relocate:
 ##### :white_check_mark: Users can drag and drop TAB in content among archives to relocate its belonging archive.
-##### :white_medium_square: Users can drag and drop TAB inside belonging archive for different order.
-##### :white_medium_square: Users can drag and drop ARCHIVE in Content to relocate its order.
-##### :white_medium_square: Users can drag and drop ARCHIVE in Sidebar to relocate its order.
+##### :white_large_square: Users can drag and drop TAB inside belonging archive for different order.
+##### :white_large_square: Users can drag and drop ARCHIVE in Content to relocate its order.
+##### :white_large_square: Users can drag and drop ARCHIVE in Sidebar to relocate its order.
 
 #### Search:
 ##### :white_check_mark: Users can search tabs by id or title.
