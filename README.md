@@ -4,7 +4,7 @@
 
 ## About The Project
 ### Description:
-#### Tabs Archive is a pure front-end and pure Javascript chrome extension project, with no framework, no backend, which is built with
+#### Tabs Archive is a pure front-end and pure Javascript chrome extension project ( yet to deploy), with no framework, no backend, which is built with
 
 - Vanilla.js (HTML, CSS, Javascript)
 - SCSS
