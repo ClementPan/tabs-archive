@@ -26,7 +26,7 @@
 ##### :white_check_mark: Users can open certain tab.
 ##### :white_check_mark: Users can open all unclassified tabs in root archive.
 ##### :white_check_mark: Users can open all tabs in certain archive from content.
-##### :white_medium_square: Users can unfold and focus archive in content by clicking archive in sidebar.
+##### :white_large_square: Users can unfold and focus archive in content by clicking archive in sidebar.
 
 #### Edit:
 ##### :white_check_mark: Users can edit archive name in content
